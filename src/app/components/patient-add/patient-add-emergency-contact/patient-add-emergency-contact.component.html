@@ -1,0 +1,41 @@
+<form [formGroup]="emergencyContactFormGroup" novalidate>
+  <!-- TODO: bind formgroup @Input from current .ts file -->
+  <div class="card">
+    <div class="card-header">
+      Emergency Contact
+    </div>
+    <!-- <code>{{emergencyContactFormGroup.value|json}}</code> -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Name</label>
+        </div>
+        <div class="col-md-6">
+          <label>Contact</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <input class="form-control form-control-sm " formControlName="name" />
+        </div>
+        <div class="col-md-6">
+          <int-phone-prefix formControlName="contact" [defaultCountry]="'sg'" [locale]="'en'" [maxlength]=15></int-phone-prefix>
+        </div>
+      </div>
+      <div class="row pt-3">
+        <div class="col-md-6">
+          <label>Relationship</label>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="emergencyContactFormGroup.value.relationshipDropdown.value"
+            bindLabel="label" bindValue="value" placeholder="Select Relationship" formControlName="relationship" value="relationship">
+          </ng-select>
+          <errors [control]="emergencyContactFormGroup.get('relationship')"></errors>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

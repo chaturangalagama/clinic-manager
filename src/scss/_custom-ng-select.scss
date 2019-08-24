@@ -1,0 +1,92 @@
+ng-select.custom-select {
+  @extend .p-0;
+  // height: calc($input-height-sm+1) !important;
+  // padding: 0 !important;
+  height: 1.75rem !important;
+  height: auto;
+}
+
+ng-select.custom-select .ng-select-container {
+  min-height: 0px;
+  height: calc(1.75rem - 2px) !important;
+  // height: calc(1.43rem + 2px) !important;
+}
+
+// ng-select.custom-select ng-dropdown-panel{
+//   height: auto;
+//   min-width: 100%;
+//   width: intrinsic !important;           /* Safari/WebKit uses a non-standard name */
+//   width: -moz-max-content !important;    /* Firefox/Gecko */
+//   width: -webkit-max-content !important; /* Chrome */
+// }
+.appointmentsSelect .ng-select .ng-select-container {
+  border: display;
+}
+
+.ng-select .ng-select-container {
+  border: none;
+  border-radius: 0px;
+}
+
+ng-select.ng-select-multiple.custom-select-multiple {
+  .ng-select-container {
+    min-height: initial !important;
+    border: 1px solid #c2cfd6;
+
+    .ng-value-container {
+      padding-top: 3px;
+
+      .ng-value {
+        margin-bottom: 4px;
+      }
+
+      .ng-value+.ng-input {
+        width: 0px;
+      }
+    }
+  }
+}
+
+.ng-select.ng-select-disabled>.ng-select-container {
+  background-color: #c2cfd6;
+}
+
+.ng-dropdown-panel.custom-select-extra-small-width {
+  height: auto;
+  min-width: 100%;
+  width: 6vw !important;
+  margin-left: -30px;
+}
+
+.ng-dropdown-panel.custom-select-extra-medium-width {
+  height: auto;
+  min-width: 100%;
+  width: 15vw !important;
+  // width: intrinsic !important;           /* Safari/WebKit uses a non-standard name */
+  // width: -moz-fit-content !important;    /* Firefox/Gecko */
+  // width: -webkit-fit-content !important; /* Chrome */
+}
+
+.ng-dropdown-panel.custom-select-medium-width {
+  height: auto;
+  min-width: 100%;
+  width: 22vw !important;
+  // width: intrinsic !important;           /* Safari/WebKit uses a non-standard name */
+  // width: -moz-fit-content !important;    /* Firefox/Gecko */
+  // width: -webkit-fit-content !important; /* Chrome */
+}
+
+.ng-dropdown-panel.custom-select-extra-width {
+  height: auto;
+  min-width: 100%;
+  width: 45vw !important;
+  // width: intrinsic !important;           /* Safari/WebKit uses a non-standard name */
+  // width: -moz-fit-content !important;    /* Firefox/Gecko */
+  // width: -webkit-fit-content !important; /* Chrome */
+}
+
+.ng-dropdown-panel.custom-select-extra-large-width {
+  height: auto;
+  min-width: 100%;
+  width: 60vw !important;
+}

@@ -1,0 +1,32 @@
+<form [formGroup]="medicalCoverageFormGroup" novalidate>
+    <div class="card">
+        <div class="card-header">
+            Medical Coverage
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <ng-container *ngIf="this.medicalCoverageFormGroup.value.patientCoverages">
+                        <div class="row plan-remark-headers align-middle">
+                            <div *ngIf="hasUpdatePriority" class="col-1">Priority</div>
+                            <div class="col">Company</div>
+                            <div class="col">Plan</div>
+                            <div class="col" style="border-right-style:none">Coverage No</div>
+                            <div class="col-1"></div>
+                        </div>
+
+                        <div *ngFor="let medicalCoverageType of medicalCoverages; let j=index;">
+
+                            <div *ngFor="let item of this.medicalCoverageFormGroup.value.patientCoverages[medicalCoverageType]; let i=index;">
+                                <span *ngIf="item">
+                                <app-add-queue-medical-coverage-item [forDisplayOnly]="forDisplayOnly" [attachedMedicalCoverages]="this.medicalCoverageFormGroup.get('attachedMedicalCoverages')" [item]="item" [selectedIndex]="getSelectedIndex(item)" [isChecked]="isPlanSelected(item)"
+                                   [selectedCoverages]='selectedCoverages' [isCompatible]="!checkAgainstSelectedCoverages(medicalCoverageType , item,i)" [index]=i [isHead]="(j===0 && i===0) ? true : false"></app-add-queue-medical-coverage-item>
+                              </span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

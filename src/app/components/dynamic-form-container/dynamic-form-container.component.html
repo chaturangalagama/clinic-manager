@@ -1,0 +1,52 @@
+<div [formGroup]="form" class="row">
+    <!-- <pre>SUB {{question|json}}</pre> -->
+    <div *ngIf="question.controlType!='formgroup' ; else elseBlock" [ngClass]="question.col">
+        <label [attr.for]="question.key" class="mb-0">{{question.label}}</label>
+        <div [ngSwitch]="question.controlType">
+            <input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type" class="form-control form-control-sm">
+
+            <textarea *ngSwitchCase="'textarea'" [formControlName]="question.key" [id]="question.key" class="form-control form-control-sm"></textarea>
+
+            <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="form-control form-control-sm">
+                <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+            </select>
+
+        </div>
+    </div>
+
+    <ng-template #elseBlock>
+        <div *ngFor="let subQuestion of question.formControls; let i=index " [formGroupName]="question.key" [ngClass]="question.formControls[i].col">
+            <label [attr.for]="question.formControls[i].key" class="mb-0">{{question.formControls[i].label}}</label>
+            <div [ngSwitch]="question.formControls[i].controlType">
+
+                <input *ngSwitchCase="'textbox'" [formControlName]="question.formControls[i].key" [id]="question.formControls[i].key" [type]="question.formControls[i].type" class="form-control form-control-sm">
+
+                <textarea *ngSwitchCase="'textarea'" [formControlName]="question.formControls[i].key" [id]="question.formControls[i].key" class="form-control form-control-sm"></textarea>
+
+                <select [id]="question.formControls[i].key" *ngSwitchCase="'dropdown'" [formControlName]="question.formControls[i].key" class="form-control form-control-sm">
+                    <option *ngFor="let opt of question.formControls[i].options" [value]="opt.key">{{opt.value}}</option>
+                </select>
+
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- <div [ngSwitch]="question.controlType" #createItem>
+
+        <input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type" class="form-control form-control-sm">
+
+        <textarea *ngSwitchCase="'textarea'" [formControlName]="question.key" [id]="question.key" class="form-control form-control-sm"></textarea>
+
+        <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key" class="form-control form-control-sm">
+            <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+        </select>
+
+    </div> -->
+
+    <!-- <div class="errorMessage" *ngIf="!isValid" class="text-danger">{{question.label}} is required</div> -->
+    <div class="errorMessage" *ngIf="isError &&(isDirty ||isTouched)" class="text-danger">
+
+        <p *ngIf="error.required">{{question.label}} is required</p>
+        <p *ngIf="error.pattern">The email address must contain at least the @ character</p>
+    </div>
+</div>

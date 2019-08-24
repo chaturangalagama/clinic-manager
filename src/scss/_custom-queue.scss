@@ -1,0 +1,266 @@
+#queue-div .queue-header {
+    background-color: white;
+    height: 40px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dddee0;
+    margin: 0;
+}
+
+#queue-pane {
+    width: auto;
+    border-right-color: rgb(194, 207, 214);
+    border-right-style: solid;
+    border-right-width: 1px;
+    background-color: #ffffff;
+}
+
+#queue-pane.collapsed {
+    width: 50px;
+}
+
+.item-even {
+    background-color: $white;
+    padding: 0;
+}
+
+.item-odd {
+    background-color: #f1f3f7;
+    padding: 0;
+}
+
+app-queue-item li.list-group-item {
+    border-right-style: none;
+    border-top-style: none;
+    border-bottom-color: rgba(0, 0, 0, 0.125);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.text-small {
+    font-size: 10px;
+}
+
+.text-x-small {
+    font-size: 9px;
+}
+
+ul.list-group.list-group-item {
+    margin: 0;
+}
+
+.align-items-center {
+    -ms-flex-align: center!important;
+    align-items: center!important;
+}
+
+.d-flex {
+    display: -ms-flexbox!important;
+    display: flex!important;
+}
+
+li.nav-item.hiddenTab {
+    display: none;
+}
+
+.queue-row {
+    // border-style: solid;
+    // border-color: white;
+    // border-width: 1px;
+    display: table;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 50px;
+    cursor: pointer;
+}
+
+div.row.border.alertsPanel {
+    border-color: #dddee0 !important;
+}
+
+.queue-list {
+    // padding-top: 41px;
+    max-height: calc(100vh - 200px);
+    margin-bottom: 10px;
+    overflow-y: auto;
+}
+
+.queue-number {
+    display: table-cell;
+    width: 15%;
+    vertical-align: middle;
+}
+
+.queue-row table {
+    width: 100%;
+    min-height: 50px;
+}
+
+.queue-row td {
+    width: 50%;
+}
+
+.queue-call-button {
+    width: 15%;
+    position: absolute;
+    bottom: 0;
+}
+
+.queue-first-element {
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.queue-last-element {
+    padding-top: 0px;
+    padding-bottom: 5px;
+}
+
+.queue-details {
+    width: 100%;
+    /* margin: auto; */
+}
+
+// Header
+.app-header-data-title {
+    color: $silver;
+    font-size: 10px;
+}
+
+.app-header-data-info {
+    color: $white;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.navbar-logo {
+    border-bottom-style: none;
+    height: 80px;
+}
+
+.app-header.navbar .navbar-brand {
+    height: 40px;
+}
+
+.brand-minimized .app-header.navbar .navbar-brand {
+    border-bottom: none;
+}
+
+// Card
+.card-header-transparent {
+    background-color: transparent !important;
+    padding: 0.2rem 0.5rem;
+}
+
+.card-header {
+    // background-color: white!important;
+    // border-style: none;
+}
+
+.card-body-diagnosis {
+    padding: 0.2rem 0.5rem;
+}
+
+// Nav-link
+tabset.consultation .nav-link.active {
+    color: $indigo-100;
+    background-color: transparent;
+    border-bottom-color: $indigo-100;
+    border-bottom-style: solid;
+}
+
+tabset.consultation .nav-pills .nav-link {
+    color: gray;
+    font-weight: 500;
+    padding: 0.725rem 0.8rem;
+}
+
+tabset.consultation {
+    padding-left: 0px;
+}
+
+tabset.consultation.tab-container {
+    width: 100vw;
+}
+
+tabset.consultation div.tab-content .tab-pane {
+    padding: 1rem 1rem 1rem 0.5rem;
+}
+
+.list-group-item.selected {
+    background-color: #D2D2D2;
+}
+
+tabset.consultation ul.nav.nav-pills {
+    background-color: white;
+    // position: fixed;
+    width: auto;
+    justify-content: left;
+    padding-top: 0px;
+    border-width: 1px;
+    border-bottom-style: solid;
+    border-color: #dddee0;
+    z-index: 10;
+}
+
+tabset.consultation div.tab-content {
+    background-color: $gray-lighter;
+    border-style: none;
+    margin-top: 0px;
+    max-height: calc(100vh - 180px);
+    margin-bottom: 10px;
+    padding-bottom: 100px;
+    overflow-y: auto;
+}
+
+.edit-detail-btn {
+    position: fixed;
+    z-index: 20;
+    width: 10%;
+    right: 1.5em;
+    top: 5.3rem;
+    margin-top: 5px;
+    color: white;
+}
+
+.alertsPanel {
+    height: 48px;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    background-color: white;
+}
+
+//Consultation-Pane
+#consultation-pane {
+    // max-height: 100vh;
+    margin-bottom: 4em;
+    overflow: scroll;
+}
+
+.sidebar.sidebar-brand-main a.nav-link.active {
+    background-color: $barney-purple!important;
+}
+
+.sidebar.sidebar-brand-main a.nav-link:hover {
+    background-color: $barney-purple!important;
+}
+
+.sub-heading-grey {
+    background-color: #f2f2f2;
+    color: black;
+    font-size: 10px;
+    padding: 0.25em;
+    text-align: center;
+}
+
+// Table display
+.hideOverflow {
+    overflow: hidden;
+}
+
+#queue-pane,
+#consultation-pane {
+    display: table-cell;
+}

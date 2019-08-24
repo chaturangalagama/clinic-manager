@@ -1,0 +1,92 @@
+<div class="card">
+    <div class="card-header">
+        Advanced Search
+    </div>
+    <div class="row sub-heading-grey mx-0 justify-content-center">
+        <div class="center">Search All Item Codes</div>
+    </div>
+    <div class="card-body">
+        <!-- Labels -->
+        <div class="row mb-0">
+            <div class="col-md-3">
+                <label class="mb-0">Item Code</label>
+            </div>
+            <div class="col-md-4">
+                <label class="mb-0">Item Name</label>
+            </div>
+            <div class="col-md-3">
+                <label class="mb-0">Item Type</label>
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+
+        <!-- Input Fields -->
+        <div class="row mb-0">
+            <div class="col-md-3">
+                <input class="mb-0 w-100" [formControl]="searchByCodeField" />
+            </div>
+            <div class="col-md-4">
+                <input class="mb-0 w-100" [formControl]="searchByNameField" />
+            </div>
+            <div class="col-md-3">
+                <ng-select class="form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="itemTypeOptions"
+                    bindLabel='label' bindValue='value' [virtualScroll]="true" [formControl]="searchByTypeField"></ng-select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn-gray-450 text-white w-100" (click)="updateFilter()">Search</button>
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <ngx-datatable #table class='bootstrap mt-2' [columnMode]="'flex'" [headerHeight]="30" [footerHeight]="20"
+            [rowHeight]="30" [limit]="10" [rows]='rows' [selected]='selected' [selectionType]="'checkbox'" (activate)="onActivate($event)"
+            (select)='onSelect($event)'>
+            <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+                [resizeable]="false">
+                <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                    let-selectFn="selectFn">
+                    <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+                </ng-template>
+                <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                    let-onCheckboxChangeFn="onCheckboxChangeFn">
+                    <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Item Code" prop="code" [resizeable]=false [flexGrow]=2>
+                <ng-template ngx-datatable-cell-template let-row="row.item">
+                    <button class="btn btn-sm btn-link font-weight-semi-bold pt-0">
+                        {{row.code}}
+                    </button>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Item Name" prop="name" [resizeable]=false [flexGrow]=2>
+                <ng-template ngx-datatable-cell-template let-row="row.item">
+                    <div>{{ row.name }}</div>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Description" prop="datatable" [resizeable]=false [flexGrow]=2>
+                <ng-template ngx-datatable-cell-template let-row="row.item">
+                    <div>{{ row.description }}</div>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+
+        <!-- Buttons -->
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="btn-toolbar float-right" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-large btn-outline-dark" (click)="onCancelBtnClicked()">Cancel</button>
+
+                    </div>
+                </div>
+                <div class="btn-toolbar float-right mr-2 " role="toolbar ">
+                    <div class="btn-group " role="group ">
+                        <button class="btn btn-large btn-brand-secondary" (click)="onAddBtnClicked()">Add Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

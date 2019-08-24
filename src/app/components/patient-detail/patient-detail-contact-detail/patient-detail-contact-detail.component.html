@@ -1,0 +1,84 @@
+<form [formGroup]="contactDetailFormGroup" novalidate>
+    <div class="card">
+        <div class="card-header">
+            CONTACT DETAILS
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>
+                        Primary Contact
+                        <span class="compulsory">*</span>
+                        <span class="text-grey-small"> (Mobile Number)</span>
+                    </label>
+                    <int-phone-prefix formControlName="primary" [locale]="'en'" [defaultCountry]="" [maxlength]=15 onlyNumbers=true></int-phone-prefix>
+                    <errors [control]="contactDetailFormGroup.get('primary')"></errors>
+                </div>
+                <div class="col-md-6">
+                    <label>
+                        Secondary Contact
+                        <span class="text-grey-small"> (Home/Office)</span>
+                    </label>
+                    <int-phone-prefix formControlName="secondary" [locale]="'en'" [maxlength]=15></int-phone-prefix>
+                    <!-- <int-phone-prefix formControlName="secondary" [defaultCountry]="(contactDetailFormGroup.get('secondary').value? 'sg': '')" [locale]="'en'" [maxlength]=15></int-phone-prefix> -->
+                    <errors [control]="contactDetailFormGroup.get('secondary')"></errors>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <label>Address Line 1
+                        <span class="compulsory">*</span>
+                    </label>
+                    <input class="form-control form-control-sm" formControlName="line1" />
+                    <errors [control]="contactDetailFormGroup.get('line1')"></errors>
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-md-8">
+                    <label>Address Line 2</label>
+                    <input class="form-control form-control-sm" formControlName="line2" />
+                </div>
+                <div class="col-md-4">
+                    <label>Post Code
+                        <span class="compulsory">*</span>
+                    </label>
+                    <input class="form-control form-control-sm" formControlName="postCode" />
+                    <errors [control]="contactDetailFormGroup.get('postCode')"></errors>
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-md-6">
+                    <label>Email</label>
+                    <input class="form-control form-control-sm" formControlName="email" />
+                    <errors [control]="contactDetailFormGroup.get('email')"></errors>
+                </div>
+                <div class="col-md-6">
+                    <label>Preferred mode of communication
+                        <span class="compulsory">*</span>
+                    </label>
+                    <div class="row">
+                        <div *ngFor="let input of contactDetailFormGroup.value.communications.value;">
+                            <div class="col-md-4 input-group-addon">
+                                <input type="radio" value="{{input.value}}" formControlName="communicationMode">
+                                <span class="ml-1">{{input.label}}</span>
+                            </div>
+                            <errors [control]="contactDetailFormGroup.get('communicationMode')"></errors>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-md-1">
+                    <label class="checkmark-container">
+                        <input type="checkbox" formControlName="consentGiven">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="col-md-11">
+                    <span>Patient gives consent to be contacted with latest news and offers from Healthway Medical Centre (via Email, Telephone,
+                    etc.).</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

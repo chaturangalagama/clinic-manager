@@ -1,0 +1,70 @@
+<div class="px-3">
+    <div class="row">
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                    NRIC
+                </span>
+            <br>
+            <span class="app-header-data-info">{{nric}}
+                </span>
+        </div>
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                Patient
+            </span>
+            <br>
+            <ng-container>
+                <a class="app-header-data-info" [routerLink]="[getPatientDetailRoute()]" target="_blank"> <span class="link">{{patientName}}</span></a>
+            </ng-container>
+        </div>
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                    Sex
+                </span>
+            <br><span class="app-header-data-info">{{sex === 'FEMALE' ? 'F' : 'M'}}</span>
+        </div>
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                    DOB
+                </span>
+            <br><span class="app-header-data-info">{{dob}}</span>
+        </div>
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                    Status
+                </span>
+            <br><span class="app-header-data-info">{{maritalStatus}}</span>
+        </div>
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                        Occupation
+                    </span>
+            <br><span class="app-header-data-info">{{maritalStatus}}</span>
+        </div>
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                            Contact
+                        </span>
+            <br><span class="app-header-data-info">{{contactNo}}</span>
+        </div>
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                Address
+            </span>
+            <br><span class="app-header-data-info">{{address1}} {{address2}} {{postal}}</span>
+        </div>
+        <div class="col-auto">
+            <span class="app-header-data-title">
+                Medical Coverage
+            </span><br>
+            <span *ngIf="priorityMedicalCoverage!==''" (click)="showMedicalCoverages()">
+                <span class="app-header-data-info">
+                  {{priorityMedicalCoverage}}
+                </span>
+            </span>
+            <span *ngIf="priorityMedicalCoverage===''" style="color:darkgray;">
+                      <span class="app-header-data-info"><i>Unassigned</i></span>
+            </span>
+        </div>
+    </div>
+    <!-- <app-consultation-patient-alert-info [hidden]='hideAlerts' [patientInfo]='patientInfo' [alerts]="alerts" [medicalAlerts]="medicalAlerts"></app-consultation-patient-alert-info> -->

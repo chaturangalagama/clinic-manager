@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <path id="notification-a" d="M10.8,26.325 C12.285,26.325 13.5,25.11 13.5,23.625 L8.1,23.625 C8.1,25.11 9.315,26.325 10.8,26.325 Z M18.9,18.225 L18.9,11.475 C18.9,7.3305 16.6995,3.861 12.825,2.943 L12.825,2.025 C12.825,0.9045 11.9205,0 10.8,0 C9.6795,0 8.775,0.9045 8.775,2.025 L8.775,2.943 C4.914,3.861 2.7,7.317 2.7,11.475 L2.7,18.225 L0,20.925 L0,22.275 L21.6,22.275 L21.6,20.925 L18.9,18.225 Z M16.2,19.575 L5.4,19.575 L5.4,11.475 C5.4,8.127 7.4385,5.4 10.8,5.4 C14.1615,5.4 16.2,8.127 16.2,11.475 L16.2,19.575 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(4.5 1.5)">
+    <mask id="notification-b" fill="#fff">
+      <use xlink:href="#notification-a"/>
+    </mask>
+    <use fill="#FFF" fill-rule="nonzero" xlink:href="#notification-a"/>
+    <g fill="#006496" mask="url(#notification-b)">
+      <rect width="27" height="27" transform="translate(-2.7)"/>
+    </g>
+  </g>
+</svg>

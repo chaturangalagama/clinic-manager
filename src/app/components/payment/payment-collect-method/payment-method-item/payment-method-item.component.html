@@ -1,0 +1,60 @@
+<div>
+    <div class="row">
+        <div class="col-md-5 text-indigo font-weight-500">
+            Paid By
+        </div>
+        <div class="col-md-4 text-indigo font-weight-500">
+            <div class="row">
+                <div [ngClass]="{'col-md-12' : paymentMethodItemFormGroup.value.payment !== 'CHEQUE', 'col-md-6': paymentMethodItemFormGroup.value.payment ==='CHEQUE'}">
+                    Amount ($)
+                </div>
+                <div class="col-md-6" *ngIf="paymentMethodItemFormGroup.value.payment ==='CHEQUE'">
+                    Bank
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 text-indigo font-weight-500" *ngIf="paymentMethodItemFormGroup.value.payment !== 'CASH'">
+            {{paymentMethodItemFormGroup.value.payment === 'CHEQUE' ? 'Cheque No.' : 'Transaction ID'}}
+        </div>
+    </div>
+
+    <div class="row" [formGroup]="paymentMethodItemFormGroup">
+
+        <div class="col-md-5">
+            <ng-select class="p-0 form-control form-control-sm custom-select" [items]="payments" bindLabel="label" bindValue="value" placeholder="Select Payment Method" formControlName="payment" [virtualScroll]="true" [clearable]="false" *ngIf="paymentMethodItemFormGroup.value.payment !== 'CASH'">
+            </ng-select>
+
+            <input type="text" class="form-control from-control-sm" formControlName="payment" *ngIf="paymentMethodItemFormGroup.value.payment === 'CASH'" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <div class="row">
+                <div [ngClass]="{'col-md-12' : paymentMethodItemFormGroup.value.payment !== 'CHEQUE', 'col-md-6': paymentMethodItemFormGroup.value.payment === 'CHEQUE'}">
+                    <input type="number" class="form-control form-control-sm" [formControl]="amount" min="0">
+                    <errors [control]="paymentMethodItemFormGroup.get('amount')"></errors>
+                </div>
+                <div class="col-md-6" *ngIf="paymentMethodItemFormGroup.value.payment ==='CHEQUE'">
+                    <input type="text" class="form-control form-control-sm" formControlName="bank">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-11">
+                    <input type="text" class="form-control form-control-sm" formControlName="transactionId" *ngIf="paymentMethodItemFormGroup.value.payment !== 'CASH'">
+                </div>
+                <div class="col-md-1 pl-0">
+                    <i class="icon-ellipsis-vert" [popover]="popTemplate2" placement="top" [outsideClick]="true" *ngIf="paymentMethodItemFormGroup.value.payment !== 'CASH'"></i>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #popTemplate2>
+            <div class="row ">
+                <button class="btn btn-link-grey p-1 " (click)="deletePressed()">
+          <i class="icon-trash"></i>
+        </button>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div [collapse]="!isDiscountShown" class="card card-header row mb-0" [formGroup]='discountGroup'>
+  <!-- <div class="well well-lg ">{{form.value | json}}</div> -->
+  <div class="row mb-0 ">
+    <div class="col-md-2 ">
+      <label class="mb-0 ">Unit Price</label>
+    </div>
+    <div class="col-md-2 ">
+      <label class="mb-0 ">Dec Amount(
+        <span [hidden]="!isDollarDiscount()">$</span>
+        <span [hidden]="!isPercentageDiscount()">%</span>)</label>
+    </div>
+    <div class="col-md-2 ">
+      <label class="mb-0 ">Inc Amount(
+        <span [hidden]="!isDollarDiscount()">$</span>
+        <span [hidden]="!isPercentageDiscount()">%</span>)</label>
+    </div>
+
+    <div class="col-md-2 ">
+      <label class="mb-0 ">Adj Total Price(w/GST)</label>
+    </div>
+    <div *ngIf="isStockShown === true" [ngClass]="{'col-md-2':isStockShown === true, 'col-md-4':isStockShown !== true }">
+      <label class="mb-0 ">Stocks Balance</label>
+    </div>
+    <div [ngClass]="{'col-md-2':isStockShown === true, 'col-md-4':isStockShown !== true }">
+      <label class="mb-0 ">Adjustment Remarks</label>
+    </div>
+  </div>
+  <div class="row pt-2 ">
+    <div class="col-md-2 ">
+      <input class="form-control form-control-sm" readonly [(ngModel)]="unitPrice" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="col-md-2 ">
+      <input class="form-control form-control-sm" min="0" [readonly]="!isDecreasedEnabled" type="number" formControlName="decreaseValue">
+      <errors [control]="discountGroup.get('decreaseValue')"></errors>
+    </div>
+    <div class="col-md-2 ">
+      <input class="form-control form-control-sm" [readonly]="!isIncreasedEnabled" min="0" type="number" formControlName="increaseValue">
+      <errors [control]="discountGroup.get('increaseValue')"></errors>
+    </div>
+
+    <div class="col-md-2 ">
+      <input class="form-control form-control-sm" [(ngModel)]="discountedPrice" [ngModelOptions]="{standalone: true}" readonly>
+    </div>
+    <div *ngIf="isStockShown === true" [ngClass]="{'col-md-2':isStockShown === true, 'col-md-4':isStockShown !== true }">
+      <input class="form-control form-control-sm" [(ngModel)]="stock" [ngModelOptions]="{standalone: true}" readonly>
+    </div>
+    <div [ngClass]="{'col-md-2':isStockShown === true, 'col-md-4':isStockShown !== true }">
+      <input class="form-control form-control-sm" [readonly]="!isDiscountEnabled" formControlName="remark">
+      <errors [control]="discountGroup.get('remark')"></errors>
+    </div>
+  </div>
+</div>

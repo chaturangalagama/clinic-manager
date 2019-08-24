@@ -1,0 +1,131 @@
+<div class="fixed-div-patient-list">
+    <button class="btn btn-brand-primary" (click)="addPatient()"> + Add Patient to Registry </button>
+</div>
+<div class="row mr-0 pt-4" style="background-color:#f2f2f2;padding-top:48px;">
+    <div class="col-12 mt-3 mb-2">
+        <div class="container-fluid pb-5">
+            <alert></alert>
+            <div class="card border-0 mt-4">
+                <div class="card-body shadow">
+                    <div class="row">
+                        <div class="col-8">
+                            <h5>All Registered Patients</h5>
+                        </div>
+                    </div>
+                    <hr class="p-0 m-0">
+                    <!-- FILTERS -->
+                    <div class="row pt-2 pb-2 justify-content-between">
+                        <div class="">
+                            <div class="d-inline-flex">
+                                <span class="p-2">Show</span>
+                                <ng-select class="p-0 form-control form-control-sm custom-select" [items]="numberOfEntriesDropdown.value" bindLabel="label" bindValue="value" [clearable]='false' [virtualScroll]="true" placeholder="25" (change)="populateEntries($event)" style="margin-left: 5px;">
+                                </ng-select>
+                                <span class='p-2'>entries</span>
+                            </div>
+                        </div>
+
+                        <div class="d-inline-flex pl-2">
+                            <span class="icon-filter filter-icon pt-2"></span>
+                            <span class="pt-2 pr-2">Status</span>
+                            <ng-select class="p-0 custom-select-multiple" [items]="statusFilterDropdown" placeholder="Any" value="" [clearable]='true' [virtualScroll]="true" [multiple]="true" (change)="updateFilter($event , 'status')">
+                            </ng-select>
+                        </div>
+
+
+                        <div class="d-inline-flex pl-2">
+                            <span class="p-2">Doctor</span>
+                            <ng-select class="p-0 custom-select-multiple" [items]="doctorsFilterDropdown" placeholder="All" [clearable]='false' [virtualScroll]="true" [multiple]="true" (change)="updateFilter($event, 'doctor')">
+                            </ng-select>
+                        </div>
+
+
+                        <div class="d-inline-flex flex-grow-1 px-2">
+                            <span class="p-2">Name</span>
+                            <input class="form-control form-control-sm" type="text" placeholder="Type name... " (keyup)="updateFilter($event, 'name')" />
+                            <span class="icon-search search-icon-patient-list"></span>
+                        </div>
+
+                    </div>
+                    <!-- FILTERS -->
+                    <div class="container-fluid mx-0 px-0">
+                        <ngx-datatable #table class='bootstrap custom-datatable expandable' [columns]="columns" [columnMode]="patientRegistryExpand()" [headerHeight]="30" [footerHeight]="30" [rowHeight]="35" [rowClass]='getRowClass' [rows]='rows' [limit]="pageLimit">
+                            <ngx-datatable-column name="No" prop="visitno" minWidth="inherit" [canAutoResize]=false [flexGrow]=1 [resizeable]="false">
+                                <ng-template ngx-datatable-cell-template let-row="row">
+                                    <div>{{ row.visitNumber }}</div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Name" prop="name" [canAutoResize]=true minWidth="inherit" [flexGrow]=1 [resizeable]="false">
+                                <ng-template ngx-datatable-cell-template let-row="row">
+                                    <div>
+                                        <a [title]="row.name" href="" class="font-weight-semi-bold" (click)='redirectToPatientDetail(row.patientId, row.visitId, row.caseId)'>
+                                            {{ row.name }}
+                                        </a>
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="NRIC" prop="nric" minWidth="inherit" [canAutoResize]=true [flexGrow]=1 [resizeable]="false">
+                                <ng-template ngx-datatable-cell-template let-row="row">
+                                    <div [title]="row.nric">{{ row.nric }}</div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Time In" prop="time" minWidth="inherit" [flexGrow]=1 [canAutoResize]=true [resizeable]="false">
+                                <ng-template ngx-datatable-cell-template let-row="row">
+                                    <div>{{ row.time | displayHour }}</div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Doctor" prop="doctor" minWidth="inherit" [flexGrow]=1 [canAutoResize]=true [resizeable]="false">
+                                <ng-template ngx-datatable-cell-template let-row="row">
+                                    <div [title]="row.doctor">{{ row.doctor }}</div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Purpose" prop="purpose" minWidth="inherit" [flexGrow]=1 [canAutoResize]=true [resizeable]="false">
+                                <ng-template ngx-datatable-cell-template let-row="row">
+                                    <div [title]="row.purpose">{{ row.purpose }}</div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Remarks" prop="remarks" minWidth="inherit" [flexGrow]=1 [canAutoResize]=true [resizeable]="false">
+                                <ng-template class="clipboardRow" ngx-datatable-cell-template let-row="row">
+                                    <div *ngIf="row.remarks">
+                                        <i class="icon-clipboard-1 cursor-pointer" [popover]="popTemplate" placement="top" [outsideClick]="true" containerClass="remarks-popover" container="body"></i>
+                                    </div>
+                                    <ng-template #popTemplate>
+                                        <div *ngIf='row.remarks===""'>
+                                            <i>
+                                              <span style="color:darkgray;">No Remarks</span>
+                                            </i>
+                                        </div>
+                                        <div *ngIf='row.remarks!==""'>{{row.remarks}}</div>
+                                    </ng-template>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name=" Status" prop="status" minWidth="inherit" [flexGrow]=1 [canAutoResize]=true [resizeable]="false">
+                                <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+                                    <div [title]="row.status">
+                                        <button [class]="buttonIsDisabled(value)" (click)="redirectToNextPage(row.status, row.patientId,row.caseId, row.visitId, row.doctorId)">
+                                        {{ row.status === "POST_CONSULT" ? "POST CONSULT" : row.status }}
+                                      </button>
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="Action " prop="action" minWidth="inherit" [flexGrow]=1 [canAutoResize]=true [resizeable]="false">
+                                <ng-template ngx-datatable-cell-template let-row="row">
+                                    <div class="btn-group btn-group-sm " dropdown container="body" [autoClose]="true">
+                                        <button class="btn btn-outline-dark dropdown-toggle" value="value " dropdownToggle aria-controls="dropdown-basic">Actions</button>
+                                        <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu dropdown-menu-right p-2" role="menu " aria-labelledby="basic-link" (click)="preventClose($event)">
+                                            <li *ngFor="let choice of actionList">
+                                                <input type="radio" id="{{choice}}" name="{{choice}}" value="{{choice}}" [(ngModel)]="selectedAction">
+                                                <label class='text-dark' for="{{choice}}">{{choice}}</label>
+                                            </li>
+                                            <div class="divider dropdown-divider "></div>
+                                            <button class="btn btn-sm btn-brand-dark" (click)="btnActionProceed(row) ">Proceed</button>
+                                        </ul>
+                                    </div>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

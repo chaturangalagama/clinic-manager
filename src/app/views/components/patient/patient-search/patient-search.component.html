@@ -1,0 +1,45 @@
+<alert></alert>
+<div class="container-fluid">
+    <div class="row pt-3 pb-2">
+        <div class="col-md-10">
+            <h5 class="p-2">Patient Lookup</h5>
+        </div>
+        <div class="col-md-2 align-self-end pr-3">
+            <button class="btn btn-md btn-brand-primary float-right px-4" (click)="onAddNewPatient()">Create New Patient</button>
+        </div>
+    </div>
+    <div class="row pb-2">
+        <div class="col-md-12">
+            <input class="search-input-flat w-100 pb-2" type='text' placeholder='Search by Name, Contact No. or Identification No.' [formControl]="searchField" />
+        </div>
+    </div>
+    <ngx-datatable #table class='bootstrap' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="40" [limit]="20" [rows]='rows'>
+        <ngx-datatable-column name="Name" prop="name" [resizeable]=false [flexGrow]=2>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <button class="btn btn-sm btn-link font-weight-semi-bold pt-0" (click)="toPatientDetail(row.patientid)">
+          {{row.name}}
+        </button>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Contact" prop="contact" [resizeable]=false [flexGrow]=2>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <div>{{ row.phone }}</div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="DOB" prop="dob" [resizeable]=false [flexGrow]=2>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <div>{{ row.dob }}</div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Id" prop="id" [resizeable]=false [flexGrow]=2>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <div>{{ row.id }}</div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="" prop="action" [resizeable]=false [flexGrow]=1>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <button class="btn btn-sm btn-brand-dark" (click)="onAddToQueue(row.patientid)">+ Add to Registry</button>
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>

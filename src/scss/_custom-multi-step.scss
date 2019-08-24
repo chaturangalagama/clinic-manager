@@ -1,0 +1,272 @@
+// Variables
+$base-margin: 0em;
+$base-padding: 1.5rem;
+$number-padding: 0.75rem;
+$base-border-radius: 0em;
+$number-border-radius: 50%;
+$screen-xs-max: 786px;
+
+$text-color: #49a4e0;
+$text-color-inverted: #fff;
+$clickable-hover: #d8f1ff;
+
+$brand-primary: #4285f4;
+$brand-success: #54b948;
+$brand-danger: #d50000;
+
+$gray-dark: #333;
+$gray-light: #999;
+$gray-lighter: #f2f2f2;
+
+$icon-danger: '\f071';
+$icon-success: '\f00c';
+
+$animation-time: 0.5s;
+
+.main .container-remaining-part {
+    padding: ($base-padding * 3) 30px;
+}
+
+// Multi-step code
+.rl-multi-step {
+	margin: ($base-margin / 2) 0;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+}
+
+// Setting up flexbox for list
+.rl-multi-step-list {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	list-style-type: none;
+	padding: 0;
+	.rl-multi-step-item:first-child { margin-left: 0; }
+	.rl-multi-step-item:last-child { margin-right: 0; }
+}
+
+// Defaults for each 'step'
+.rl-multi-step-item {
+	position: relative;
+	width: 100%;
+	margin: 0 ($base-margin / 6);
+	@media only screen and (max-width: $screen-xs-max) {
+		margin: 0 ($base-margin / 6);
+	}
+	z-index: 2;
+	border-radius: $base-border-radius;
+
+	// Step title and subtitle defaults
+	.rl-item-title,
+	.rl-item-subtitle {
+		position: relative;
+		margin: 0;
+		z-index: 2;
+	}
+	@media only screen and (max-width: $screen-xs-max) {
+		.rl-item-subtitle { display: none; }
+	}
+	.rl-item-title {
+		color: $brand-primary;
+		font-weight: 600;
+		margin: 0;
+	}
+
+	// Different step states [ active, current, completed, error]
+	&.active:hover { cursor: pointer; }
+	&.current .rl-item-title,
+	&.current .rl-item-subtitle {
+		color: $text-color-inverted;
+	}
+	&.active.current:hover .rl-item-title,
+	&.active.current:hover .rl-item-subtitle {
+		color: $brand-primary;
+	}
+	&.error:after {
+		position: absolute;
+		top: 50%;
+		z-index: 2;
+		transform: translateY(-50%);
+		right: .5em;
+		font-family: FontAwesome;
+		content: $icon-danger;
+		color: $brand-danger;
+	}
+
+	// pointer-events: none;
+	// cursor: default;
+}
+
+// Creates the 'arrow' effect / background colors
+.rl-item-wrap {
+	padding: $base-padding;
+	position: relative;
+	height: 100%;
+	&:before, &:after {
+		position: absolute;
+		left: 0;
+		content: ' ';
+		width: 100%;
+		height: 50.5%;
+		z-index: 1;
+		background-color: $gray-lighter;
+	}
+
+	// Top of the arrow
+	&:before {
+		top: 0;
+		transform: skew(45deg);
+		border-radius: .2em .2em 0 0;
+	}
+	// Bottom of the arrow
+	&:after {
+		bottom: 0;
+		transform: skew(-45deg);
+		border-radius: 0 0 .2em .2em;
+	}
+}
+
+// Changing arrow colors based on state
+.current .rl-item-wrap:before,
+.current .rl-item-wrap:after {
+	background-color: $brand-primary;
+}
+
+.active:hover .rl-item-wrap:before,
+.active:hover .rl-item-wrap:after {
+	background-color: $clickable-hover;
+}
+
+.rl-multi-step-item.error {
+	.rl-item-title,
+	.rl-item-subtitle {
+		padding-right: ($base-padding * 2);
+	}
+}
+
+// Changing step styles based on :first/:last step
+.rl-multi-step-item:first-child .rl-item-wrap,
+.rl-multi-step-item:last-child .rl-item-wrap {
+	width: 100%;
+	border-radius: $base-border-radius;
+	&:before, &:after { width: 50%; }
+}
+
+// If first step, only point on the right
+.rl-multi-step-item:first-child .rl-item-wrap {
+	background: linear-gradient(to right, $gray-lighter 95%, transparent 5%);
+	&:before, &:after { left: 50%; }
+}
+.active.rl-multi-step-item:first-child:hover .rl-item-wrap {
+	background: linear-gradient(to right, $clickable-hover 95%, transparent 5%);
+}
+.current.rl-multi-step-item:first-child .rl-item-wrap {
+	background: linear-gradient(to right, $brand-primary 95%, transparent 5%);
+}
+
+// If last step, only indent on the left
+.rl-multi-step-item:last-child .rl-item-wrap {
+	background: linear-gradient(to left, $gray-lighter 95%, transparent 5%);
+	&:before, &:after { right: 50%; }
+}
+.active.rl-multi-step-item:last-child:hover .rl-item-wrap {
+	background: linear-gradient(to left, $clickable-hover 95%, transparent 5%);
+}
+.current.rl-multi-step-item:last-child .rl-item-wrap {
+	background: linear-gradient(to left, $brand-primary 95%, transparent 5%);
+}
+
+// MSI Checked & Complete
+.checked .rl-multi-step-item.completed:after {
+	position: absolute;
+	top: 50%;
+	z-index: 2;
+	transform: translateY(-50%);
+	right: .5em;
+	font-family: 'Roboto', sans-serif;
+	content: $icon-success;
+	color: $brand-success;
+}
+
+// MSI Numbered
+.numbered .rl-multi-step-item {
+	counter-increment: step-counter;
+	.rl-item-wrap { padding-left: 25%; }
+
+	// Adds number to step
+	&:before {
+		content: counter(step-counter);
+		position: absolute;
+		top: 50%;
+		left: 10%;
+		transform: translateY(-50%);
+		min-width: .5em;
+		padding: ($number-padding / 2) $number-padding;
+		z-index: 2;
+		font-size: .85em;
+		background-color: white;
+		color: $text-color;
+		font-weight: 600;
+		text-align: center;
+		border-radius: $number-border-radius;
+	}
+}
+
+// MSI w/ badge counts
+.rl-item-wrap .badge {
+	position: absolute;
+	right: .5em;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 3;
+}
+.error .rl-item-wrap .badge {
+	right: 2em;
+	~ .rl-item-title,
+	~ .rl-item-subtitle {
+		padding-right: 3em;
+	}
+}
+
+// MSI CSS Loader
+// .rl-multi-step-loading { opacity: .75; }
+//
+// .current.rl-multi-step-loading:before {
+// 	border-color: $text-color-inverted;
+// 	border-top-color: transparent;
+// 	opacity: 1;
+// }
+//
+// .rl-item-wrap .busy { display: none; }
+//
+// .busy-css {
+// 	z-index: 3;
+// 	content: '';
+// 	position: absolute;
+// 	top: 50%;
+// 	left: 50%;
+// 	margin-top: -.5em;
+// 	margin-left: -.5em;
+// 	border-radius: 50%;
+// 	width: 1em;
+// 	height: 1em;
+// 	border: .25em solid $gray-dark;
+// 	border-top-color: transparent;
+// 	animation: spin ($animation-time * 2) infinite linear;
+// }
+//
+// .rl-multi-step-loading:before {
+// 	@busy-css;
+// 	opacity: 1;
+// }
+//
+// @keyframes spin {
+// 	from {
+// 		transform: rotate(0deg);
+// 	}
+// 	to {
+// 		transform: rotate(360deg);
+// 	}
+// }

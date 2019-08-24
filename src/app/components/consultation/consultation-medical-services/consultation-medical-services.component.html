@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-header font-weight-semi-bold">
+        MEDICAL SERVICES
+    </div>
+    <div class="card-body px-0">
+        <tabset>
+            <tab heading="Immunization">
+                <!-- <app-consultation-immunization></app-consultation-immunization> -->
+            </tab>
+            <tab heading="Medical Certificate">
+                <app-medical-certificate-items-array [itemsFormArray]="mcItemsFormArray"></app-medical-certificate-items-array>
+            </tab>
+            <tab heading="Referral">
+                <app-consultation-referral></app-consultation-referral>
+            </tab>
+            <tab heading="Memo">
+                <app-consultation-memo></app-consultation-memo>
+            </tab>
+            <tab heading="Follow Ups">
+                <app-consultation-follow-up></app-consultation-follow-up>
+            </tab>
+        </tabset>
+    </div>
+</div>

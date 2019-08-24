@@ -1,0 +1,78 @@
+<div class="card">
+  <div class="card-header">{{title}}</div>
+  <div class="card-body">
+
+    <div class="" [formGroup]='mainFormGroup'>
+
+      <div class="case-card-search row pale-grey pt-3 mb-1 mt-1" style="background-color: #f2f4f7">
+
+        <div class="col-3 mt-2">
+          <h6>Search by Month</h6>
+        </div>
+
+        <div class="form-group col-5">
+          <input class="form-control form-control-sm" #dp="bsDatepicker" bsDatepicker placement="bottom" [bsConfig]="{dateInputFormat:'MMMM YYYY',containerClass: 'theme-blue'}"
+            formControlName="startDate" (onShown)="onOpenCalendar($event)">
+        </div>
+
+        <div class="icon-calendar pt-2" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen"></div>
+
+        <div class="col-2 pl-3">
+          <button class="btn btn-cancel pl-4 pr-4" (click)="showVisits()"> Show Visits </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ml-2 mt-2">
+      Showing last 10 visits
+    </div>
+
+    <div class="container-fluid" style="padding-top: 15px; padding-bottom: 5px;">
+
+      <ngx-datatable #table class='bootstrap custom-datatable expandable' [columns]="columns" [headerHeight]="40"
+        [columnMode]="'force'" [footerHeight]="0" [rowHeight]="40" [rows]='rows' [selected]="selected" [selectionType]="'checkbox'"
+        (select)='onSelect($event)'>
+
+        <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false">
+          <ng-template ngx-datatable-cell-template let-value="value" let-onCheckboxChangeFn="onCheckboxChangeFn">
+            <input type="checkbox" (change)="onCheckboxChangeFn($event)" />
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Date" prop="date" minWidth="inherit" [canAutoResize]=false>
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <div>{{ row.date }}</div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Purpose" prop="purpose" [canAutoResize]=true minWidth="false" headerClass="headerAlignCenter">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <div [title]="row.purpose">{{ row.purpose }}</div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Existing Case ID" prop="existingCaseId" minWidth="false" headerClass="headerAlignCenter"
+          [canAutoResize]=true>
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <div [title]="row.existingCaseId" class="centerContent">{{ row.existingCaseId }}</div>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+
+    <div class="col-12 case-card-search row pale-grey pt-3 mb-1 mt-1">
+      <div class="col-3 mr-4"></div>
+
+      <div class="col-3">
+        <button class="btn btn-cancel pl-5 pr-5" (click)="cancelModal()"> Cancel </button>
+      </div>
+
+      <div class="col-4 pl-3 ml-4">
+        <button class="btn btn-brand-primary pl-4 pr-4" (click)="attachToThisCase()"> Attach to this case </button>
+      </div>
+    </div>
+
+  </div>
+</div>

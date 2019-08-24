@@ -1,0 +1,18 @@
+<body>
+
+
+  <form ngNoForm name='mainForm' id='mainForm' target="_blank" method="POST" action="{{reportSubmitAction}}">
+    <input type="hidden" name="Authorization" value="{{authToken}}">
+
+    <input type="text" name="body" value="{{payload}}" />
+
+    <!-- <input type="text" name="clinicIds" value="">{JSON PAYLOAD}</input> -->
+    <!-- <a href="assets/data/reportTest.html" target="blank">Click Here</a> -->
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // document.forms["mainForm"].submit();
+  </script>
+
+</body>

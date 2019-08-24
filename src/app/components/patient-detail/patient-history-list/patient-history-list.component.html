@@ -1,0 +1,41 @@
+<form [formGroup]="formGroup" novalidate>
+    <ngx-datatable #table class='bootstrap custom-datatable expandable' [columnMode]="'force'"
+        [headerHeight]="40" [footerHeight]="40" [rowHeight]="'auto'" [rows]="formGroup.get('formArray').value" (page)='setPage($event)'
+        [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size">
+        <ngx-datatable-column name="Date" prop="date" minWidth="inherit" [canAutoResize]=true [flexGrow]=2>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <div>{{ row.date }}</div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Diagnosis" prop="diagnosis" minWidth="inherit" [canAutoResize]=true [flexGrow]=3>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <div *ngFor="let diagnosisCode of row.diagnosis.value;">
+                    <div class="row ml-0 mr-0">
+                        {{diagnosisCode}}
+                    </div>
+                </div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Attending Dr. / Clinic" prop="doctor" minWidth="inherit" [canAutoResize]=true [flexGrow]=3>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <div>{{row.doctor}} / {{row.clinic}}</div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Case" prop="caseId" minWidth="inherit" [canAutoResize]=true [flexGrow]=3>
+            <ng-template ngx-datatable-cell-template let-row="row">
+                <div><span class="link" (click)="toCaseDetail(row.caseId)">{{row.caseNumber}}</span></div>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Action" prop="action" minWidth="inherit" [canAutoResize]=true [flexGrow]=1>
+        <ng-template ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-action p-0 btn-blue rounded" (click)="onBtnDetailClicked(rowIndex)">
+                        <i class="icon-search i-dot"></i>
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+        </ngx-datatable-column>    
+    </ngx-datatable>
+</form>

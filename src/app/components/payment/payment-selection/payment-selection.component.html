@@ -1,0 +1,58 @@
+<form [formGroup]="formGroup" novalidate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row bg-grey-400 pt-2 pb-2 ml-0 mr-0 mb-2">
+      <div class="col-md-4">
+        <label class="mb-0">Payment</label>
+      </div>
+      <div class="col-md-4">
+        <label class="mb-0">Amount</label>
+      </div>
+      <div class="col-md-3">
+        <label class="mb-0">Transaction ID</label>
+      </div>
+    </div>
+    <form *ngFor="let form of formGroup.get('paymentArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+      <div class="row pt-2 pb-2 ml-0 mr-0 mb-2">
+        <div class="col-md-4">
+          <ng-select class="p-0 form-control form-control-sm custom-select" [items]="payments" bindLabel="label" bindValue="value"
+            placeholder="Select Payment Method" formControlName="payment" [virtualScroll]="true">
+          </ng-select>
+        </div>
+        <div class="col-md-4">
+          <input type="number" class="form-control form-control-sm" formControlName="amount" />
+        </div>
+        <div class="col-md-3">
+          <input class="form-control form-control-sm" formControlName="transactionId" />
+        </div>
+        <div class="col-md-1" dropdown>
+          <button dropdownToggle type="button" class="btn btn-mini p-0">...</button>
+          <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="onDelete(form, i)">Delete</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </form>
+    <div class="row pt-4">
+      <div class="col-md-12">
+        <div class="btn-toolbar float-right" role="toolbar">
+          <div class="btn-group" role="group">
+            <button class="btn btn-medium btn-outline-pink" (click)="onBtnAdd(formGroup)">
+              + Add Payment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-pink" (click)="onSave()">Save</button>
+  </div>
+</form>

@@ -1,0 +1,42 @@
+/*!
+ * CoreUI - Open Source Bootstrap Admin Template
+ * @version v1.0.6
+ * @link http://coreui.io
+ * Copyright (c) 2017 creativeLabs Łukasz Holeczek
+ * @license MIT
+ */
+
+// Override Boostrap variables
+@import 'bootstrap-variables';
+// Import Bootstrap source files
+@import 'node_modules/bootstrap/scss/bootstrap';
+// Override core variables
+@import 'core-variables';
+// Import core styles
+@import 'core/core';
+// Import custom checkbox
+@import 'custom-checkbox';
+// Import custom radio
+@import 'custom-radio';
+// @import 'fontello';
+@import url(fontello.css);
+// Other Custom Styles
+@import 'custom-multi-step';
+@import 'icon-input';
+@import 'container-title';
+@import 'custom-btn';
+@import 'custom-ng-select';
+@import 'custom-ngx-datatable';
+@import 'custom-calendar';
+@import 'custom-queue';
+@import 'custom-table';
+@import 'drug-input-search';
+@import 'timeline';
+@import 'fixed-header';
+// Custom styles
+@import 'custom';
+
+/* angular-cli file: src/styles.css */
+
+// @import "node_modules/angular-calendar/css/angular-calendar.css";
+@import "../../node_modules/angular-calendar/css/angular-calendar.css";

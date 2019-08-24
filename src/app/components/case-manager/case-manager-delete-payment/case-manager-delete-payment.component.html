@@ -1,0 +1,28 @@
+<div class="card mb-0" style="border:0">
+  <div class="card-header-red">{{title}}</div>
+  <div class="card-body">
+    <div><span style="margin-bottom:0px">Are you sure you want to remove this Payment?</span></div>
+    <div class="mt-3">
+      <h5>Reason for removing this Payment</h5>
+    </div>
+
+    <form (ngSubmit)='onDeletePaymentConfirm()' [formGroup]='mainFormGroup'>
+      <textarea type="text" placeholder="Please enter your reason here..." style="width:100%; height:100px;"
+        formControlName='textInput'></textarea>
+      <div class="col-12 row ml-0 pr-0 mt-3">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <button class="btn btn-cancel" type="button" style="padding:8px 56px 8px 56px;" (click)="cancelModal()">Cancel</button>
+        </div>
+        <div class="col-4" align="right" style="padding-right:0px;">
+          <button class="btn btn-brand-primary" style="padding:8px 56px 8px 56px;" [disabled]="!mainFormGroup.valid">Save</button>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="message != null || message != undefined" class="case-card-search row pale-grey pt-3 mb-1 mt-1" style="background-color: #f2f4f7">
+      <div class="col-12 row">
+        <div class="col-11" style="color: red">{{message}}</div>
+      </div>
+    </div>
+  </div>
+</div>

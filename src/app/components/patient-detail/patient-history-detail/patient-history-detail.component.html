@@ -1,0 +1,459 @@
+<form [formGroup]="formGroup" novalidate>
+    <div class="row pt-4">
+        <div class="col-md-12">
+            <div class="float-left">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-medium btn-brand-primary" (click)="onBtnPreviousClicked()">Previous</button>
+                </div>
+            </div>
+            <div class="float-right">
+                <div class="btn-group pl-2" role="group">
+                    <button class="btn btn-medium btn-brand-primary" (click)="onBtnSaveClicked()" [hidden]="!isDoctor()">Save (F4)
+          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row pt-2">
+        <div class="col-md-12">
+            <span class="pl-4">Date of visit:
+                <label>{{formGroup.value.date}}</label>
+            </span>
+            <span class="pl-4">Consultation Start Time:
+                <label>{{formGroup.value.consultationStartTime ? (formGroup.value.consultationStartTime | displayHour) : '-'}}</label>
+            </span>
+            <span class="pl-4">Consultation End Time:
+                <label>{{formGroup.value.consultationEndTime ? (formGroup.value.consultationEndTime | displayHour) : '-'}}</label>
+            </span>
+            <span class="pl-4">Visit Start Time:
+                <label>{{formGroup.value.startTime}}</label>
+            </span>
+            <span class="pl-4">Visit End Time:
+                <label>{{formGroup.value.endTime}}</label>
+            </span>
+            <span class="pl-4 float-right">Follow Up:
+                <label>{{formGroup.value.followupConsultationFormGroup.followupDate}}
+                </label>
+                <i [hidden]="!formGroup.value.followupConsultationFormGroup.remarks" class="icon-info-circled" placement="top" [popover]="popTemplate"></i>
+                <ng-template #popTemplate>
+                <div>{{formGroup.value.followupConsultationFormGroup.remarks}}</div>
+                </ng-template>
+            </span>
+        </div>
+    </div>
+
+    <!-- <div class="card mt-4">
+        <div class="card-header card-header-grey">
+            DIAGNOSIS
+        </div>
+        <div class="card-body">
+            <div class="row mb-0">
+                <div class="col-md-3">
+                    <label class="mb-0">ICD-10</label>
+                </div>
+                <div class="col-md-9">
+                    <label class="mb-0">Description</label>
+                </div>
+            </div>
+
+            <form *ngFor="let form of formGroup.get('diagnosisArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+                <div class="row pt-2">
+                    <div class="col-md-3">
+                        {{form.value.icd}}
+                    </div>
+                    <div class="col-md-9">
+                        {{form.value.description}}
+                    </div>
+                </div>
+            </form>
+        </div>
+</div> -->
+
+    <div class="card mt-4" [hidden]="!isDoctor()">
+        <div class="card-header card-header-grey">
+            CONSULTATION NOTES
+        </div>
+        <div class="card-body">
+            <div class="row mb-0">
+                <div class="col-md-3">
+                    <label class="mb-0">Purpose of Visit</label>
+                </div>
+                <div class="col-md-9">
+                    <label class="mb-0">Treatment Notes</label>
+                </div>
+            </div>
+
+            <div class="row pt-2">
+                <div class="col-md-3">
+                    {{formGroup.value.purpose}}
+                </div>
+                <div class="col-md-8" [innerHTML]="formGroup.value.notes">
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-link-grey p-0" (click)="onBtnEditNotesClicked()">
+                        <svg-icon src='/assets/svg/othericons/edit.svg'></svg-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header card-header-grey">
+            ITEM
+        </div>
+        <div class="card-body">
+            <div class="row mb-0">
+                <div class="col-md-2">
+                    <label class="mb-0">Item Code</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">UOM</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Instr</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Dur</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">Qty (UOM)</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Batch No</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Expiry Date</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">Remarks</label>
+                </div>
+            </div>
+
+            <form *ngFor="let form of formGroup.get('itemArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+                <div class="row pt-2">
+                    <div class="col-md-2">
+                        {{form.value.itemCode}}
+                    </div>
+                    <div class="col-md-2">
+                        {{form.value.uom.replace("#", form.value.dosage)}}
+                    </div>
+                    <div class="col-md-1">
+                        {{form.value.instruct}}
+                    </div>
+                    <div class="col-md-1">
+                        {{form.value.duration}}
+                    </div>
+                    <div class="col-md-2">
+                        {{form.value.quantity}} {{form.value.quantityUom}}
+                    </div>
+                    <div class="col-md-1">
+                        {{form.value.batchNo}}
+                    </div>
+                    <div class="col-md-1">
+                        {{form.value.expiryDate}}
+                    </div>
+                    <div class="col-md-2">
+                        {{form.value.remarks}}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-4" *ngxPermissionsOnly="['ROLE_FILE_MANAGEMENT']">
+        <div class="card-header card-header-grey">
+            DOCUMENTS
+        </div>
+        <div class="card-body">
+            <div class="row pb-4">
+                <div class="col-md-4">
+                    <input class="form-control form-control-sm" formControlName="filter" placeholder="Search By Name" />
+                </div>
+                <div class="col-md-8" *ngxPermissionsOnly="['ROLE_FILE_UPLOAD']">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-blue-cms" type="button" type="button" (click)="openModal($event)">Uploaded
+                                Documents
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-0">
+                <div class="col-md-2">
+                    <label class="mb-0">Name</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">Document</label>
+                </div>
+                <div class="col-md-4">
+                    <label class="mb-0">Description</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">Type</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">Size (KB)</label>
+                </div>
+            </div>
+
+            <form *ngFor="let form of formGroup.get('documentsArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+                <div class="row pt-2" *ngxPermissionsOnly="['ROLE_FILE_LIST']">
+                    <div class="col-md-2">
+                        {{form.value.name}}
+                    </div>
+                    <div class="col-md-2">
+                        <span class="link" (click)="onDownloadDocument(i)" *ngxPermissionsOnly="['ROLE_FILE_DOWNLOAD']">{{form.value.document}}</span>
+                    </div>
+                    <div class="col-md-4">
+                        {{form.value.description}}
+                    </div>
+                    <div class="col-md-2">
+                        {{form.value.type.split('.').slice(-1)}}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.value.size/1024 | number:'.2' }}
+                    </div>
+                </div>
+            </form>
+
+            <div ng2FileDrop [ngClass]="{'file-over': hasDropZoneOver}" (fileOver)="fileOver($event)" (onFileDrop)="openModal($event)" [uploader]="uploader" class="well drop-zone p-2 mt-2" *ngxPermissionsOnly="['ROLE_FILE_UPLOAD']">
+                Drag and Drop to upload or
+                <input type="file" ng2FileSelect (onFileSelected)="openModal($event)" [uploader]="uploader" multiple />
+            </div>
+
+            <div *ngFor="let item of uploader.queue; let i=index;">
+                <div class="row pt-2" *ngxPermissionsOnly="['ROLE_FILE_UPLOAD']">
+                    <div class="col-md-2">
+                        {{ item.file.name }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ item?.file?.size/1024/1024 | number:'.2' }} MB
+                    </div>
+                    <div class="col-md-4">
+                        <div class="progress mb-0">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                        <div *ngIf="item.errorMsg" style="color: red;"> {{ item.errorMsg }} </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-danger btn-xs" (click)="item.upload()" *ngIf="!item.isSuccess">
+                            <span class="glyphicon glyphicon-upload"></span> Retry
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs" (click)="onRemoveDocumemt(i)" *ngIf="!item.isSuccess">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                        <span *ngIf="item.isSuccess">
+                            File is successfully uploaded.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header card-header-grey d-flex justify-content-between">
+            <span>CLINIC NOTES</span>
+        </div>
+        <div class="card-body">
+            <div class="row mb-0">
+                <div class="col-12">
+                    <textarea cols="10" rows="5" class="w-100 bg-grey" disabled>{{formGroup.value.clinicNotes}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header card-header-grey">
+            PRINT
+        </div>
+        <div class="card-body">
+            <div class="row mb-0">
+                <div class="col-md-2">
+                    <label class="mb-0">Item</label>
+                </div>
+                <div class="col-md-6">
+                    <label class="mb-0">Description</label>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col col-md-2">
+                    <label class="mb-0">Drug Label</label>
+                </div>
+
+                <div class="col">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-primary" (click)="onBtnPrintLabelClicked()" (keyup)="onBtnPrintLabelClicked()" [disabled]="!formGroup.get('itemArray').value.length">
+                                Print Label (F7)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header p-0"></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col col-md-2">
+                    <label class="mb-0">Medical Certificates</label>
+                </div>
+
+                <div class="col col-md-6">
+                    <form *ngFor="let form of formGroup.get('certificateArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+                        <div class="row ml-0 mr-0">
+                            <label class="mb-0">{{form.value.str}}</label>
+                            <button class="btn btn-link-grey p-0" (click)="onBtnEditMedicalCertificatesClicked(i)" [hidden]="!isDoctor()">
+                                <svg-icon src='/assets/svg/othericons/edit.svg' class="pl-2"></svg-icon>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col">
+                    <div class="btn-toolbar float-right" role="toolbar" *ngIf="formGroup.get('certificateArray').value.length === 0">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-primary" (click)="onBtnEditMedicalCertificatesClicked()" [hidden]="!isDoctor()">
+                                Add MC
+                            </button>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar float-right" role="toolbar" *ngIf="formGroup.get('certificateArray').value.length">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-primary" (click)="onBtnPrintMCClicked()" [disabled]="isCertificateChanged">
+                                Print MC (F8)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header p-0" *ngIf="formGroup.get('referralArray').value.length"></div>
+        <div class="card-body" *ngIf="formGroup.get('referralArray').value.length">
+            <div class="row">
+                <div class="col col-md-2">
+                    <label class="mb-0">Referral</label>
+                </div>
+
+                <div class="col col-md-6">
+                    <form *ngFor="let form of formGroup.get('referralArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+                        <div class="row ml-0 mr-0">
+                            <label class="mb-0">{{form.value.str}}</label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-primary" (click)="onBtnPrintLetterClicked()">
+                                Print Letter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header p-0" *ngIf="formGroup.value.memo"></div>
+        <div class="card-body" *ngIf="formGroup.value.memo">
+            <div class="row">
+                <div class="col col-md-2">
+                    <label class="mb-0">Memo</label>
+                </div>
+
+                <div class="col col-md-6">
+                    <div class="row ml-0 mr-0" [innerHTML]="formGroup.value.memo">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-primary" (click)="onBtnPrintMemoClicked()">
+                                Print Memo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header p-0" *ngIf="formGroup.value.timeChitFrom && formGroup.value.timeChitTo"></div>
+        <div class="card-body" *ngIf="formGroup.value.timeChitFrom && formGroup.value.timeChitTo">
+            <div class="row">
+                <div class="col col-md-2">
+                    <label class="mb-0">Time Chit (optional)</label>
+                </div>
+
+                <div class="col col-md-6">
+                    <div class="row ml-0 mr-0">
+                        <label class="mb-0">TIME CHIT: FROM </label> <span class="mx-1">{{formGroup.value.timeChitFrom}}</span>
+                        <label class="mb-0">TO </label> <span class="mx-1">{{formGroup.value.timeChitTo}}</span>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-dark" (click)="onBtnPrintTimeChitClicked()">
+                                Print Time Chit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header p-0"></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col col-md-2">
+                    <label class="mb-0">Patient Label</label>
+                </div>
+
+                <div class="col">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-primary" (click)="onBtnPrintPatientLabelClicked()">
+                                Print Patient Label (F9)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header p-0" *ngIf="formGroup.get('itemArray').value.length"></div>
+        <div class="card-body" *ngIf="formGroup.get('itemArray').value.length">
+            <div class="row">
+                <div class="col col-md-2">
+                    <label class="mb-0">Vaccination Certificates</label>
+                </div>
+
+                <div class="col">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-primary" (click)="onBtnPrintVCClicked()">
+                                Print VC
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-md-12">
+            <div class="float-right">
+                <div class="btn-group pl-2" role="group">
+                    <button class="btn btn-medium btn-brand-primary" (click)="onBtnSaveClicked()" [hidden]="!isDoctor()">Save (F4)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

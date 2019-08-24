@@ -1,0 +1,115 @@
+<div class="fixed-div-consultation-add">
+    <app-consultation-patient-info [patientNameRedirect]=true *ngxPermissionsOnly="['ROLE_PATIENT_MEDICAL_ALERTS']"></app-consultation-patient-info>
+</div>
+<form novalidate class="container-fluid mb-3" style="margin-top:14rem" [formGroup]="consultationForm">
+    <alert></alert>
+
+    <!-- <div class=""> -->
+    <div class="row no-gutters">
+        <div class="col-md">
+        </div>
+        <div id="consultation-history-btn" class="col-md-6" *ngxPermissionsOnly="['ROLE_PATIENT_VISIT_HISTORY']">
+            <div class="row right-strip">
+                <div class="col input-group-append mx-0">
+                    <button class="btn btn-sm btn-gray-950 mt-2 py-0 btn-left" (click)="btnConsultationHistory()">
+                        <i [class]="isConsultationHidden?'icon-left-open':'icon-right-open'"></i></button>
+                    <button class="btn btn-gray-450 btn-sm btn-block text-left mt-2 py-0 btn-right mx-0" (click)="btnConsultationHistory()">
+                        <span>PATIENT VITALS</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="row-main">
+        <div class="col-md" id="consultation-note-div">
+            <div class="row">
+                <app-consultation-notes class="col" [consultationNotes]="consultationForm.get('consultationNotes')"></app-consultation-notes>
+            </div>
+            <div class="row mt-3">
+                <app-consultation-diagnosis class="col" [diagnosisIds]="consultationForm.get('diagnosisIds')"></app-consultation-diagnosis>
+            </div>
+        </div>
+        <div id="consultation-history-div" class="col-md">
+            <div class="row">
+                <app-vital class="col" [vitalForm]="getVitalForm()" *ngxPermissionsOnly="['ROLE_VIEW_VITALS']"></app-vital>
+            </div>
+            <div class="row">
+                <div class="mx-2 col bg-gray-450 form-control-sm">
+                    <span class="text-white">PATIENT HISTORY</span>
+                </div>
+            </div>
+            <div class="row">
+                <app-consultation-history (copiedPrescription)='copyPrescription($event)' class="col" *ngxPermissionsOnly="['ROLE_PATIENT_VISIT_HISTORY']"></app-consultation-history>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- <app-consultation-prescription class="mt-0" [itemsFormArray]="consultationForm.get('drugDispatch').get('dispatchDrugDetail')"></app-consultation-prescription>
+    <app-consultation-medical-service [itemsFormArray]="consultationForm.get('medicalServiceGiven').get('medicalServices')"></app-consultation-medical-service> -->
+    <div class="row justify-content-around mb-2" [hidden]='true'>
+        <div class="col-md">
+            <button class="btn btn-block btn-outline-pink" (click)='medicalCertificateShown=!medicalCertificateShown'>Add Medical Certificate</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-pink" (click)='laboratoryShown=!laboratoryShown'>Add Laboratory</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-pink" (click)='immunizationShown=!immunizationShown'>Add Immunization</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-pink" (click)='memoShown=!memoShown'>Add Memo</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-pink" (click)='referralShown=!referralShown'>Add Referral</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-pink" (click)='followUpShown=!followUpShown'>Add Follow Up</button>
+            <button class="btn btn-block btn-outline-brand-secondary" (click)='medicalCertificateShown=!medicalCertificateShown'>Add Medical Certificate</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-brand-secondary" (click)='laboratoryShown=!laboratoryShown'>Add Laboratory</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-brand-secondary" (click)='immunizationShown=!immunizationShown'>Add Immunization</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-brand-secondary" (click)='memoShown=!memoShown'>Add Memo</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-brand-secondary" (click)='referralShown=!referralShown'>Add Referral</button>
+        </div>
+        <div class="col-md">
+            <button class="btn btn-block  btn-outline-brand-secondary" (click)='followUpShown=!followUpShown'>Add Follow Up</button>
+        </div>
+    </div>
+    <!-- <app-consultation-laboratory [hidden]='!laboratoryShown' [itemsFormArray]="consultationForm.get('issuedMedicalTest').get('issuedMedicalTestDetails')"></app-consultation-laboratory> -->
+    <!-- <app-consultation-immunization [hidden]='!immunizationShown' [itemsFormArray]="consultationForm.get('immunisationGiven').get('immunisation')"></app-consultation-immunization> -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <app-consultation-referral [hidden]='!referralShown' [itemsFormArray]="consultationForm.get('patientReferral').get('patientReferrals')"></app-consultation-referral>
+        </div>
+        <div class="col-md-6">
+            <app-medical-certificate-items-array [hidden]='!medicalCertificateShown' [itemsFormArray]="consultationForm.get('medicalCertificates')">
+            </app-medical-certificate-items-array>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <app-consultation-memo [hidden]='!memoShown' [memo]="consultationForm.get('memo')"></app-consultation-memo>
+        </div>
+        <div class="col-md-6">
+            <app-consultation-follow-up [hidden]='!followUpShown' [item]="consultationForm.get('followupConsultation')"></app-consultation-follow-up>
+        </div>
+    </div>
+    <button class="btn btn-pink" [disabled]="!consultationForm.valid" (click)="onSubmit()">Save & End Consultation(F4)</button>
+
+    <div class="row mb-4">
+        <div class="col-md">
+            <app-clinic-notes [clinicNotes]="consultationForm.get('clinicNotes')"></app-clinic-notes>
+        </div>
+    </div>
+
+    <div class="row flex-row-reverse">
+        <!-- <button class="btn btn-pink" [disabled]="!consultationForm.valid" (click)="onSubmit()">Save & End Consultation(F4)</button> -->
+    </div>
+</form>

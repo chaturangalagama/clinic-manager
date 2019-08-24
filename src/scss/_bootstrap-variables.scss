@@ -1,0 +1,146 @@
+// Bootstrap overrides
+//
+// Color system
+//
+$white: #fff;
+$gray-100: #f0f3f5;
+$gray-200: #c2cfd6;
+$gray-300: #a4b7c1;
+$gray-400: #869fac;
+$gray-500: #678898;
+$gray-600: #536c79;
+$gray-700: #3e515b;
+$gray-800: #29363d;
+$gray-900: #151b1e;
+$black: #000 !default;
+// OUE Custom
+$indigo-100: #0093dc !default;
+$dark-sky-blue: #4a90e2 !default;
+$bright-sky-blue: #02bbf1 !default;
+$light-blue-100: #e3f2fa !default;
+$peacock-blue: #006496 !default;
+$darkish-pink: #e64a79 !default;
+$red-100: #d0021b !default;
+$grey-50:#ebebeb !default;
+$grey-100: #f8f8f8 !default;
+$grey-200: #f9f9fa !default;
+$grey-400: #ededed !default;
+$grey-600: #9b9b9b !default;
+$grey-800: #4a4a4a !default;
+$light-gray: #d8d8d8 !default;
+$cerulean:#0094c9 !default;
+$silver-10-full: rgb(198, 203, 212);
+$silver-10-alpha: 0.1;
+$silver-10: rgba($silver-10-full, $silver-10-alpha);
+$sandy-yellow: #fff176;
+$twilight: #454079;
+$bluish: #238a9f;
+// $grey-700: #666666 !default;
+$grey-500: #cccacd !default;
+$grey-800: #4a4a4a;
+$gray-450: #666666;
+$gray-950: #333333;
+$duck-egg-blue: #e3f2fa;
+$duck-egg-blue-two: #cdecfc;
+$pale-blue: #dce9ee;
+$greyish-brown:#4a4a4a;
+$brownish-grey: #666666;
+$warm-grey: #9b9b9b;
+$warm-grey-two: #979797;
+$cool-grey: #a8aab7;
+$brown-gray:#969696;
+$silver: #c6cbd4;
+$pale-grey: #f2f4f7;
+$pale-grey-two: #e2e7ee;
+$pale-grey-three:#f5f7fa;
+$blue: #20a8d8;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$barney-purple: #555194;
+$pink: #e83e8c !default;
+$red: #f86c6b;
+$maroon: #d0021b;
+$orange: #f8cb00;
+$yellow: #ffc107 !default;
+$green: #4dbd74;
+$dark-seafoam-green: #3baf70;
+$teal: #20c997 !default;
+$cyan: #63c2de;
+$vivid-purple: #9013fe;
+$squash: #f5a623;
+$colors: (blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan, white: $white, gray: $gray-600, warm-gray: $warm-grey, gray-dark: $gray-800, peacock-blue: $peacock-blue, cool-grey:$cool-grey, light-blue-100:$light-blue-100);
+$theme-colors: (primary: $indigo-100, secondary: $gray-300, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-100, dark: $gray-800, pale-grey-three:$pale-grey-three, light-blue-100:$light-blue-100, pink: $darkish-pink, blue: $dark-sky-blue, duck-egg-blue: $duck-egg-blue, maroon: $maroon, peacock-blue: $peacock-blue, gray-200: $gray-200, gray-450: $gray-450, gray-600: $gray-600, gray-950: $gray-950, light-gray: $light-gray, brown-gray: $brown-gray, vivid-purple: $vivid-purple, squash: $squash, bright-sky-blue:$bright-sky-blue, cool-grey:$cool-grey, warm-grey: $warm-grey, sandy-yellow:$sandy-yellow, cerulean:$cerulean, warm-grey-two:$warm-grey-two, grey-50:$grey-50, bluish:$bluish, twilight:$twilight, brand-primary: $barney-purple, brand-secondary:$bluish, brand-dark: $barney-purple, brand-main: $twilight, complete: $dark-seafoam-green);
+$grid-gutter-width: 12px !default;
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+$enable-transitions: true;
+$enable-rounded: false;
+// Body
+//
+// Settings for the `<body>` element.
+$body-bg: #e4e5e6;
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+// $font-size-base: 0.875rem;
+$font-size-base: 0.6875rem;
+// Breadcrumbs
+$breadcrumb-bg:$light-blue-100;
+$breadcrumb-margin-bottom: 1.5rem;
+$breadcrumb-divider:quote(">") !default;
+// Cards
+$card-border-color: $gray-200;
+$card-cap-bg: $gray-100;
+$card-spacer-y: 0.1rem;
+$card-spacer-x: 0.5rem;
+// Dropdowns
+$dropdown-padding-y: 0;
+$dropdown-border-color: $gray-200;
+$dropdown-divider-bg: $gray-100;
+// Buttons
+$btn-secondary-border: $gray-300;
+// Progress bars
+$progress-bg: $gray-100;
+// Tables
+$table-bg-accent: $gray-100;
+$table-bg-hover: $gray-100;
+// Forms
+$input-group-addon-bg: $gray-100;
+$input-border-color: $gray-200;
+$input-group-addon-border-color: $gray-200;
+$font-size-sm: 0.75rem;
+// OUE -- Override
+$input-color: #000 !default;
+$btn-padding-y-sm-sq: 0.1rem;
+$btn-padding-x-sm-sq: 0.1rem;
+$font-size-sm-sq: 0.45rem;
+$btn-line-height-sm-sq: 1.5;
+$btn-border-radius-sm-sq: 0.2rem;
+// OUE -- Override button subcomponent
+$btn-padding-y-sm-sub: 0.22rem;
+$btn-padding-x-sm-sub: 0.3rem;
+$font-size-sm-sub: 0.7rem;
+$btn-line-height-sm-sub: 1.1;
+$btn-border-radius-sm-sub: 0rem;
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height; // Manually declare to provide an override to the browser default
+
+  @if $enable-rounded {
+    border-radius: $border-radius;
+  }
+
+  @else {
+    border-radius: 0;
+  }
+}
+
+.btn-sm-sq {
+  @include button-size($btn-padding-y-sm-sq, $btn-padding-x-sm-sq, $font-size-sm-sq, $btn-line-height-sm-sq, $btn-border-radius-sm-sq);
+}
+
+$input-color: #000 !default;

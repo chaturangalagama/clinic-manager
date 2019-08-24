@@ -1,0 +1,65 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">New Appointment</h4>
+</div>
+<div class="container-fluid h-100">
+    <div class="row p-2 pb-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    New Appointment
+                </div>
+                <div class="card-body">
+                    <alert></alert>
+                    <div class="row  justify-content-end">
+                        <div class="col-md-8 pb-0">
+                            <h6>Patient Lookup</h6>
+                        </div>
+                        <div class="col-4 align-self-end">
+                            <button class="btn btn-brand-primary pl-4 pr-4  float-right" (click)="addPatient()">Create New Patient </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 pb-0">
+                            <label>Patient Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-9 appointmentsSelect">
+                            <ng-select class="custom-select form-control-sm custom-select-extra-medium-width" [items]="rows" [(ngModel)]="selectedPatient" bindLabel="name" bindValue="name" [typeahead]="searchName" (clear)="onFilterInputChanged()">
+                                <ng-template ng-option-tmp let-item="item " let-index="index " let-search="searchTerm ">
+                                    <div class="card-body ">
+                                        <h5 class="card-title " style="white-space:normal;" [ngOptionHighlight]="search ">{{item.name}}</h5>
+                                        <!--  <h6 class="card-subtitle mb-2 text-muted ">{{item.preferredLanguage}}</h6> -->
+                                        <p class="card-text ">
+                                            {{item.id}}
+                                            <br> {{item.phone}}
+                                        </p>
+                                    </div>
+                                </ng-template>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row pt-4 ">
+                        <div class="col-md-6 pb-0 ">
+                            <h6>Schedule Appointment</h6>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col pb-0 ">
+                            <alert></alert>
+                            <app-add-appointment></app-add-appointment>
+                            <app-patient-add-consultation [consultationInfoFormGroup]="consultationFormGroup "></app-patient-add-consultation>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-toolbar float-right " role="toolbar ">
+                <div class="btn-group " role="group ">
+                    <button class="btn btn-large btn-brand-secondary mr-2 ">Cancel</button>
+                    <button class="btn btn-large btn-brand-primary ">Save Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

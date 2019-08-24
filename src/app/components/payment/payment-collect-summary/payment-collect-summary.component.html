@@ -1,0 +1,65 @@
+<div class="card">
+    <div class="card-header">
+        PAYMENT SUMMARY
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 text-indigo">
+                Cash Received
+            </div>
+            <div class="col-md-8 text-pink">
+                ${{cash | displayDollar}}
+            </div>
+        </div>
+        <!-- {{ paymentFormGroup.value | json}} -->
+        <ng-container *ngIf="!payCashOnly">
+
+            <div class="row pt-1">
+                <div class="col-md-4 text-indigo">
+                    Payment by Credit Card
+                </div>
+                <div class="col-md-8 text-pink">
+                    ${{creditCard | displayDollar}}
+                </div>
+            </div>
+
+            <div class="row pt-1">
+                <div class="col-md-4 text-indigo">
+                    Payment by NETS
+                </div>
+                <div class="col-md-8 text-pink">
+                    ${{nets | displayDollar}}
+                </div>
+            </div>
+
+            <div class="row pt-1">
+                <div class="col-md-4 text-indigo">
+                    Payment by Cheque
+                </div>
+                <div class="col-md-8 text-pink">
+                    ${{cheque | displayDollar}}
+                </div>
+            </div>
+
+        </ng-container>
+        <div class="row pt-1" *ngIf="payCashOnly">
+            <div class="col-md-4 text-indigo">
+                Other Payment Method
+            </div>
+            <div class="col-md-8 text-pink">
+                $0.00
+            </div>
+        </div>
+
+        <div class="row pt-1" [ngClass]="{'backgorund-soft-yellow': paymentFormGroup.value.chargeBack > 0}">
+            <div class="col-md-4 text-indigo font-weight-500">
+                Change needed
+            </div>
+            <div class="col-md-8 text-pink font-weight-500">
+                ${{paymentFormGroup.value.chargeBack | displayDollar}}
+                <span class="text-dark-grey-small font-weight-normal" *ngIf="chargeBackCentNotValid"> (must be multiplier of $0.05)</span>
+            </div>
+        </div>
+
+    </div>
+</div>

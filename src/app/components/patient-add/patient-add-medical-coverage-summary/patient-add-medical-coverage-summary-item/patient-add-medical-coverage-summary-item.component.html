@@ -1,0 +1,23 @@
+<ng-container *ngIf="this.medicalCoverageItem.value">
+    <div class="row modal-sub-header modal-input1" [formGroup]='medicalCoverageItem'>
+
+        <div class="col-sm-4 text-queue-md">
+            <strong> {{selectedIndex>0? selectedIndex:''}}</strong>
+            <input type="checkbox" (click)="checkClick()" formControlName="isSelected" [(ngModel)]='isChecked'>&nbsp;&nbsp; {{this.medicalCoverageItem.get('coverageSelected').value.name}}
+        </div>
+        <div class="col-4 text-queue-md">
+            {{medicalCoverageItem.get('planSelected').value.name}}
+        </div>
+        <div class="col-3 text-queue-md">
+            {{medicalCoverageItem.get('patientCoverageId').value}}
+        </div>
+        <div class="col-1 text-queue-md">
+            <button type="button" class="btn btn-sm menu-button remarks" (click)="isCollapsed = !isCollapsed">
+                <i [ngClass]="isCollapsed?'icon-right-open':'icon-down-open'"></i>
+            </button>
+        </div>
+    </div>
+    <div [collapse]="isCollapsed">
+        <!-- <app-medical-coverage-item-detail [inputObject]='itemObject' [inputFormGroup]='medicalCoverageItem' [inputIsFormGroup]=true></app-medical-coverage-item-detail> -->
+    </div>
+</ng-container>

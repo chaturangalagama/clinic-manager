@@ -1,0 +1,51 @@
+<form [formGroup]="companyInfoFormGroup" novalidate>
+    <!-- TODO: bind formgroup @Input from current .ts file -->
+    <div class="card">
+        <div class="card-header">
+            Patient Company Information
+        </div>
+        <!-- <code>{{companyInfoFormGroup.value|json}}</code> -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Company</label>
+                </div>
+                <div class="col-md-6">
+                    <label>Occupation</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="form-control form-control-sm " formControlName="company" />
+                </div>
+                <div class="col-md-6">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="companyInfoFormGroup.value.occupationDropdown.value" placeholder="Select Occupation" bindLabel="label" bindValue="value" formControlName="occupation" value="occupation"  [addTag]="true" [clearable]="true">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <label>Address Line 1</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input class="form-control form-control-sm " formControlName="address1" /> </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <label>Address Line 2</label>
+                </div>
+                <div class="col-md-6">
+                    <label>Company Postal</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="form-control form-control-sm " formControlName="address2" /> </div>
+                <div class="col-md-6">
+                    <input class="form-control form-control-sm " formControlName="postalCode" /> </div>
+            </div>
+        </div>
+    </div>
+</form>

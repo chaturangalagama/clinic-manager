@@ -1,0 +1,36 @@
+<div class="container mt-2 p-3">
+    <alert></alert>
+    <!-- <h5> Medical Coverage</h5> -->
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Medical Coverage</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="onBtnExit()">
+          <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+    <div class="modal-body-main">
+
+        <!-- <code>{{medicalCoverageFormGroup.value|json}}</code> -->
+
+        <div class="row  plan-remark-headers  align-middle">
+            <div class="col-2">Company</div>
+            <div class="col-2">Plan</div>
+            <div class="col-1">Policy No</div>
+            <div class="col-2">Start Date</div>
+            <div class="col-2">End Date</div>
+            <div class="col-1">Cost Center</div>
+            <div class="col-2">Remarks</div>
+        </div>
+        <!-- <code>{{itemArray.value|json}}</code> -->
+        <app-assign-medical-coverage-item *ngFor="let item of itemArray.controls; let i=index" [medicalCoverage]="item" [index]=i (deleteClicked)='onDelete($event)'> </app-assign-medical-coverage-item>
+
+        <div class="text-right mt-3">
+            <button name="btnAdd" class="btn btn-outline-pink" [disabled]='!itemArray.valid' (click)="addNewItem()">Add Another Coverage</button>
+        </div>
+    </div>
+
+    <div class="pr-3">
+        <div style="padding: 5px 10px " class="text-right ">
+            <button name="btnSave " class="btn btn-pink" [disabled]='!itemArray.valid' (click)="onBtnSaveClicked()">Save</button>
+        </div>
+    </div>
+</div>

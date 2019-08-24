@@ -1,0 +1,74 @@
+<div class="card">
+    <div class="card-header bg-white">
+        <div class="row">
+            <div class="col-md-2 text-indigo">Charge</div>
+            <div class="col-md-10 text-pink font-weight-bold">{{chargeItemDescription.charge}}
+                <span *ngIf="chargeItemDescription.charge">/</span> {{chargeItemDescription.qty}} {{chargeItemDescription.uom}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-indigo">SIG & Indication</div>
+            <div class="col-md-10 text-pink">{{chargeItemDescription.dosageInstruction}} {{chargeItemDescription.sig}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-indigo ">Cautionary</div>
+            <div class="col-md-10 text-pink">{{chargeItemDescription.cautionary}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 text-indigo ">Remarks</div>
+            <div class="col-md-10 text-pink">{{chargeItemDescription.remarks}}</div>
+        </div>
+
+    </div>
+    <div class="card-body px-0 pt-0" style="padding-bottom: 0px;">
+        <div class="card-body">
+            <div class="row data-table">
+                <div style="padding:15px 5px 0 10px;">
+                    <input type="checkbox" name="" (change)="onCheckAll($event.target.checked ? 'T':'F')" [(ngModel)]="checkboxValue" [ngModelOptions]="{standalone: true}" [disabled]='caseStatus=="CLOSED"'>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Item Code</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">UOM</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Instr</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Dur (Days)</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Qty (UOM)</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Plan</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Total Amount ($)</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Batch No</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Expiry Date</label>
+                </div>
+                <div class="col-md-1">
+                    <label class="mb-0">Remarks</label>
+                </div>
+            </div>
+            <!-- Case-Charge : {{ itemsFormArray.value | json }} -->
+            <app-case-charge-item *ngFor="let item of itemsFormArray?.controls; let i=index" [index]="i" [prescriptionItem]="item" (onHandleChargeItemChange)="onHandleChargeItemChange($event)" (onTopChargeItemDescriptionChanged)="onTopChargeItemDescriptionChanged($event)">
+            </app-case-charge-item>
+
+            <div class="default-panel-footer" *ngIf="caseStatus=='OPEN'">
+                <button type="button" class="btn btn-light" (click)="addItem()">+ Add Another Row</button>
+                <button type="button" class="btn delete-btn btn-pink" (click)="deleteItem()">
+                  <i class="icon-trash "></i>Delete Row(s)
+                </button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

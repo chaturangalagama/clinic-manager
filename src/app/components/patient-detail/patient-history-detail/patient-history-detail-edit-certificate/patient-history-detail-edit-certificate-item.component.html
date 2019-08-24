@@ -1,0 +1,40 @@
+<div class="container-fluid px-0" [formGroup]="medicalCertificateItem">
+    <div class="row">
+        <div class="col">
+            <label class="mb-0">Reason:</label>
+            <ng-select name="reason" class='p-0 form-control form-control-sm custom-select' bindLabel='label' bindValue='value' [items]="reasons" [clearable]=false formControlName='purpose'></ng-select>
+            <errors [control]="medicalCertificateItem.get('purpose')"></errors>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="form-control-group col">
+                    <label class="mb-0">Start From</label>
+                    <input type="text" class="form-control form-control-sm datepicker" [minDate]="minDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-blue'}" #dp="bsDatepicker" bsDatepicker formControlName="startDate">
+                    <errors [control]="medicalCertificateItem.get('startDate')"></errors>
+                </div>
+                <div class="form-control-group col-2 pl-0 ">
+                    <label class="mb-0 ">Days</label>
+                    <input type="text " class="form-control form-control-sm " formControlName="numberOfDays" />
+                    <errors [control]="medicalCertificateItem.get('numberOfDays')"></errors>
+                </div>
+                <div *ngIf="!isRoundNumber(medicalCertificateItem.get('numberOfDays').value)">
+                    <div class="form-control-group col pl-0 ">
+                        <label class="mb-0 "></label>
+                        <ng-select class='p-0 form-control form-control-sm  custom-select  custom-select-extra-small-width' bindLabel='label' bindValue='value' [items]="halfDayOptions" [clearable]=false formControlName='halfDayOption'></ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col form-control-group ">
+            <label class="mb-0 ">Remarks:</label>
+            <textarea type="text" class="form-control form-control-sm" formControlName="remark"></textarea>
+            <errors [control]="medicalCertificateItem.get('remark')"></errors>
+        </div>
+    </div>
+    <div class="row justify-content-end pt-3 px-3">
+        <button class="btn btn-sm btn-outline-pink float-right" (click)="removeItem() ">Remove</button>
+    </div>
+</div>
+<hr>

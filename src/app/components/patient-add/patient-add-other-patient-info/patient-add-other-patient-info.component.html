@@ -1,0 +1,42 @@
+<form [formGroup]="otherInfoFormGroup" novalidate>
+    <!-- TODO: bind formgroup @Input from current .ts file -->
+    <div class="card">
+        <div class="card-header">
+            Other Patient Information
+        </div>
+        <!-- <code>{{otherInfoFormGroup.value|json}}</code> -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Nationality</label>
+                </div>
+                <div class="col-md-6">
+                    <label>Race</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="otherInfoFormGroup.value.nationalitiesDropdown.value" bindLabel="label" bindValue="value" placeholder="Select Nationality" formControlName="nationality"
+                        value="nationality">
+                    </ng-select>
+                </div>
+                <div class="col-md-6">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="otherInfoFormGroup.value.raceDropdown.value" bindLabel="label" bindValue="value" placeholder="Select Race" formControlName="race" value="race">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <label>Preferred Language</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="otherInfoFormGroup.value.languagesDropdown.value" bindLabel="label" bindValue="value" placeholder="English" formControlName="preferredLanguage"
+                        value="preferredLanguage">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

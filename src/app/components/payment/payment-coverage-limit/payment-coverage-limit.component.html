@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-header">
+        Coverage Limit
+    </div>
+    <div class="card-body">
+        <div class="row mb-0">
+            <!-- {{ coverageLimitFormGroup.value | json}} -->
+            <div class="col-md-5">
+                <label class="mb-0">Plan</label>
+            </div>
+            <div class="col-md-2">
+                <label class="mb-0">Initial Limit</label>
+            </div>
+            <div class="col-md-2">
+                <label class="mb-0">Updated Limit / Current Limit</label>
+            </div>
+        </div>
+        <form *ngFor="let form of coverageLimitFormGroup.get('coverageLimitArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+            <div class="row pt-2">
+                <div class="col-md-5">
+                    <label class="mb-0">{{form.value.name}}</label>
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control form-control-sm" type="number" formControlName="initialLimit" step="0.01" [value]="form.get('initialLimit').value | displayDollar">
+                </div>
+                <div class="col-md-2">
+                    <!-- <input class="form-control form-control-sm" type="number" formControlName="updatedLimit" step="0.01"> -->
+                    <input class="form-control form-control-sm" type="number" [formControl]='updatedLimits[i]'>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

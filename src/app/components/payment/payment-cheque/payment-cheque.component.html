@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header">
+    CHEQUE PAYMENT / GIRO
+  </div>
+  <div class="card-body">
+    <form [formGroup]="chequeFormGroup" novalidate>
+      <div class="row mb-0">
+        <div class="col-md-4">
+          <label class="mb-0">Amount</label>
+        </div>
+        <div class="col-md-3">
+          <label class="mb-0">Bank</label>
+        </div>
+        <div class="col-md-4">
+          <label class="mb-0">Cheque No.</label>
+        </div>
+      </div>
+
+      <form *ngFor="let form of chequeFormGroup.get('chequeArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+        <div class="row pt-2">
+          <div class="col-md-4">
+            <input class="form-control form-control-sm" type="number" formControlName="amount" />
+          </div>
+          <div class="col-md-3">
+            <input class="form-control form-control-sm" type="text" formControlName="bank" />
+          </div>
+          <div class="col-md-4">
+            <input class="form-control form-control-sm" type="text" formControlName="chequeNo" />
+          </div>
+          <div class="col-md-1" dropdown>
+            <button dropdownToggle type="button" class="btn btn-mini p-0">...</button>
+            <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="onDelete(form, i)">Delete</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
+      <div class="pt-4 btn-toolbar float-right" role="toolbar">
+        <div class="btn-group" role="group">
+          <button class="btn btn-medium btn-outline-pink" (click)="onBtnAdd(chequeFormGroup)">
+            + Add Cheque
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

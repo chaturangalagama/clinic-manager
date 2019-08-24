@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header font-weight-semi-bold bg-sandy-yellow d-flex justify-content-between">
+    <span>CLINIC NOTES</span>
+    <button class="btn-sm-sq btn-outline-gray-200 bg-white align-items-center" (click)="isExpanded=!isExpanded">
+      <i class="text-black" [ngClass]="{'icon-up-open':isExpanded,'icon-down-open':!isExpanded}"></i>
+    </button>
+  </div>
+  <div class="card-body" [hidden]="!isExpanded">
+    <div class="container-fluid px-0">
+      <!-- TITLE -->
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <textarea cols="10" rows="5" class="form-control" [formControl]="clinicNotes"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

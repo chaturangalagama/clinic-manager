@@ -1,0 +1,23 @@
+<div class="filter-wrapper">
+  <div class="keyword-wrapper">
+    <input class="form-control form-control-sm" [formControl]="queryField" (click)="onInputClicked($event)" type="text" id="keyword" placeholder="Search keyword ..."
+      autofocus autocomplete="off" />
+  </div>
+  <!-- <div class="filter-container"> -->
+  <table #filterSelect id="filterSelect" class="filter-select" [ngClass]="results.length>0?'filter-select filter-select-visible':'filter-select'">
+    <tr *ngFor="let result of results" class="filter-select-list" (click)="onItemSelected(result)">
+      <td colspan="2" class="px-2">
+        <span>{{result.code}}</span>
+      </td>
+      <td colspan="2" class="px-2">
+        <span>{{result.uom}}</span>
+      </td>
+      <td colspan="2" class="px-2">
+        <span>{{result.name}}</span>
+      </td>
+    </tr>
+  </table>
+  <!-- </div> -->
+
+
+</div>

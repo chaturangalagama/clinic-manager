@@ -1,0 +1,67 @@
+<div class="container-fluid bg-light-gray">
+    <alert></alert>
+    <ngx-datatable #table class='bootstrap' [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40" [rowHeight]="40" [rows]='rows' [limit]="pageLimit" style="overflow:visible;">
+
+    <ngx-datatable-column name="#" prop="number" [resizeable]=false [flexGrow]=1>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <div class='px-1'>
+          <input type='radio' name="selectedPatient" [checked]='row.checked' (click)='onSelectionChange(row, row.number)' />&nbsp;&nbsp;</div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Name" prop="name" [resizeable]=false [flexGrow]=2>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <div>
+          <!-- <a href="" class="font-weight-semi-bold" (click)='redirectToPatientDetail(row.patientid, row.name)'> -->
+          {{ row.name }}
+          <!-- </a> -->
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+
+        <ngx-datatable-column name="Purpose" prop="purpose" [resizeable]=false [flexGrow]=2 headerClass="headerAlignCenter">
+            <ng-template class="clipboardRow" ngx-datatable-cell-template let-row="row">
+                <div class="centerContent">
+                    <div *ngIf='row.purpose!==""'>{{row.purpose}}</div>
+                    <!-- <i class="icon-clipboard-1" [popover]="popTemplatePurpose" placement="top" [outsideClick]=true containerClass="remarks-popover"></i> -->
+                </div>
+                <!-- <ng-template #popTemplatePurpose>
+                    <div *ngIf='row.purpose===""'>
+                        <i>
+                <span style="color:darkgray;">No Remarks</span>
+                </i>
+                    </div>
+                    <div *ngIf='row.purpose!==""'>{{row.purpose}}</div>
+                </ng-template> -->
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Remarks" prop="remarks" [resizeable]=false [flexGrow]=1 headerClass="headerAlignCenter">
+            <ng-template class="clipboardRow" ngx-datatable-cell-template let-row="row">
+                <div class="centerContent">
+                    <i class="icon-clipboard-1" [popover]="popTemplate" placement="top" [outsideClick]=true containerClass="remarks-popover"></i>
+                </div>
+                <ng-template #popTemplate>
+                    <div *ngIf='row.remarks===""'>
+                        <i>
+                <span style="color:darkgray;">No Remarks</span>
+                </i>
+                    </div>
+                    <div *ngIf='row.remarks!==""'>{{row.remarks}}</div>
+                </ng-template>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- <ngx-datatable-column name="Action" prop="action" [resizeable]=false [flexGrow]=6>
+            <ng-template ngx-datatable-cell-template let-row="row">
+            <button class="btn btn-blue pill" value="value" ng-click="">{{ row.action }}</button>
+            </ng-template>
+            </ngx-datatable-column> Hide this column first -->
+  </ngx-datatable>
+  <div class="row p-2">
+    <div class="col-md">
+      <button class="btn btn-blue btn-block" (click)="onNextPatient()">Call Patient</button>
+    </div>
+    <div class="col-md" [hidden]='true'>
+      <button class="btn btn-blue btn-block" (click)="onNextPatient()">Next Patient</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<ng-container>
+    <!-- {{ patientCoverageItem.value | json }} hasAdd: {{hasAdd}} -->
+    <div [class]="getSubHeaderClass()" (click)="isCollapsed = !isCollapsed">
+        <!-- <div [class]="getSubHeaderClass()"> -->
+        <div *ngIf="hasUpdatePriority" class="col-1">
+            <strong> {{ selectedIndex > 0 ? selectedIndex + "&#160;&#160;" :"&#160;&#160;&#160;&#160;"}}</strong>
+            <input type='checkbox' (click)="checkClick($event)" value="{{patientCoverageItem.get('isSelected').value}}"
+                [(ngModel)]="patientCoverageItem.get('isSelected').value" [disabled]="disableCheckBox()" value="on" />
+            <span class="checkmarkUpdate"></span>
+        </div>
+        <ng-container *ngIf="(!hasAdd && hasDelete) || hasUpdatePriority || displaySelectedCoverages">
+            <!-- For display, show these columns -->
+            <div class="col">
+                {{ patientCoverageItem.get('coverageSelected') ? patientCoverageItem.get('coverageSelected').value.name
+                : ''}}
+            </div>
+            <div [class]="hasUpdatePriority? 'col pl-3' : 'col'">
+                {{ patientCoverageItem.get('planSelected').value.name&#160;&nbsp;}}
+                <span class="policyHolderExpired" *ngIf="policyHolderExpired">
+                    <br>* This plan has expired. Please go to Patient Detail to extend policy end date.</span>
+                <span class="policyHolderExpired" *ngIf="policyExpired && !patientCoverageItem.get('isNew').value">
+                    <br>* This medical coverage has expired. Please contact administrator.</span>
+            </div>
+            <div [class]="hasUpdatePriority? 'col-3 pl-4' : 'col-3'">
+                {{ patientCoverageItem.get('patientCoverageId').value}}
+            </div>
+        </ng-container>
+        <ng-container *ngIf="hasAdd" [formGroup]='patientCoverageItem'>
+            <!-- For adding new coverages, show these columns -->
+            <ng-container *ngIf="patientCoverageItem.get('isNew').value">
+
+                <div class="col-2 " (click)="isCollapsed = !isCollapsed">
+                    <ng-select class="form-control form-control-sm custom-select custom-select-extra-width" [items]="medicalCoverageSelect"
+                        bindLabel='name' bindValue='id' [addTag]="false" [loading]="loading" [virtualScroll]="true"
+                        [typeahead]="codesTypeahead" (change)="onCoverageSelected($event)" (clear)="reset()"
+                        formControlName='medicalCoverageId'>
+                    </ng-select>
+                </div>
+                <div class="col-2" (click)="isCollapsed = !isCollapsed">
+                    <ng-select class="form-control form-control-sm custom-select custom-select-extra-width" [items]="planSelect"
+                        bindLabel='name' bindValue='id' (change)="onPlanSelected($event)" formControlName='planId'></ng-select>
+                </div>
+                <div class="col-1 d-flex justify-content-between" (click)="isCollapsed = !isCollapsed">
+                    <input class="form-control form-control-sm" type="text" formControlName='patientCoverageId' />
+                </div>
+                <div class="col-2" (click)="isCollapsed = !isCollapsed">
+                    <input class="form-control form-control-sm datepicker" placeholder="DD-MM-YYYY" #dp="bsDatepicker"
+                        bsDatepicker formControlName="startDate" values="startDate" [minDate]="minDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+                                'theme-blue'}">
+                </div>
+                <div class="col-2" (click)="isCollapsed = !isCollapsed">
+                    <input class="form-control form-control-sm datepicker" placeholder="DD-MM-YYYY" #dp="bsDatepicker"
+                        bsDatepicker [minDate]="minDate" formControlName="endDate" values="endDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+                                'theme-blue'}">
+                    <errors [control]="patientCoverageItem.get('endDate')"></errors>
+                </div>
+                <div class="col-1" (click)="isCollapsed = !isCollapsed">
+                    <input class="form-control form-control-sm" type="text" formControlName='costCenter' />
+                </div>
+                <div class="col-1 d-flex justify-content-between" (click)="isCollapsed = !isCollapsed">
+                    <input class="form-control form-control-sm" type="text" formControlName='remarks' />
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!patientCoverageItem.get('isNew').value">
+                <!-- For simply displaying i.e Patient Details, show these columns -->
+                <div class="col-2">
+                    {{ patientCoverageItem.get('coverageSelected') ?
+                    patientCoverageItem.get('coverageSelected').value.name : ''}}
+                </div>
+                <div class="col-2">
+                    {{ patientCoverageItem.get('planSelected').value.name}}
+                    <span class="policyHolderExpired" *ngIf="policyHolderExpired">
+                        <br>* This plan has expired. Please extend policy end date.</span>
+                </div>
+                <div class="col-1">
+                    {{ patientCoverageItem.get('patientCoverageId').value}}
+                </div>
+                <div class="col-2">
+                    {{ patientCoverageItem.get('startDate').value}}
+                </div>
+                <!-- {{ patientCoverageItem.get('endDate').value}}
+                     -->
+                <div *ngIf="!policyExpired" class="col-2" (click)="isCollapsed = !isCollapsed">
+                    <input class="form-control form-control-sm datepicker" placeholder="DD-MM-YYYY" #dp="bsDatepicker"
+                        bsDatepicker [minDate]="minDate" formControlName="endDate" values="endDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:'theme-blue'}">
+                    <errors [control]="patientCoverageItem.get('endDate')"></errors>
+                </div>
+                <div *ngIf="policyExpired" class="col-2" (click)="isCollapsed = !isCollapsed">
+                    {{ patientCoverageItem.get('endDate').value}}
+                    <br>
+                    <span style="color:red;">This medical coverage has expired. Please contact administrator.</span>
+                </div>
+                <div class="col-1">
+                    {{ patientCoverageItem.get('costCenter').value}}
+                </div>
+                <div class="col-1">
+                    {{ patientCoverageItem.get('remarks').value}}
+                </div>
+            </ng-container>
+        </ng-container>
+        <div class="col-1 pr-3">
+            <span *ngIf="hasDelete">
+                <button type="button" (click)="isCollapsed = !isCollapsed" class="btn p-0 menu-button" [popover]="popTemplate2"
+                    placement="top" [outsideClick]="true" *ngxPermissionsOnly="['ROLE_MEDICAL_MANAGE_POLICY_HOLDER']">
+                    <i class="icon-ellipsis-vert"></i>
+                </button>
+            </span>
+            <button type="button" class="btn menu-button remarks p-0" (click)="isCollapsed = isCollapsed">
+                <i [ngClass]="isCollapsed ? 'icon-down-open-big':'icon-up-open-big'"></i>
+            </button>
+        </div>
+    </div>
+    <ng-template #popTemplate2>
+        <div class="row">
+            <button class="btn btn-link-grey p-1 " (click)="onbtnDeleteClicked()">
+                <i class="icon-trash "></i>
+            </button>
+        </div>
+    </ng-template>
+    <div [collapse]="isCollapsed">
+        <app-medical-coverage-item-detail [patientCoverageItem]="patientCoverageItem" [policyHolderInfo]="policyHolderInfo"></app-medical-coverage-item-detail>
+    </div>
+</ng-container>

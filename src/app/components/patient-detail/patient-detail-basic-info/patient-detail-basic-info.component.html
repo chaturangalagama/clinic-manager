@@ -1,0 +1,206 @@
+<form class="h-100" [formGroup]="basicInfoFormGroup" novalidate>
+    <!-- Basic Info Section -->
+    <div class="card h-100">
+        <div class="card-header">
+            BASIC INFORMATION
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-1">
+                    <label>Title
+                        <span class="compulsory">*</span>
+                    </label>
+                </div>
+                <div class="col-md-5">
+                    <label>Patient Name
+                      <span class="compulsory">*</span>
+                  </label>
+                </div>
+                <div class="col-md-3 pl-3">
+                    <label>Primary Contact
+                        <span class="compulsory">*</span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label>Secondary Contact
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    <ng-select class="p-0 form-control form-control-sm custom-select  custom-select-extra-medium-width" [clearable]=false [items]="basicInfoFormGroup.value.titles.value" bindLabel="label" bindValue="value" placeholder="Select Title" formControlName="title">
+                    </ng-select>
+                    <errors [control]="basicInfoFormGroup.get('title')">
+                    </errors>
+                </div>
+                <div class="col-md-5">
+                    <input class="form-control form-control-sm" formControlName="name" />
+                    <errors [control]="basicInfoFormGroup.get('name')">
+                    </errors>
+                </div>
+                <div class="col-md-3 pl-3">
+                    <int-phone-prefix formControlName="primary" [locale]="'en'" [defaultCountry]="" [maxlength]=15 onlyNumbers=true></int-phone-prefix>
+                    <errors [control]="basicInfoFormGroup.get('primary')"></errors>
+                </div>
+                <div class="col-md-3">
+                    <int-phone-prefix formControlName="secondary" [locale]="'en'" [defaultCountry]="" [maxlength]=15 onlyNumbers=true></int-phone-prefix>
+                    <errors [control]="basicInfoFormGroup.get('secondary')"></errors>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-md-3">
+                    <label>Date of Birth
+                        <span class="compulsory">*</span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label>Gender
+                        <span class="compulsory">*</span>
+                    </label>
+                </div>
+                <div class="col-md-6 pl-3">
+                    <label>Address Line 1<span class="compulsory">*</span>
+                        </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <input class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker formControlName="birth" [maxDate]="maxDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+                    'theme-blue'}">
+                    <errors [control]="basicInfoFormGroup.get('birth')">
+                    </errors>
+                </div>
+                <div class="col-md-3">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [clearable]=false [items]="basicInfoFormGroup.value.genders.value" bindLabel="label" bindValue="value" placeholder="Select Gender" formControlName="gender">
+                    </ng-select>
+                    <errors [control]="basicInfoFormGroup.get('gender')">
+                    </errors>
+                </div>
+                <div class="col-md-6 pl-3">
+                    <input class="form-control form-control-sm" formControlName="line1" />
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-md-3">
+                    <label>Identification Type
+                        <span class="compulsory">*</span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label>Identification Number
+                        <span class="compulsory">*</span>
+                    </label>
+                </div>
+                <div class="col-md-4 pl-3">
+                    <label>Address Line 2
+                    </label>
+                </div>
+                <div class="col-md-2">
+                    <label>Post Code 
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" [formGroup]="basicInfoFormGroup.get('fullId')">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="basicInfoFormGroup.value.idTypes.value" bindLabel="label" bindValue="value" placeholder="Select Identification Type" formControlName="idType" value="idType"
+                        [clearable]=false>
+                    </ng-select>
+                </div>
+                <div class="col-md-3" [formGroup]="basicInfoFormGroup.get('fullId')">
+                    <input class="form-control form-control-sm " formControlName="id" />
+                    <errors [control]="basicInfoFormGroup.get('fullId').get('id')"></errors>
+                </div>
+                <div class="col-md-4 pl-3">
+                    <input class="form-control form-control-sm " formControlName="line2" />
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control form-control-sm " formControlName="postCode" />
+                    <errors [control]="basicInfoFormGroup.get('postCode')"></errors>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div *ngIf="basicInfoFormGroup.get('fullId').get('idType').value==='PASSPORT'">
+                        <ng-select class="mt-1 p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="basicInfoFormGroup.value.countries.value" bindLabel="label" bindValue="value" placeholder="Select Country" formControlName="country" value="country"
+                            [clearable]=false>
+                        </ng-select>
+                        <errors [control]="basicInfoFormGroup.get('country')"></errors>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Info Section -->
+            <div class="row pt-2">
+                <div class="col-md-3">
+                    <label>Race</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Nationality</label>
+                </div>
+                <div class="col-md-3 pl-3">
+                    <label>Email</label>
+                </div>
+                <div class="col-md-3 text-sm">
+                    <label>Preferred communication <span class="compulsory">*</span></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [clearable]=false [items]="basicInfoFormGroup.value.races.value" bindLabel="label" bindValue="value" placeholder="Select Race" formControlName="race">
+                    </ng-select>
+                </div>
+                <div class="col-md-3">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [clearable]=false [items]="basicInfoFormGroup.value.nationalities.value" bindLabel="label" bindValue="value" placeholder="Select Nationality" formControlName="nationality">
+                    </ng-select>
+                </div>
+                <div class="col-md-3 pl-3">
+                    <input class="form-control form-control-sm" formControlName="email" />
+                    <errors [control]="basicInfoFormGroup.get('email')"></errors>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div *ngFor="let input of basicInfoFormGroup.value.communications.value;">
+                            <div class="col-md-4 input-group-addon">
+                                <input type="radio" value="{{input.value}}" formControlName="communicationMode">
+                                <span class="ml-1">{{input.label}}</span>
+                            </div>
+                            <errors [control]="basicInfoFormGroup.get('communicationMode')"></errors>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-md-3">
+                    <label>Marital Status
+                        <span class="compulsory">*</span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label>Language Spoken</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [clearable]=false [items]="basicInfoFormGroup.value.maritalStatus.value" bindLabel="label" bindValue="value" placeholder="Select Marital Status" formControlName="status">
+                    </ng-select>
+                    <errors [control]="basicInfoFormGroup.get('status')"></errors>
+                </div>
+                <div class="col-md-3">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [clearable]=false [items]="basicInfoFormGroup.value.languages.value" bindLabel="label" bindValue="value" placeholder="Select Language" formControlName="language">
+                    </ng-select>
+                </div>
+                <div class="col-md-1 pl-3">
+                    <label class="checkmark-container">
+                        <input type="checkbox" formControlName="consentGiven">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="col-md-5 ">
+                    <span>Patient gives consent to be contacted with latest news and offers from Healthway Medical Centre (via Email, Telephone,
+                        etc.).
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

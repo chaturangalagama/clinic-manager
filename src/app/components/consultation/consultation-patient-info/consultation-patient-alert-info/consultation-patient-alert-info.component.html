@@ -1,0 +1,41 @@
+<div class="row align-items-center" *ngIf="alerts && medicalAlerts">
+    <div class="col-10">
+        <ul class="list-inline mt-0 mb-0">
+            <li class="list-inline-item">DRUG ALLERGIES</li>
+            <span *ngIf="alerts.length  > 0 && alerts!==undefined">
+                <li class="list-inline-item" *ngFor="let alert of alerts; let i = index">
+                    <span *ngIf="alert.name.length>0" class="text-pink text-uppercase">
+                        {{alert.name}}
+                    </span>
+            </li>
+            </span>
+            <span *ngIf="alerts.length=== 0">
+                <li class="list-inline-item">
+                    None
+                </li>
+            </span>
+        </ul>
+        <ul class="list-inline mt-0 mb-0">
+            <li class="list-inline-item">CLINIC ALERTS</li>
+            <span *ngIf="medicalAlerts.length  > 0 && medicalAlerts!==undefined">
+                <li class="list-inline-item" *ngFor="let alert of medicalAlerts; let i = index">
+                    <span *ngIf="alert.name.length>0" class="text-squash text-uppercase">
+                        {{alert.name}}
+                    </span>
+            </li>
+            </span>
+            <span *ngIf="medicalAlerts.length=== 0">
+                <li class="list-inline-item">
+                    None
+                </li>
+            </span>
+        </ul>
+    </div>
+    <div class="col-2 btn-group btn-group-sm" dropdown container="body" [autoClose]="true">
+        <button class="btn btn-secondary dropdown-toggle" value="value " dropdownToggle aria-controls="Alert/Allergies">Actions</button>
+        <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu p-2" role="menu " aria-labelledby="basic-link">
+            <li (click)="onAddAlert()">Allergies</li>
+            <li (click)="onAddMedicalAlert()">Alerts</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+<!-- <code>{{basicInfoFormGroup.value|json}}</code> -->
+<form [formGroup]="basicInfoFormGroup" novalidate>
+    <div class="card">
+        <div class="card-header">
+            Patient Information
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 pl-3 pb-2">
+                    <label> (Fields marked as
+                        <font color="red">*</font> are mandatory)
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label> Identification Type</label>
+                    <font color="red">*</font>
+                </div>
+                <div class="col-md-6">
+                    <label>Identification Number
+                         <font color="red"> *</font>
+                   </label>
+                </div>
+            </div>
+            <div class="row" [formGroup]="basicInfoFormGroup.get('fullId')">
+                <div class="col-md-6">
+                    <ng-select class="p-0 form-control form-control-sm custom-select  custom-select-extra-medium-width" [items]="basicInfoFormGroup.value.idTypes.value" bindLabel="label" bindValue="value" placeholder="Select Identification Type" formControlName="idType"
+                        value="idType" (change)="resetIDControlErrors($event)" [clearable]=false>
+                    </ng-select>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control form-control-sm " formControlName="id" />
+                    <errors [control]="basicInfoFormGroup.get('fullId').get('id')"></errors>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div *ngIf="basicInfoFormGroup.get('fullId').get('idType').value==='PASSPORT'">
+                        <ng-select class="mt-3 p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="basicInfoFormGroup.value.countries.value" bindLabel="label" bindValue="value" placeholder="Select Country" formControlName="country" value="country"
+                            [clearable]=false>
+                        </ng-select>
+                        <errors [control]="basicInfoFormGroup.get('country')"></errors>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-2">
+                    <label>Title
+            <font color="red">*</font>
+          </label>
+                </div>
+                <div class="col-md-4">
+                    <label>Patient Name
+            <font color="red">*</font>
+          </label>
+                </div>
+                <div class="col-md-6">
+                    <label>Gender
+            <font color="red">*</font>
+          </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 pr-0">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [clearable]=false [items]="basicInfoFormGroup.value.titles.value" placeholder="" bindLabel="label" bindValue="value" formControlName="title" value="title">
+                    </ng-select>
+                    <errors [control]="basicInfoFormGroup.get('title')"></errors>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control form-control-sm" formControlName="name" />
+                    <errors [control]="basicInfoFormGroup.get('name')"></errors>
+                </div>
+                <div class="col-md-6">
+                    <div class="row border mx-0 pt-2 pb-1 pl-2" style="border: 1px solid #c2d0d6 !important;">
+                        <div *ngFor="let input of basicInfoFormGroup.value.genderOptions.value;">
+                            <div class="col-md-4 input-group-addon">
+                                <input type="radio" value="{{input.value}}" formControlName="gender">
+                                <span class="ml-1">{{input.label}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row  pt-3">
+                <div class="col-md-6">
+                    <label>Date of Birth
+                         <font color="red">*</font>
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <label>Marital Status
+                       <font color="red">*</font>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group col-md-6">
+                    <input class="form-control form-control-sm datepicker" placeholder="DD-MM-YYYY" #dp="bsDatepicker" bsDatepicker [maxDate]="maxDate" formControlName="birthday" values="birthday" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+                    'theme-blue'}">
+                    <span class="pl-2 icon-search search-icon"></span>
+                </div>
+                <div class="col-md-6">
+                    <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="basicInfoFormGroup.value.maritalStatusDropdown.value" placeholder="Select Marital Status" formControlName="maritalStatus" bindLabel="label" bindValue="value"
+                        value="maritalStatus">
+                    </ng-select>
+                    <!-- <input class="form-control form-control-sm" formControlName="address2" /> -->
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <label>Primary Contact
+                        <font color="red">*</font>
+                         <span class="text-grey-small">(Mobile Number)</span>
+                    </label>
+                </div>
+                <div class="col-md-6">
+                    <label>Email
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <int-phone-prefix class="phoneInput" (change)="onInput($event)" formControlName="contactNumber" [defaultCountry]="'sg'" [locale]="'en'" [maxlength]=15></int-phone-prefix>
+                    <errors [control]="basicInfoFormGroup.get('contactNumber')"></errors>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control form-control-sm" formControlName="email" />
+                    <errors [control]="basicInfoFormGroup.get('email')"></errors>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <label>Post Code
+                   </label>
+                </div>
+                <div class="col-md-6">
+                    <label>Address Line 1
+            <font color="red">*</font>
+          </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input class="form-control form-control-sm" formControlName="postcode" />
+                    <errors [control]="basicInfoFormGroup.get('postcode')"></errors>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control form-control-sm" formControlName="address1" />
+                    <errors [control]="basicInfoFormGroup.get('address1')"></errors>
+                </div>
+            </div>
+            <div class="row  pt-3">
+                <div class="col-md-12">
+                    <label>Address Line 2</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input class="form-control form-control-sm" formControlName="address2" />
+                </div>
+            </div>
+            <div class="row  pt-3">
+                <div class="col-md-6">
+                    <label>Preferred mode of communication
+            <font color="red">*</font>
+          </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div *ngFor="let input of basicInfoFormGroup.value.communicationMode.value">
+                            <div class="col-md-6 input-group-addon">
+                                <input type="radio" value="{{input.value}}" formControlName="preferredMethodOfCommunication">
+                                <span class="ml-1">{{input.label}}</span>
+                                <errors [control]="basicInfoFormGroup.get('preferredMethodOfCommunication')"></errors>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-0 m-0 pr-2">
+                    <label class="checkmark-container">
+            <input type="checkbox" checked formControlName="consentGiven">
+            <span class="checkmark" checked> </span>
+          </label>
+                </div>
+                <div class="col-md-5 p-0">Patient gives consent to be contacted with latest news and offers from Healthway Medical Centre (via Email, Telephone, etc)
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

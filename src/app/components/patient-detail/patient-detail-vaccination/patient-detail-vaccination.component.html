@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-header">
+        VACCINATION CERTIFICATES
+    </div>
+    <div class="card-body">
+        <div class="row mb-0">
+            <div class="col-md-3">
+                <label class="mb-0">Vaccine</label>
+            </div>
+            <div class="col-md-3">
+                <label class="mb-0">Dosage</label>
+            </div>
+            <div class="col-md-3">
+                <label class="mb-0">Next Dose</label>
+            </div>
+        </div>
+        <div *ngIf="patientInfo">
+            <form #f='ngForm'>
+                <div *ngFor="let vaccine of patientInfo.patientVaccinations">
+                    <div class="row pt-2">
+                        <div class="col-md-3">
+                            <input type="checkbox" value='{{vaccine.id}}' [(ngModel)]="vaccine.isSelected" name="vaccine"><span class="pl-2"> {{getVaccineName(vaccine.vaccineId)}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            {{getDoseName(vaccine.vaccineId)}}
+                        </div>
+                        <div class="col-md-3">
+                            <div *ngIf="vaccine.vaccinationSchedules.length > 0">
+                                <div *ngFor="let date of vaccine.vaccinationSchedules">
+                                    {{ convertUnixDateToDashFormat(date.scheduledDate)}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="btn-toolbar float-right" role="toolbar">
+            <div class="btn-group" role="group">
+                <button class="btn-sm-sub btn-brand-secondary" [disabled]="disableVaccinePrint()" (click)="onBtnPrintVCClicked()">
+                Print Vaccination Certificate
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

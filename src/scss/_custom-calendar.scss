@@ -1,0 +1,64 @@
+.cal-month-view .cal-cell,
+// .cal-week-view {
+{
+    float: left;
+    flex: 1;
+    -js-display: flex;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    color: #9b9b9b;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.cal-week-view .cal-day-headers .cal-header {
+    flex: 1;
+    text-align: center;
+    padding: 5px;
+    color: #9b9b9b;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.cal-week-view .cal-time {
+    height: 30px;
+    color: #9b9b9b;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+// For appointments
+.navbar-nav li>a {
+    text-transform: capitalize;
+    color: #333;
+    transition: background-color .2s, color .2s;
+    &:hover,
+    &:focus {
+        background-color: #333;
+        color: #fff;
+    }
+}
+
+.navbar-nav li.active>a {
+    background-color: #333;
+    color: #fff;
+}
+
+ul.nav.nav-pills {
+    justify-content: center;
+    padding-top: 2em;
+}
+
+.confirmation div.tab-content {
+    border: none;
+}
+
+tabset.nav-hidden .nav-item {
+    display: none;
+}
+
+input.form-control.text-center.bs-timepicker-field {
+    height: 1.7rem;
+    margin-top: -1px;
+}

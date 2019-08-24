@@ -1,0 +1,30 @@
+<!-- <button class='btn btn-block btn-light' (click)='isOpen=!isOpen'>
+  <div class="row">
+    <div class="col-md-10 ">
+      <div class="row px-2">
+        <h4>Registry</h4>
+      </div>
+      <div class="row px-2" [hidden]=true>
+        <span>0004</span>
+      </div>
+    </div>
+    <div class="col-md-2 px-2" dropdown placement="bottom right" [autoClose]="true" [isOpen]="isOpen">
+      <button class="btn btn-sm btn-link" dropdownToggle aria-controls="dropdown-custom-html">
+        <i class="icon-down-dir"></i>
+</button>
+
+<app-header-registry-content *dropdownMenu class="dropdown-menu dropdown-menu-registry dropdown-menu-right" (click)="preventClose($event)"></app-header-registry-content>
+
+</div>
+</div>
+</button> -->
+
+
+<div class="btn-group w-100" [hidden]=true dropdown>
+  <button class="btn btn-block btn-light" dropdownToggle aria-controls="dropdown-custom-html">
+    <span style="font-size:24px">Register</span>
+    <span class="icon-down-dir"></span>
+  </button>
+
+  <app-header-registry-content *dropdownMenu class="dropdown-menu dropdown-menu-registry dropdown-menu-right" (click)="preventClose($event)"></app-header-registry-content>
+</div>

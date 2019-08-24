@@ -1,0 +1,47 @@
+<div class="row" [formGroup]="itemGroup">
+  <div class="col-md-3">
+    <ng-select class="p-0 form-control form-control-sm  custom-select custom-select-extra-width" [items]="codes"
+      placeholder="Select Code" formControlName="id" bindValue='id' bindLabel='icd10Code' [addTag]="false" [typeahead]="codesTypeahead"
+      [loading]="loading" [virtualScroll]="true" (change)="onDiagnosisSelected($event)" appendTo="body">
+      <ng-template ng-header-tmp>
+        <div class="row">
+          <div class="col-md-3 font-weight-semi-bold">Code</div>
+          <div class="col-md-9 font-weight-semi-bold">Term</div>
+        </div>
+      </ng-template>
+      <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+        <div class="row">
+          <div class="col-md-3">{{item.icd10Code}}</div>
+          <div class="col-md-9">{{item.icd10Term}}</div>
+        </div>
+      </ng-template>
+    </ng-select>
+
+    <!-- <ng-select class="p-0 form-control-sm" [items]="codes" placeholder="Select Code"  [clearable]="true"  formControlName="id" [loading]="codesLoading">
+        </ng-select> -->
+  </div>
+  <div class="col-md-9">
+    <div class="row no-gutters">
+      <div class="col-md-11">
+        <input class="form-control form-control-sm" type="text" readonly [(ngModel)]="description" [ngModelOptions]="{standalone: true}" />
+      </div>
+      <div class="col-md-1 px-1">
+        <div class="col-md-5">
+          <button type="button" class="btn btn-sm" [popover]="popTemplate2" placement="left" [outsideClick]="true">
+            <i class="icon-ellipsis-vert"></i>
+          </button>
+        </div>
+
+        <ng-template #popTemplate2>
+          <div class="row">
+            <button class="btn btn-link-grey p-1 " (click)="onBtnDeleteClicked()">
+              <i class="icon-trash"></i>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+  </div>
+  <!-- {{itemGroup.value|json}} -->
+</div>

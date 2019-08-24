@@ -1,0 +1,57 @@
+<div class="card">
+  <div class="card-header">
+    CHARGES BREAKDOWN
+  </div>
+  <div class="card-body pt-2">
+    <div class="row pt-2 pb-2 mb-2 bg-grey-50">
+      <div class="col-4">
+        Item
+      </div>
+      <div class="col-2">
+        Charge
+      </div>
+      <div class="col-2">
+        GST@{{ overallChargeFormGroup.value.gstValue | displayDollar }}%
+      </div>
+      <div class="col-2">
+        Payable
+      </div>
+      <div class="col-2">
+        Coverage
+      </div>
+    </div>
+    <!-- {{ this.overallChargeFormGroup.get('overallCharges').value | json }} -->
+    <div *ngFor="let overallCharge of this.overallChargeFormGroup.get('overallCharges').value.value; let i = index;">
+      <div class="row mb-0" *ngIf="overallCharge.charge">
+        <div class="col-4">
+          <label class="mb-0">
+            {{ overallCharge.paymentMode === 'Cash' ? formatToTitleCase(overallCharge.paymentMode)
+            :formatToTitleCase(overallCharge.planName)}}
+          </label>
+        </div>
+        <div class="col-2">
+          ${{overallCharge.charge | displayDollar}}
+        </div>
+        <div class="col-2">
+          ${{overallCharge.gst | displayDollar }}
+        </div>
+        <div class="col-2">
+          {{overallCharge.paymentMode === 'Cash' ? '$' + ((overallCharge.charge +
+          overallCharge.gst|displayDollar)).toFixed(2): '-'}}
+        </div>
+        <div class="col-2">
+          {{overallCharge.paymentMode !== 'Cash' ? '$' + ((overallCharge.charge +
+          overallCharge.gst|displayDollar)).toFixed(2) : '-'}}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-9">
+        Total Bill Amount
+      </div>
+      <div class="col-3">
+        ${{ overallChargeFormGroup.get('totalAmount').value | displayDollar }}
+      </div>
+    </div>
+  </div>
+</div>

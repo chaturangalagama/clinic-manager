@@ -1,0 +1,38 @@
+// Latest Animation
+#row-main {
+    /* necessary to hide collapsed sidebar */
+    overflow-x: hidden;
+}
+
+#consultation-history-div {
+    /* for the animation */
+    transition: margin 0.3s ease;
+    // border: 1px solid black;
+  // max-height: 45rem;
+}
+
+#consultation-note-div {
+    /* for the animation */
+    transition: width 0.3s ease;
+}
+
+.collapsed {
+    /* hide it for small displays*/
+    display: none;
+}
+
+#consultation-history-btn {
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 720px) {
+    .collapsed {
+        display: none;
+        /* same width as sidebar */
+        margin-right: -200%;
+    }
+}
+
+.right-strip{
+  margin-left:-2rem;
+}

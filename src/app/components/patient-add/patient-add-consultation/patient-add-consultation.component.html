@@ -1,0 +1,41 @@
+<form [formGroup]="consultationInfoFormGroup" novalidate>
+    <div class="row">
+        <div class="col-md-6 pb-0">
+            <label>Purpose of Visit</label>
+        </div>
+        <div class="col-md-6 pb-0">
+            <label>Preferred Doctor</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <ng-select class="custom-select form-control-sm custom-select-extra-medium-width" type="text" bindValue='value'
+                name="purposeOfVisit" [items]="visitPurposes" formControlName="purposeOfVisit">
+            </ng-select>
+            <errors [control]="consultationInfoFormGroup.get('purposeOfVisit')"></errors>
+        </div>
+        <div class="col-md-6">
+            <ng-select class="custom-select form-control-sm custom-select-extra-medium-width" type="text" bindValue='value'
+                bindLabel='label' name="plan" [items]="doctors" formControlName="preferredDoctor"></ng-select>
+            <errors [control]="consultationInfoFormGroup.get('preferredDoctor')"></errors>
+        </div>
+    </div>
+    <div class="row mt-3" *ngIf="showPrioritySelect">
+        <div class="col-md-6 pb-0">
+            <label>Priority</label>
+            <ng-select class="custom-select form-control-sm custom-select-extra-medium-width" bindValue='value'
+                bindLabel='label' [items]="priorities" [clearable]="false" formControlName="priority"></ng-select>
+            <errors [control]="consultationInfoFormGroup.get('priority')"></errors>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-12 pb-0">
+            <label>Remarks </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <textarea class="form-control form-control-sm" formControlName="remarks"></textarea>
+        </div>
+    </div>
+</form>

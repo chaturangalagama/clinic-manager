@@ -1,0 +1,104 @@
+<div class="container-fluid pb-4">
+    <div class="row pt-3 pb-3">
+        <div class="col-md-10">
+            <h5 class="p-2 greyish-brown">Appointments
+            </h5>
+        </div>
+    </div>
+    <div class="row pb-4">
+        <div class="col-md-2">
+            <button class="btn btn-md btn-brand-secondary btn-block" (click)="buttonClicked()">Calendar Settings</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-md btn-brand-secondary btn-block" (click)="buttonClicked()">Print</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-md btn-brand-secondary btn-block" (click)="buttonClicked()">Export</button>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <button class="btn btn-md btn-brand-secondary btn-block" (click)="buttonClicked()">Block Off Dr's Time</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-md btn-brand-primary btn-block" (click)="newAppointmentBtnClicked()" style="margin-right:15px;">New
+        Appointment</button>
+        </div>
+    </div>
+    <ng-template #modalContent let-close="close">
+        <div class="modal-header">
+            <h5 class="modal-title">Event action occurred</h5>
+            <!-- <button type="button" class="close" (click)="close()">
+              <span aria-hidden="true">&times;</span>
+             </button> -->
+        </div>
+        <div class="modal-body">
+            <div>
+                Action:
+                <pre>{{ modalData?.action }}</pre>
+            </div>
+            <div>
+                Event:
+                <pre>{{ modalData?.event | json }}</pre>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button> -->
+        </div>
+    </ng-template>
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="nav nav-pills">
+                <div class="btn-group float-right pr-2">
+                    <div class="btn-pill-violet pill" (click)="view = CalendarView.Day" [class.active]="view === CalendarView.Day">
+                        Day
+                    </div>
+                    <div class="btn-pill-violet pill" (click)="view = CalendarView.Week" [class.active]="view === CalendarView.Week">
+                        Week
+                    </div>
+                    <div class="btn-pill-violet pill" (click)="view = CalendarView.Month" [class.active]="view === CalendarView.Month">
+                        Month
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-1">
+            <h5><i class="icon-left-dir" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false"></i></h5>
+        </div> -->
+        <div class="col-md-4">
+            <h5 class="greyish-brown"><i class="icon-left-circle float-left ml-5" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false"></i> {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+                <i class="icon-right-circle float-right mr-5" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="activeDayIsOpen = false"></i>
+            </h5>
+        </div>
+    </div>
+    <div class="row no-gutters">
+        <div class="col-md">
+        </div>
+        <div id="filter-btn" class="col-md-1">
+            <div class="row right-strip ">
+                <div class="col input-group-append mx-0">
+                    <button class="btn btn-gray-450 btn-sm btn-block text-left mt-2 ml-1 py-3 btn-right mx-0 grey " (click)="btnFilter() ">
+                        <span *ngIf="!isFilterHidden "><b>Filter</b></span>
+                        <i [class]="isFilterHidden? 'icon-filter float-right': 'icon-left-circle float-right' "></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="row-main">
+        <div class="col" [ngSwitch]="view">
+            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent(
+            'Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event) ">
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week " [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent( 'Clicked', $event.event) " (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-week-view>
+            <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day " [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent( 'Clicked', $event.event) " (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-day-view>
+        </div>
+        <div id="filter">
+            <app-appointments-filter *ngIf="!isFilterHidden"></app-appointments-filter>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>

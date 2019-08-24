@@ -1,0 +1,153 @@
+<!-- CONTENT -->
+<!-- <alert></alert>  -->
+<app-simple-error [errors]='errors'></app-simple-error>
+<div *ngIf="prescriptionItem.get('drugId').value!==''">
+    <div class="row p-2" (click)="rowClicked()">
+        <div class="col-1">
+            <span class="text-right"><i [ngClass]="isCollapsed ? 'icon-down-open-big float-right mr-1':'icon-up-open-big float-right mr-1'"></i></span>
+        </div>
+        <div class="col-6">{{ code }}</div>
+        <div class="col-4">{{ prescriptionItem.get('adjustedTotalPrice').value }}</div>
+        <div class="col-1 text-grey">
+            <i class="icon-trash" (click)="deletePressed()"></i>
+        </div>
+    </div>
+    <!-- {{ prescriptionItem.value | json }} -->
+    <!-- UOM-->
+    <hr class="row my-0" />
+    <div *ngIf="!isCollapsed" class="px-2 mx-0 bg-grey">
+        <div class="row">
+
+            <!-- Dosage instruction -->
+            <div class="form-group col-md-6">
+                <label class="mb-0">Dosage</label>
+                <div class=" input-group input-group-sm" [formGroup]="prescriptionItem.get('dosageInstruction')">
+                    <div class="input-group-append col-md-8" style="padding:0px;">
+                        <ng-select name="instruction" class='p-0 form-control form-control-sm  custom-select custom-select-extra-width' bindLabel='code' bindValue='code' [items]="dosageInstructions" [clearable]=false [virtualScroll]="true" (change)="onDosageInstructionSelect($event)"
+                            formControlName='code'>
+                            <!-- <ng-select name="baseUom" class='p-0 form-control form-control-sm  custom-select  custom-select-extra-medium-width' bindLabel='uom' bindValue='uom' [items]="baseUom" [clearable]=false [virtualScroll]="true" formControlName='uom'> -->
+                            <ng-template ng-header-tmp>
+                                <div class="row">
+                                    <div class="col-md-2 font-weight-semi-bold">Code</div>
+                                    <div class="col-md-6 font-weight-semi-bold">Instruction</div>
+                                </div>
+                            </ng-template>
+                            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                                <div class="row">
+                                    <div class="col-md-2">{{item.code}}</div>
+                                    <div class="col-md-6">{{item.instruct}}</div>
+                                </div>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                    <div class="input-group-append">
+                        <input name="dosageInstruction" class="form-control form-control-sm" type="number" align="right" min="0" max="100" [formControl]="prescriptionItem.get('dose').get('quantity')" step="{{dosageMin}}">
+                    </div>
+                    <errors [control]="prescriptionItem.get('dose').get('quantity')"></errors>
+                    <!-- <input name="quantity" class="form-control form-control-sm col-md-5" style="margin-right:6px;" type="number" min="0" max="100" formControlName="quantity"> -->
+                </div>
+            </div>
+
+            <!-- Instruction -->
+            <div class="form-group col-md-3">
+                <label class="mb-0">Instr</label>
+                <div [formGroup]="prescriptionItem.get('instruction')">
+                    <ng-select name="instruction" class='p-0 form-control form-control-sm  custom-select custom-select-extra-width' bindLabel='code' bindValue='code' [items]="instructions" [clearable]=false [virtualScroll]="true" (change)="onInstructionSelect($event)" formControlName='code'>
+                        <ng-template ng-header-tmp>
+                            <div class="row">
+                                <div class="col-md-2 font-weight-semi-bold">Code</div>
+                                <div class="col-md-6 font-weight-semi-bold">Instruction</div>
+
+                            </div>
+                        </ng-template>
+                        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                            <div class="row">
+                                <div class="col-md-2">{{item.code}}</div>
+                                <!-- <div class="col-md-6">{{item.instruct}}</div> -->
+                            </div>
+                        </ng-template>
+                    </ng-select>
+                    <errors [control]="prescriptionItem.get('instruction').get('code')"></errors>
+                </div>
+            </div>
+
+            <!-- Purchase Qty -->
+            <div class="form-group col-md-3">
+                <label class="mb-0">Qty (UOM)</label>
+                <div [formGroup]="prescriptionItem" class=" input-group input-group-sm">
+                    <input name="quantity" class="form-control form-control-sm" type="number" min="0" max="100" formControlName="purchaseQty">
+                    <div class="input-group-append">
+                        <span class="input-group-text" style="font-size:11px; padding:0 2px" id="dosage-addon">{{salesUom}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" [formGroup]="prescriptionItem">
+            <!-- Duration -->
+            <div class="form-group col-md-3">
+                <label class="mb-0">Duration</label>
+                <input name="drugDuration" class="form-control form-control-sm" type="number" min="0" max="100" formControlName="duration">
+            </div>
+
+
+            <!-- Batch No -->
+            <div class="form-group col-md-3">
+                <label class="mb-0">Batch No</label>
+                <input class="form-control form-control-sm" name="batchNumber" formControlName="batchNumber">
+            </div>
+
+            <!-- Expiry Date -->
+            <div class="form-group col-md-3">
+                <label class="mb-0">Expiry Date</label>
+                <input class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+                'theme-blue'}" name="expiryDate" formControlName="expiryDate">
+            </div>
+
+
+            <!-- Stocks Balance -->
+            <div class="form-group col-md-3">
+                <label class="mb-0">Stock Bal.</label>
+                <input type="text" class="form-control form-control-sm" readonly formControlName="stock">
+            </div>
+
+        </div>
+        <!-- Remarks -->
+        <div class="row" [formGroup]="prescriptionItem">
+            <div class="form-group col-md-12">
+                <label class="mb-0">Remarks</label>
+                <input class="form-control form-control-sm" type="text" formControlName="remark">
+            </div>
+        </div>
+        <div class="row">
+            <!-- Total Price -->
+            <div class="form-group col-md-4" [formGroup]="prescriptionItem.get('unitPrice')">
+                <!-- {{prescriptionItem.get('unitPrice').value | json }} -->
+                <label class="mb-0">Unit Price ($)</label>
+                <input class="form-control form-control-sm" type="text" step='0.01' name="unitPriceDisplay" [(ngModel)]="unitPriceDisplay" [ngModelOptions]="{standalone: true}" readonly>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="mb-0">Adj. Unit Price ($)</label>
+                <input class="form-control form-control-sm" type="text" step='0.01' name="adjustedUnitPriceDisplay" [(ngModel)]="adjustedUnitPriceDisplay" [ngModelOptions]="{standalone: true}" readonly>
+            </div>
+
+            <div [formGroup]="prescriptionItem" class="form-group col-md-4">
+                <label class="mb-0">Total Amount ($)</label>
+                <input class="form-control form-control-sm" type="number" step='0.01' placeholder="0.00" name="adjustedTotalPrice" formControlName="adjustedTotalPrice">
+            </div>
+            <!-- <br> Original Total Price : {{ this.prescriptionItem.get('oriTotalPrice').value }}
+            <br> Adjusted Total Amount : {{ this.prescriptionItem.get('adjustedTotalPrice').value * 100}}
+            <br> Difference ( Adjusted Total Amount - Original Total Amount) = {{(this.prescriptionItem.get('adjustedTotalPrice').value*100) - this.prescriptionItem.get('oriTotalPrice').value }}
+            <br> Quantity : {{ this.prescriptionItem.get('purchaseQty').value}}
+            <br> Minimum: {{ (this.prescriptionItem.get('adjustedTotalPrice').value*100) - (1 * this.prescriptionItem.get('purchaseQty').value/100) }}
+            <br>Adjusted Value Per Unit (Diff / Qty) : {{ ((this.prescriptionItem.get('adjustedTotalPrice').value*100) - this.prescriptionItem.get('oriTotalPrice').value) / this.prescriptionItem.get('purchaseQty').value}} -->
+        </div>
+        <!-- Adjusted Remarks -->
+        <div [formGroup]=" prescriptionItem.get('priceAdjustment')" class="row">
+            <div class="form-group col-md-12 ">
+                <label class="mb-0 ">Adjusted Remarks</label>
+                <input class="form-control form-control-sm" type="text" formControlName="remark">
+            </div>
+        </div>
+    </div>
+</div>

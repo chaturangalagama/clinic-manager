@@ -1,0 +1,32 @@
+<form class="h-100" [formGroup]="emergencyContactFormGroup" novalidate>
+    <div class="card h-100">
+        <div class="card-header">
+            EMERGENCY CONTACT
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Name</label>
+                    <input class="form-control form-control-sm" formControlName="name" />
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-md-12">
+                    <label>
+                        Contact
+                        <span class="text-grey-small"> (Mobile Number)</span>
+                    </label>
+                    <int-phone-prefix formControlName="contact" [defaultCountry]="(emergencyContactFormGroup.get('contact').value==='') ? 'sg': ''" [locale]="'en'" [maxlength]=15></int-phone-prefix>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-md-12">
+                    <label>Relationship</label>
+                    <!-- <input class="form-control form-control-sm" formControlName="relationship" /> -->
+                    <ng-select class="p-0 form-control form-control-sm custom-select" [clearable]=false [items]="emergencyContactFormGroup.value.relationships.value" [virtualScroll]="true" bindLabel="label" bindValue="value" placeholder="Select Relationship" formControlName="relationship">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

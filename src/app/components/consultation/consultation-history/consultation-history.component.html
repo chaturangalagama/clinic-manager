@@ -1,0 +1,17 @@
+<!-- <alert></alert> -->
+<div class="card mb-0  h-100">
+  <div class="container py-2 consultation-history card-body px-0">
+
+    <tabset class='borderless-tab'>
+      <tab heading="VISIT HISTORY">
+        <app-consultation-history-main-container (copiedPrescription)='copyPrescription($event)'></app-consultation-history-main-container>
+      </tab>
+      <tab heading="PATIENT NOTES">
+        <app-consultation-problem-list></app-consultation-problem-list>
+      </tab>
+      <tab heading="DOCUMENTS">
+        <app-consultation-documents></app-consultation-documents>
+      </tab>
+    </tabset>
+  </div>
+</div>

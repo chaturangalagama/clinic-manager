@@ -1,0 +1,22 @@
+<div class="row mb-0">
+    <div class="col-md-3">
+        <label class="mb-0">Code</label>
+        <font color="red">*</font>
+    </div>
+    <div class="col-md-9">
+        <label class="mb-0">Description</label>
+    </div>
+</div>
+
+<!-- CONTENT -->
+
+<div class="row" *ngFor="let item of diagnosisIds.controls; let i = index;">
+    <app-consultation-diagnosis-item class="col-md mb-2" [itemGroup]="item" [index]=i (onDelete)="onBtnDeleteClicked($event)"
+        [attachedMedicalCoverages]="attachedMedicalCoverages"></app-consultation-diagnosis-item>
+</div>
+<button class="btn-light float-left" (click)="onBtnAddClicked()">+ Add Another Row</button>
+<!-- <button class="btn-sm-sub  btn-pink float-right">Delete Row(s)</button> -->
+
+<!-- <code>{{diagnosisIds.value|json}}</code> -->
+<!-- </div>
+</div> -->

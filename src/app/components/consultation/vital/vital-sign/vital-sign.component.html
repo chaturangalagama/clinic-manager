@@ -1,0 +1,65 @@
+<div [formGroup]="vitalForm" class="container pl-3 pt-3 pb-3">
+    <label>VITAL SIGNS</label>
+    <!-- <code>{{vitalForm.value|json}}</code> -->
+    <!-- <code>{{vitalForm.valid|json}}</code> -->
+    <div class=" row text-header-consultation">
+        <div class="col-md-2">WT (kg)</div>
+        <div class="col-md-2">HT (cm)</div>
+        <div class="col-md-2">BMI</div>
+        <div class="col-md-3">BP</div>
+        <div class="col-md-2">Pulse</div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-2">
+            <input type="number" min="0" class="w-100 form-control form-control-sm" formControlName="weight">
+        </div>
+        <div class="col-md-2">
+            <input type="number" class="w-100 form-control form-control-sm" formControlName="height">
+        </div>
+        <div class="col-md-2">
+            <input type="number" class="w-100 form-control form-control-sm" formControlName="bmi" readonly/>
+        </div>
+        <div class="col-md-3">
+            <div class="row" [formGroup]="vitalForm.get('bp')">
+                <div class="col pr-0">
+                    <input type="number" class="w-100 form-control form-control-sm" name="bp1" formControlName="systolic">
+                </div>
+                <div class="col-1 p-0" align="center">
+                    <h4>/</h4>
+                </div>
+                <div class="col pl-0 ">
+                    <input type="number" class="w-100 form-control form-control-sm" name="bp2" formControlName="diastolic">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input ytpe="number" class="w-100 form-control form-control-sm" formControlName="pulse">
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row text-header-consultation ">
+        <div class="col-md-2">Resp</div>
+        <div class="col-md-2">Temp</div>
+        <!-- <div class="col-md-2">Sa02</div> -->
+        <!-- <div class="col-md-2 ">Others</div> -->
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <input type="number" class="w-100 form-control form-control-sm" formControlName="respiration">
+        </div>
+        <div class="col-md-2">
+            <input type="number" class="w-100 form-control form-control-sm" formControlName="temperature">
+        </div>
+        <!-- <div class="col-md-2">
+      <input type="number" class="w-100 form-control form-control-sm" formControlName="sa02">
+    </div> -->
+        <div class="col-md-3">
+            <!-- <input type="number " class="w-100 " formControlName="others "> -->
+        </div>
+        <div class="col-md-2">
+            <button class="w-100 btn btn-sm btn-brand-primary" [disabled]="!vitalForm.valid" (click)="onUpdate()">Update</button>
+        </div>
+
+    </div>
+</div>

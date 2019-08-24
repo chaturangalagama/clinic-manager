@@ -1,0 +1,21 @@
+<div class="card h-100">
+    <div class="card-header font-weight-semi-bold">
+        MEMO
+    </div>
+    <div class="card-body">
+        <div class="container-fluid px-0">
+            <!-- TITLE -->
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <label class="mb-0">To Whom It May Concern</label>
+                    <!-- <textarea cols="10" rows="5" class="form-control" [formControl]="memo"></textarea> -->
+                    <ckeditor [formControl]="memo" debounce="500" [config]="ckeConfig" class="cke_consultation">
+                        <p>Hello
+                            <strong>world</strong>
+                        </p>
+                    </ckeditor>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

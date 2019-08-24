@@ -1,0 +1,12 @@
+<!-- Medical Certificates -->
+<app-medical-certificate-items-array [itemsFormArray]="consultationFormGroup.get('medicalCertificates')">
+</app-medical-certificate-items-array>
+
+<!-- Referral -->
+<app-payment-referral [referralFormGroup]="consultationFormGroup.get('patientReferral')" [itemsFormArray]="consultationFormGroup.get('patientReferral').get('patientReferrals')"></app-payment-referral>
+
+<!-- Follow Up -->
+<app-payment-follow-up [followUpFormGroup]="consultationFormGroup.get('consultationFollowup')"></app-payment-follow-up>
+
+<!-- Memo -->
+<app-consultation-memo [memo]="consultationFormGroup.get('consultation').get('memo')"></app-consultation-memo>

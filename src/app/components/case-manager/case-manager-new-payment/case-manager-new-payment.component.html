@@ -1,0 +1,69 @@
+<div class="card mb-0">
+  <div class="card-header">{{title}}</div>
+  <div class="card-body">
+    <form (ngSubmit)='recordPayment()'>
+      <div class="" [formGroup]='mainFormGroup'>
+        <div class="case-card-search row pale-grey pt-3 mb-1 mt-1" style="background-color: #f2f4f7">
+          <div class="form-group col-4">
+            <h6>Payment Type</h6>
+            <ng-select name="plan" class='p-0 form-control form-control-sm  custom-select' bindLabel='name' [items]="paymentTypes"
+              [clearable]=false formControlName='paymentType'>
+            </ng-select>
+          </div>
+          <div class="form-group col-4">
+            <h6>Amount</h6>
+            <input class="form-control form-control-sm" formControlName='amount'>
+          </div>
+          <div class="form-group col-4">
+            <h6>Reference</h6>
+            <input class="form-control form-control-sm" formControlName='reference'>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 case-card-search row pale-grey pt-3 mb-1 mt-1">
+        <div class="col-4"></div>
+        <div class="col-4 pr-0" align=right>
+          <button class="btn btn-cancel pl-5 pr-5" type="button" (click)="cancelModal()">Cancel</button>
+        </div>
+        <div class="col-4">
+          <button class="btn btn-brand-primary pl-4 pr-4" type="submit" [disabled]="!mainFormGroup.valid">Record
+            Payment</button>
+        </div>
+      </div>
+    </form>
+    <div class="col-3 mt-2">
+      <h6 style="margin-bottom:0px">Existing Payment</h6>
+    </div>
+
+    <div class="container-fluid" style="padding-top: 15px; padding-bottom: 5px;">
+      <ngx-datatable #table class='bootstrap custom-datatable expandable' [columns]="columns" [headerHeight]="40"
+        [columnMode]="'force'" [footerHeight]="0" [rowHeight]="40" [rows]='rows'>
+
+        <ngx-datatable-column name="Mode" minWidth="false" [canAutoResize]=true>
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <div class="leftContent">{{ row.paymentMode }}</div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Amount" [canAutoResize]=true minWidth="false" headerClass="headerAlignRight">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <div class="rightContent pr-0">{{ row.payableAmount }}</div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Date" minWidth="false" [canAutoResize]=true headerClass="headerAlignCenter">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <div class="centerContent pr-0">{{ row.dateTime }}</div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Reference" minWidth="false" [canAutoResize]=true headerClass="headerAlignCenter">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <div class="centerContent pr-0">{{ row.reference }}</div>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

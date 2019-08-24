@@ -1,0 +1,42 @@
+<alert></alert>
+<div class="row pb-4">
+    <div class="col-md-8">
+        <app-patient-detail-basic-info [basicInfoFormGroup]="profileFormGroup.get('basicInfoFormGroup')" [patientInfo]='patientInfo'>
+        </app-patient-detail-basic-info>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <app-patient-detail-company-info [companyInfoFormGroup]="profileFormGroup.get('companyInfoFormGroup')">
+                </app-patient-detail-company-info>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <app-patient-detail-emergency-contact [emergencyContactFormGroup]="profileFormGroup.get('emergencyContactFormGroup')">
+                </app-patient-detail-emergency-contact>
+            </div>
+        </div>
+    </div>
+</div>
+<app-patient-detail-vaccination [patientInfo]="patientInfo" [historyInfo]="visitHistory"></app-patient-detail-vaccination>
+<div class="row">
+    <div class="col-md-6">
+        <app-consultation-problem-list [needRefresh]="needRefresh"></app-consultation-problem-list>
+    </div>
+    <div class="col-md-6">
+        <app-consultation-ongoing-medication [needRefresh]="needRefresh"></app-consultation-ongoing-medication>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- <div class="btn-toolbar float-right" role="toolbar">
+            <div class="btn-group" role="group">
+                <button class="btn btn-large btn-brand-primary">SAVE & NEXT (F4)</button>
+            </div>
+        </div> -->
+    </div>
+</div>
+<br>
+<br>
+<br>

@@ -1,0 +1,46 @@
+$highlight_color: #8ad4ee;
+$default_color: #a8b2b9;
+
+.left-inner-addon {
+    position: relative;
+    input {
+        padding-left: 1.875rem;
+    }
+    i {
+        left: 0;
+        top: 0;
+        position: absolute;
+        padding: 0.625rem 0.75rem;
+        pointer-events: none;
+        color: $default_color;
+    }
+    .form-control-sm + i {
+        padding: 0.3rem 0.4rem;
+    }
+    &:hover .inner-icon,
+    .form-control:focus + .inner-icon {
+        color: $highlight_color;
+    }
+}
+
+.right-inner-addon {
+    position: relative;
+    input {
+        padding-right: 1.875rem;
+    }
+    i {
+        position: absolute;
+        top: 0;
+        right: 0px;
+        padding: 0.625rem 0.75rem;
+        pointer-events: none;
+        color: $default_color;
+    }
+    .form-control-sm + i {
+        padding: 0.3rem 0.4rem;
+    }
+    &:hover .inner-icon,
+    .form-control:focus + .inner-icon {
+        color: $highlight_color;
+    }
+}

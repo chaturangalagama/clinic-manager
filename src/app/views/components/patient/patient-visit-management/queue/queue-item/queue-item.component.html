@@ -1,0 +1,56 @@
+<li [class]='getItemRowClass()'>
+    <div class="queue-row">
+        <div class="row text-center queue-number">
+            <div>
+                <div>
+                    <div class="mb-0">
+                        <span [ngClass]="item.urgent?'text-maroon':'text-greyish-brown'">
+                            <h5 class="d-flex justify-content-center">{{ item.queueNumber }}<i class="p-0 icon-flash align-self-start" *ngIf="item.urgent" style="font-size: 10px"></i></h5>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isCollapsed && !isQueueHidden" [class]="getCallButtonClass()" (click)="callThisPatient()">
+                <span *ngxPermissionsOnly="['ROLE_DOCTOR']">
+                    Call
+                </span>
+            </div>
+        </div>
+        <div class="queue-details pl-2" *ngIf="!isQueueHidden" (click)="rowClicked()">
+            <table>
+                <tr>
+                    <td class="queue-first-element">
+                        <a href="" class="font-weight-semi-bold">
+                            {{ item.name }}
+                        </a>
+                    </td>
+                    <td class="queue-first-element">
+                        {{ item.time | displayHour }}
+                        <span class="text-right"><i [ngClass]="isCollapsed ? 'icon-down-open-big float-right mr-1':'icon-up-open-big float-right mr-1'"></i></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="queue-last-element">{{ item.userId }}</td>
+                    <td class="queue-last-element">
+                        <span [class]="getStatusColor(item.status)">
+                            <span class="icon-circle"></span>{{ item.status }}
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <hr *ngIf="!isCollapsed" class="my-1">
+            <table *ngIf="!isCollapsed">
+                <tr>
+                    <td class="queue-first-element"><span class="font-weight-semi-bold text-blue">Purpose: </span> {{
+                        item.purpose }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="queue-last-element"><span class="font-weight-semi-bold text-blue">Remarks: </span> {{
+                        item.remarks}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</li>

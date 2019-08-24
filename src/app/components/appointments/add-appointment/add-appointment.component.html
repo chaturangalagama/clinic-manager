@@ -1,0 +1,17 @@
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-md-4 form-group">
+            <label class="mb-0">Appointment Date</label>
+            <input type="text " class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+                          'theme-blue'}" [minDate]="appointmentMinDate">
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="mb-0">Appointment Time</label>
+            <timepicker [showMeridian]="false" [showSpinners]="false"></timepicker>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="mb-0">Duration (mins)</label>
+            <input type='number' min="1" class='form-control form-control-sm'>
+        </div>
+    </div>
+</div>

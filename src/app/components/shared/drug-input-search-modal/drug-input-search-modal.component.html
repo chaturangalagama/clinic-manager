@@ -1,0 +1,48 @@
+<alert></alert>
+
+<div class="container-fluid p-3">
+  <button aria-label="Close" class="close pull-right" type="button" (click)='closeModal()'>
+    <span aria-hidden="true">×</span>
+  </button>
+  <div class="row py-2">
+
+    <div class="col-md mr-2">
+      <input class="search-input-flat w-100 pb-1" type='text' placeholder='Please enter your keyword' [formControl]="searchField"
+      />
+    </div>
+    <!-- <div class="col-md-1 align-self-end">
+      <button class="btn btn-sm btn-pink float-right" (click)="onAddNewPatient()">+ Add Patient</button>
+    </div> -->
+
+  </div>
+
+  <ngx-datatable #table class='bootstrap' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="20" [limit]="20"
+    [rows]='rows' [selectionType]="'single'" (select)='onSelect($event)'>
+    <ngx-datatable-column name="Code" prop="code" [resizeable]=false [flexGrow]=1>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <div>{{ row.code }}</div>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Name" prop="name" [resizeable]=false [flexGrow]=2>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <div>{{ row.name }}</div>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Brand" prop="brand" [resizeable]=false [flexGrow]=1>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <div style="hyphens: auto;">{{ row.brand }}</div>
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- <ngx-datatable-column name="Ingredients" prop="ingredients" [resizeable]=false [flexGrow]=2>
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <div class="row" *ngFor='let ingredient of row.ingredients'>
+          <div class="col">{{ingredient.name}}</div>
+        </div>
+      </ng-template>
+    </ngx-datatable-column> -->
+
+
+  </ngx-datatable>
+</div>

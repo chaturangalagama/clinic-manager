@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header">
+        Alerts
+    </div>
+    <div class="card-body">
+        <span *ngIf="alertFormGroup.get('alertArray').value.length === 0 && medicalAlertFormGroup.get('alertArray').value.length === 0">
+            <button class="btn btn-outline-brand-secondary btn-sm" type="button" (click)="addAllergy()">Manage Allergy</button>
+            <button class="btn btn-outline-brand-secondary btn-sm" [hidden]=false type="button" (click)="addMedicalAlerts()">Manage Alerts</button>
+        </span>
+        <div *ngIf="(alertFormGroup.get('alertArray').value.length > 0 || medicalAlertFormGroup.get('alertArray').value.length > 0 )">
+            <form [formGroup]="alertFormGroup">
+                <span *ngFor="let form of alertFormGroup.get('alertArray').controls;">
+                        <span *ngIf="form.value.name.length>0">
+                            <span class="badge p-2 mr-2 mb-2" [ngClass]="addTagStyle('ALLERGY')" [popover]="popTemplate" placement="top" [outsideClick]="true" triggers="hover">{{form.value.name}}</span>
+                </span>
+                <ng-template #popTemplate>
+                    <div *ngIf='form.value.remarks===""'>
+                        <i>
+                             <span style="color:darkgray;">No Remarks</span>
+                            </i>
+                    </div>
+                    <div *ngIf='form.value.remarks!==""'>{{form.value.remarks}}</div>
+                </ng-template>
+                </span>
+                <button class="btn btn-outline-brand-secondary btn-sm" (click)="addAllergy()">Manage Allergy</button>
+            </form>
+            <div class="row pt-1">
+                <form [formGroup]="medicalAlertFormGroup">
+                    <span *ngFor="let form of medicalAlertFormGroup.get('alertArray').controls;">
+                        <span *ngIf="form.value.priority.length>0">
+                            <span class="badge p-2 mr-2 mb-2" [ngClass]="addTagStyle('MEDICAL')" [popover]="popTemplate" placement="top" [outsideClick]="true" triggers="hover">
+                                <span  *ngIf="form.value.priority==='HIGH'" class="icon-attention"></span>{{form.value.name}}
+                    </span>
+                    </span>
+                    <ng-template #popTemplate>
+                        <div *ngIf='form.value.remark===" "'>
+                            <i>
+                            <span style="color:darkgray;">No Remarks</span>
+                           </i>
+                        </div>
+                        <div *ngIf='form.value.remark!==" "'>{{form.value.remark}}</div>
+                    </ng-template>
+                    </span>
+                    <button class="btn btn-outline-brand-secondary btn-sm" (click)="addMedicalAlerts()">Manage Alerts</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

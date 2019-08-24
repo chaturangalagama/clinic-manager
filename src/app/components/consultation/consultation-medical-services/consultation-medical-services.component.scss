@@ -1,0 +1,43 @@
+.tab-content {
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: 1px solid #a4b7c1;
+}
+
+.side-line {
+    display: inline-block;
+    border-top: 1px solid #a4b7c1;
+    width: 20%;
+}
+
+.nav-tabs .nav-link,
+.nav-tabs .navbar .dropdown-toggle,
+.navbar .nav-tabs .dropdown-toggle {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+// Active Tab Text Color
+.nav-link.active {
+    color: #0094c9 !important;
+    border-bottom: 2px solid #0094c9 !important;
+}
+
+.nav-item::before {
+    border-bottom: 1px solid red !important;
+}
+
+.triangle {
+    display: inline-block;
+    height: 7px;
+    width: 7px;
+    transform: rotate(45deg);
+    transform-origin: center center;
+    border-top: 1px solid #a4b7c1;
+    border-left: 1px solid #a4b7c1;
+    margin-left: -3px;
+    margin-right: -3px;
+    margin-bottom: -3px;
+}

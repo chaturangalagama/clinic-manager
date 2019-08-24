@@ -1,0 +1,22 @@
+<div *ngIf='item.status!=="INACTIVE"' class='timeline__container no-gutters'>
+    {{ item.value | json }}
+    <div class='timeline__left'>
+        {{item.addedDateTime|displayDate}}
+    </div>
+    <div class='timeline__right'>
+        <div class="timeline__dot"></div>
+        <div class="float-right">
+            <!-- <i class="icon-pencil cursor-pointer" (click)="editNoteClicked()"></i> -->
+            <i class="icon-trash cursor-pointer" (click)="deleteNoteClicked()"></i>
+        </div>
+        <p class='timeline__content'>
+            <span *ngIf="!editMode">{{item.note}}</span>
+            <input type="text" *ngIf="editMode" class="form-control form-control-sm" [formControl]="editNote" (keyUp)="onKeyUp($event)" />
+        </p>
+
+        <div class='timeline__author'>
+            Added by {{getDoctorName(item.doctorId)}}
+        </div>
+        <div class="timeline__separator"></div>
+    </div>
+</div>

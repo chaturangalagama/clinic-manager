@@ -1,0 +1,21 @@
+<div [hidden]='!isStoreReady || hasError'>
+    <app-header></app-header>
+    <div class="app-body">
+        <app-sidebar></app-sidebar>
+        <!-- Main content -->
+        <main class="main">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+    <app-footer></app-footer>
+</div>
+
+<!-- RETRY  -->
+<div>
+    <app-loading-retry [hidden]='!isStoreReady || !hasError'></app-loading-retry>
+</div>
+
+<!-- LOADING SECTION -->
+<div>
+    <app-loading [hidden]='isStoreReady'></app-loading>
+</div>

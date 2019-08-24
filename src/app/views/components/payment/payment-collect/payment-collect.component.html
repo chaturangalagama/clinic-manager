@@ -1,0 +1,40 @@
+<div class="pt-4"></div>
+<alert></alert>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- {{this.collectFormGroup.get('collectChargeFormGroup').value | json}} -->
+                <app-payment-collect-charge [collectChargeFormGroup]="collectFormGroup.get('collectChargeFormGroup')">
+                </app-payment-collect-charge>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <app-payment-collect-summary [paymentFormGroup]="collectFormGroup.get('paymentFormGroup')"></app-payment-collect-summary>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- {{this.collectFormGroup.get('paymentFormGroup') .get('paymentArray').value | json}} -->
+        <app-payment-collect-method [paymentFormGroup]="collectFormGroup.get('paymentFormGroup')"></app-payment-collect-method>
+    </div>
+</div>
+<app-payment-print-charge [collectFormGroup]="collectFormGroup" [patientInfo]="patientInfo" [paymentInfo]="paymentInfo">
+</app-payment-print-charge>
+<div *ngIf="isLessThan">
+    <h4>Paid amount is less than the charged amount.</h4>
+</div>
+<div class="btn-toolbar float-right" role="toolbar">
+    <div class="btn-group mr-4" role="group">
+        <button class="btn btn-large btn-cool-grey text-white" (click)="onBtnBackClicked()">Back</button>
+    </div>
+    <div class="btn-group" role="group">
+        <button class="btn btn-large btn-brand-secondary" (click)="onBtnSaveClicked()" (keyup)="onKeyUp($event)" [disabled]="disablePayBtn || !collectFormGroup.valid" *ngxPermissionsOnly="['ROLE_BILL_PAYMENT_MAKE']">
+      PAY (F4)
+    </button>
+    </div>
+</div>
+<br>
+<br>
+<br>

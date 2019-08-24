@@ -1,0 +1,81 @@
+<ng-container *ngIf="patientVisitHistory && patientVisitHistory">
+    <span class="pt-1">
+  </span>
+    <div class="card mb-2 mt-1">
+        <div class="card-header card-header-transparent">
+            <span class='font-weight-semi-bold'>CONSULTATION NOTES</span>
+
+        </div>
+        <div class="card-body" *ngIf="patientVisitHistory.medicalReferenceEntity.consultation" [innerHTML]="patientVisitHistory.medicalReferenceEntity.consultation.consultationNotes">
+        </div>
+    </div>
+    <div class="card mb-2">
+        <div class="card-header card-header-transparent">
+            <span class='font-weight-semi-bold'>DIAGNOSIS</span>
+        </div>
+        <div *ngIf="diagnoses && diagnoses.length>0" class="card-body card-body-diagnosis">
+            <div *ngFor="let diagnosis of diagnoses">
+                <div class="row">
+                    <div class="col-2 text-dark">
+                        {{ diagnosis.icd10Code }}
+                    </div>
+                    <div class="col-6">
+                        {{ diagnosis.icd10Term }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card ">
+        <div class="card-header card-header-transparent">
+            <span class='font-weight-semi-bold'>Charge Items</span>
+        </div>
+        <div class="card-body">
+            <div class="row bg-warm-grey text-white py-2">
+                <div class="col-md-2">
+                    Item Code
+                </div>
+                <div class="col-md-3">
+                    Item Name
+                </div>
+                <div class="col-md-1">
+                    Dosage
+                </div>
+                <div class="col-md-2">
+                    Instr
+                </div>
+                <div class="col-md-2">
+                    Dur (Days)
+                </div>
+                <div class="col-md-2">
+                    Qty (UOM)
+                </div>
+            </div>
+            <span *ngFor="let entity of patientVisitHistory.medicalReferenceEntity.dispatchItemEntities; let i = index;">
+                <div class="row mt-1" *ngIf="dispatchItems[i]">
+                    <div class="col-md-2">
+                        {{ dispatchItems[i].code}}
+                    </div>
+                    <div class="col-md-3">
+                        {{ dispatchItems[i].name}}
+                    </div>
+                    <div class="col-md-1">
+                        {{ entity.dosage}}
+                    </div>
+                    <div class="col-md-2">
+                        {{ entity.instruct}}
+                    </div>
+                    <div class="col-md-2">
+                        {{ entity.duration}}
+                    </div>
+                    <div class="col-md-2">
+                        {{ entity.quantity}}
+                    </div>
+                </div>
+            </span>
+            <div class="text-right mb-3" *ngIf="showCopyPrescription()">
+                <button class="btn btn-sm btn-small btn-blue" (click)='onCopyPrescriptionClicked()'>Copy Prescription</button>
+            </div>
+        </div>
+    </div>
+</ng-container>

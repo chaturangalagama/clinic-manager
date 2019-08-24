@@ -1,0 +1,223 @@
+<div class="container-fluid case-content-wraper h-100" style="min-height:100vh">
+
+  <div class="container-fluid px-0 pr-0 bg-white d-flex justify-content-between">
+    <div class="d-flex align-items-center pl-2">
+      <button class="btn btn-outline-dark btn-sm" (click)="backToAllCases()">
+        <i class='icon-left-open'></i><span>Back to all cases</span>
+      </button>
+    </div>
+
+    <div class="form-group mb-0 pt-2">
+      <label class="mb-0">Case Number</label>
+      <p class="form-control  border-0 m-0 p-0">{{case?.caseNumber}}</p>
+    </div>
+
+    <div class="form-group mb-0  pt-2">
+      <label class="mb-0">NRIC</label>
+      <p class="form-control border-0 m-0 p-0">{{case?.patientNRIC}}</p>
+    </div>
+
+    <div class="form-group mb-0  pt-2">
+      <label class="mb-0">Patient</label>
+      <p class="form-control border-0 m-0 p-0">{{case?.patientName}}</p>
+    </div>
+
+    <div class="col-md-5 pr-0">
+      <div class="total-due" [ngClass]="case?.salesOrder?.outstanding > 0 ? 'total-due-red' : 'total-due-green'"><label>Total
+          Due</label><span>${{case?.salesOrder?.outstanding}}</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="row pt-2">
+    <!-- LEFT SEGMENT -->
+    <div class="col-md-2">
+
+      <div class="d-flex justify-content-between bg-duck-egg-blue p-2">
+        <div class="d-flex align-items-center">
+          <label class="text-dark mb-0">Visits</label>
+        </div>
+        <button class="btn btn-brand-primary" (click)="attachNewVisit()">Attach New Visit</button>
+      </div>
+
+      <div class="row bg-grey-600 m-0 py-3">
+        <div class="col-md">
+          <span class='text-white'>Date</span>
+        </div>
+        <div class="col-md">
+          <span class='text-white'>Clinic</span>
+        </div>
+      </div>
+
+      <div class="row border-bottom m-0 bg-white" *ngFor="let row of visits" (click)="onClickVisitRow(row.visitId)">
+        <div class="col-md align-self-center">
+          <span>{{row?.visitDate}}</span>
+        </div>
+        <div class="col-md">
+
+
+          <div class="row">
+            <div class="col-md-9 align-self-center"><span>{{row?.clinicName}}</span></div>
+            <div class="col-md-1 align-self-center">
+              <button class='btn btn-link-grey' *ngIf="case?.status=='OPEN'" (click)="onDeleteVisit(row.visitId)">
+                <i class='icon-trash'></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+    <!-- LEFT SEGMENT -->
+
+    <!-- RIGHT SEGMENT -->
+    <div class="col-md-10">
+      <!-- DIAGNOSIS -->
+      <div class="card border-0">
+        <div class="card-header bg-white">DIAGNOSIS/DISPENSED</div>
+        <div class="card-body">
+          <!-- DIAGNOSIS -->
+          <!-- TITLE -->
+          <div class="border-bottom">
+            <div class="row bg-pale-grey-three">
+              <div class="col-md">ICD CODE</div>
+              <div class="col-md">Description</div>
+            </div>
+            <!-- CONTENT -->
+
+            <ng-container *ngIf="visit?.diagnosis!==undefined && visit?.diagnosis!==null && visit?.diagnosis.length>0">
+              <div class="row" *ngFor="let row of visit?.diagnosis">
+                <div class="col-md">{{row?.icd10Code}}</div>
+                <div class="col-md">{{row?.icd10Term}}</div>
+              </div>
+            </ng-container>
+          </div>
+          <!-- DIAGNOSIS -->
+          <!-- ITEMS -->
+          <!-- TITLE -->
+          <div class=" border-bottom">
+            <div class="row bg-pale-grey-three">
+              <div class="col-md">Item Code</div>
+              <div class="col-md">Charged Items</div>
+              <div class="col-md">Qty</div>
+              <div class="col-md">UOM</div>
+            </div>
+            <!-- CONTENT -->
+            <ng-container *ngIf="visit?.drugDispatch!==undefined && visit?.drugDispatch!==null && visit?.drugDispatch.length>0">
+              <div class="row" *ngFor="let row of visit?.drugDispatch">
+                <div class="col-md">{{row?.itemCode}}</div>
+                <div class="col-md">{{row?.itemName}}</div>
+                <div class="col-md">{{row?.quantity}}</div>
+                <div class="col-md">{{row?.dosageUom}}</div>
+              </div>
+            </ng-container>
+          </div>
+          <!-- ITEMS -->
+        </div>
+      </div>
+      <!-- DIAGNOSIS -->
+
+      <!-- CHARGES -->
+      <div class="card">
+        <div class="card-header">CHARGES</div>
+        <div class="card-body p-2">
+          <!-- MAIN CHARGES -->
+          <app-case-charge class="mt-0" [itemsFormArray]="caseChargeForm?.get('chargeItem')?.get('chargeItemDetails')"
+            [caseStatus]='this.case?.status' (handleChargeItemChange)="handleChargeItemChange($event)"
+            (onFirstChargeItemDetailsAdded)="onFirstChargeItemDetailsAdded($event)"></app-case-charge>
+
+          <!-- CHARGES BREAKDOWN -->
+          <div class='container-fluid p-0'>
+            <div class="row border-bottom mx-0">
+              <div class="col-md font-weight-semi-bold pl-0">CHARGES BREAKDOWN</div>
+              <div class="col-md font-weight-semi-bold">Sales Ref No.</div>
+            </div>
+            <div class="border my-2">
+              <!-- TITLE -->
+              <div class="row bg-brown-gray py-2 mx-0">
+                <div class="col-md text-white">Item</div>
+                <div class="col-md text-white">Charge</div>
+                <div class="col-md text-white">GST@7%</div>
+                <div class="col-md text-white">Payable</div>
+                <div class="col-md text-white">Coverage</div>
+              </div>
+              <!-- CONTENT -->
+              <div class="row py-2 mx-0">
+                <div class="col-md">Item</div>
+                <div class="col-md">Charge</div>
+                <div class="col-md">GST@7%</div>
+                <div class="col-md">Payable</div>
+                <div class="col-md">Coverage</div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- REFUNDS BREAKDOWN -->
+          <div class="container-fluid p-0">
+            <div class="row border-bottom mx-0">
+              <div class="col-md font-weight-semi-bold pl-0">REFUNDS BREAKDOWN</div>
+            </div>
+            <!-- TITLE -->
+            <div class="row bg-brown-gray py-2 mx-0 mt-2">
+              <div class="col-md text-white">Refund Slip No</div>
+              <div class="col-md text-white">Refund Type</div>
+              <div class="col-md text-white">Refund Amount ($)</div>
+              <div class="col-md text-white">Payment Mode</div>
+              <div class="col-md text-white">Refund Date</div>
+              <div class="col-md text-white">Remarks</div>
+              <div class="col-md text-white">Attachments</div>
+              <div class="col-md text-white">Action</div>
+            </div>
+            <!-- CONTENT -->
+            <div class="row py-2 mx-0">
+              <div class="col-md">Refund Slip No</div>
+              <div class="col-md">Refund Type</div>
+              <div class="col-md">Refund Amount ($)</div>
+              <div class="col-md">Payment Mode</div>
+              <div class="col-md">Refund Date</div>
+              <div class="col-md">Remarks</div>
+              <div class="col-md">Attachments</div>
+              <div class="col-md">Action</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- CHARGES -->
+
+      <!-- PACKAGES -->
+      <div class="card" hidden>
+        <div class="card-header">PACKAGES</div>
+        <div class="card-body p-2">
+          <div class="my-2">
+            <!-- TITLE -->
+            <div class="row bg-brown-gray py-2 mx-0">
+              <div class="col-md text-white">Item Code</div>
+              <div class="col-md text-white">Item Name</div>
+              <div class="col-md text-white">Price ($)</div>
+              <div class="col-md text-white">Date</div>
+              <div class="col-md text-white">Use By</div>
+              <div class="col-md text-white">Completed</div>
+            </div>
+            <!-- CONTENT -->
+            <div class="row py-2 mx-0">
+              <div class="col-md">Item</div>
+              <div class="col-md">Charge</div>
+              <div class="col-md">GST@7%</div>
+              <div class="col-md">Payable</div>
+              <div class="col-md">Coverage</div>
+              <div class="col-md">Coverage</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- PACKAGES -->
+
+    </div>
+  </div>
+
+
+</div>

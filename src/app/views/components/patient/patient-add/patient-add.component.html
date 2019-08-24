@@ -1,0 +1,54 @@
+<div class="container-fluid h-100" style="margin-bottom:100px;">
+    <div class="row">
+        <div class="col-9  mt-4 mb-2">
+            <alert></alert>
+            <app-patient-add-patient-info [basicInfoFormGroup]="patientAddFormGroup.get('basicInfoFormGroup')">
+            </app-patient-add-patient-info>
+            <app-patient-add-alerts-info [alertFormGroup]="patientAddFormGroup.get('alertFormGroup')"
+                [medicalAlertFormGroup]="patientAddFormGroup.get('medicalAlertFormGroup')" *ngxPermissionsOnly="['ROLE_PATIENT_MEDICAL_ALERTS']"></app-patient-add-alerts-info>
+            <app-medical-coverage [hasAdd]='false' [hasDelete]='true' [popUpAddCoverage]='true' [patientCoverages]="patientAddFormGroup.get('selectedPlans')"
+                *ngxPermissionsOnly="['ROLE_MEDICAL_COVERAGE_MANAGEMENT']"></app-medical-coverage>
+            <!-- <pre>{{patientAddFormGroup.get('selectedPlans').value|json}}</pre> -->
+            <div id=addMorePatientInformation (click)="toggleHide()">
+                <div class="row addMorePatientInformation ml-0 mb-4 ">+ Add More Patient Information</div>
+            </div>
+            <div id="otherPatientInfo" style="display:none">
+                <app-patient-add-emergency-contact [emergencyContactFormGroup]="patientAddFormGroup.get( 'emergencyContactFormGroup') "></app-patient-add-emergency-contact>
+                <app-patient-add-other-patient-info [otherInfoFormGroup]="patientAddFormGroup.get( 'otherInfoFormGroup') "></app-patient-add-other-patient-info>
+                <app-patient-add-company-info [companyInfoFormGroup]="patientAddFormGroup.get( 'companyInfoFormGroup') "></app-patient-add-company-info>
+            </div>
+            <div class="btn-toolbar float-right " role="toolbar ">
+                <div class="btn-group " role="group ">
+                    <button class="btn btn-large btn-brand-secondary" [disabled]="!patientAddFormGroup.valid" (click)="onBtnNextClicked($event) ">NEXT(F4)</button>
+                    <!-- <button class="btn btn-large btn-pink" (click)="onBtnNextClicked($event) ">NEXT(F4)</button> -->
+                </div>
+            </div>
+            <div class="btn-toolbar float-right " role="toolbar ">
+                <div class="btn-group " role="group ">
+                    <button class="btn btn-large btn-cool-grey text-white mr-2 ">Back</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 bg-grey m-0 " [hidden]=true>
+            <div class="card mt-4 mx-4 border-0 ">
+                <div class="card-body text-center ">
+                    <p class="card-title text-indigo ">QUEUE NO</p>
+                    <p class="card-text text-pink text-queue-lg ">0006</p>
+                    <p class="text-queue-xs ">Estimated Waiting Time</p>
+                    <p class="text-queue-sm ">20 minutes</p>
+                    <hr class="separator ">
+                    <div class="mx-auto ">
+                        <div class="text-left w-50 mx-auto ">
+                            <p class="text-queue-sm text-indigo ">PRIORITY</p>
+                            <input type="radio " class="radio " id="queue " name="queue " value="Normal ">
+                            <label for="queue " class="mr-3 mb-0 ">Normal</label>
+                            <br>
+                            <input type="radio " class="radio " id="queue " name="queue " value="Urgent ">
+                            <label for="queue " class="mr-3 mb-0 ">Urgent</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

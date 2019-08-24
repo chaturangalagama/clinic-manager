@@ -1,0 +1,54 @@
+// Custom CSS for drug search input
+#keyword{
+ min-width:25%;
+}
+
+.filter-wrapper{
+  width:100%
+}
+
+.filter-container {
+  z-index:1020;
+  height:-webkit-max-content;
+}
+
+.filter-select{
+  font-size: 1.1em;
+  color: rgb(105, 105, 105);
+  display:none;
+  // border-top: none;
+  /*so things don't jump around*/
+  position: absolute;
+  // left: 25%;
+  /*Since we know the wrapper will always be 100% height, we can use half of 100% + half the height of the input*/
+  // top: calc(50% + 25px);
+  /*for a better calculation use JS.  I'm calculating half of the body height - half the height of the input - li padding*/
+  // max-height: calc(50% - 15px);
+  overflow-y: auto;
+  background: #fff;
+  z-index:1020;
+  // background-color: bisque;
+}
+
+.filter-select-visible{
+  border: 1px solid #ccc;
+  display:block;
+  list-style: none;
+  padding-left: 0;
+  position:absolute;
+
+  width:intrinsic;
+  width: -moz-max-content;    /* Firefox/Gecko */
+  width: -webkit-max-content; /* Chrome */
+  max-width: 75vw;
+}
+
+.filter-select-list {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.filter-select-list:hover {
+  background: $bright-sky-blue;
+  color: #fff
+}

@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-header">
+        COLLECT CHARGE PAYMENT
+    </div>
+    <div class="card-body">
+        <!-- {{ collectChargeFormGroup.value | json }} -->
+        <form [formGroup]="collectChargeFormGroup" novalidate>
+            <div class="row mb-0">
+                <div class="col col-md-12">
+                    <div class="row mb-0">
+                        <div class="col-md-6 text-indigo">Total Charge</div>
+                        <div class="col-md-6 text-pink">${{collectChargeFormGroup.value.otherCharge | displayDollar}}</div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-md-6 text-indigo">GST@{{(collectChargeFormGroup.value.gstValue*100).toFixed(0)}}%</div>
+                        <div class="col-md-6 text-pink">${{collectChargeFormGroup.value.otherChargeGst | displayDollar}}</div>
+                    </div>
+                    <hr class="mb-1 mt-1">
+                    <div class="row  pt-2" [ngClass]="{'backgorund-soft-yellow': !collectChargeFormGroup.value.payCashOnly}">
+                        <div class="col-md-6 text-indigo">Total Amount</div>
+                        <div class="col-md-6 text-pink">
+                            ${{(collectChargeFormGroup.value.otherCharge + collectChargeFormGroup.value.otherChargeGst)| displayDollar}}</div>
+                    </div>
+                    <div class="row pt-2" [ngClass]="{'backgorund-soft-yellow': collectChargeFormGroup.value.payCashOnly}">
+                        <div class="col-md-6 text-indigo">Adjustment Amount</div>
+                        <div class="col-md-6 text-pink">
+                            <!-- ${{(collectChargeFormGroup.value.otherCharge + collectChargeFormGroup.value.otherChargeGst - collectChargeFormGroup.value.cashRoundAdjustedValue)| displayDollar}} -->
+                            ${{collectChargeFormGroup.value.cashRoundAdjustedValue | displayDollar}}
+
+                            <span class="text-dark-grey-small">(Cash payment only)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

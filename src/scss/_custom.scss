@@ -1,0 +1,1302 @@
+// Here you can add other styles
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~@ng-select/ng-select/themes/default.theme.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+// $fa-font-path: '~font-awesome/fonts';
+// @import '~font-awesome/scss/font-awesome.scss';
+$popover-max-height:30rem;
+
+body {
+  background-color: $white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+label {
+  color: $indigo-100;
+  font-weight: 500;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.drop-zone {
+  border: dotted 3px lightgray;
+}
+
+.file-over {
+  border: dotted 3px red;
+}
+
+.link {
+  color: $indigo-100;
+}
+
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.font-weight-semi-bold {
+  font-weight: 500;
+}
+
+.consultation-history-id {
+  // height: 37.5rem;
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.negative-left {
+  margin-left: -2rem;
+  @extend .w-100;
+}
+
+.icon-bell {
+  cursor: pointer;
+}
+
+// BADGE
+.badge-pink {
+  @extend .font-weight-semi-bold;
+  background-color: $darkish-pink;
+  color: $white;
+  font-size: 90%;
+  min-width: 4rem;
+  text-transform: uppercase;
+}
+
+.badge-pink-transparent {
+  @extend .font-weight-semi-bold;
+  border: 1px solid transparent;
+  border-color: $darkish-pink;
+  color: $darkish-pink;
+  font-size: 90%;
+  min-width: 4rem;
+  text-transform: uppercase;
+}
+
+.badge-yellow {
+  @extend .font-weight-semi-bold;
+  background-color: $yellow;
+  color: $white;
+  font-size: 90%;
+  min-width: 4rem;
+  text-transform: uppercase;
+}
+
+.badge-red {
+  @extend .font-weight-semi-bold;
+  background-color: $red-100;
+  color: $white;
+  font-size: 90%;
+  min-width: 6rem;
+  text-transform: uppercase;
+  background-color: $darkish-pink;
+  color: $white;
+  font-size: 90%; // min-width: 4rem;
+  min-width: 6rem;
+}
+
+.appoint-filter tr {
+  padding-top: 2em;
+}
+
+.compulsory {
+  color: $pink;
+}
+
+.pill {
+  width: auto;
+  height: 30px;
+  line-height: 0;
+  border-radius: 1.5rem;
+  background-color: #0094c9;
+}
+
+// BACKGROUND
+.bg-grey {
+  background-color: $grey-100;
+}
+
+.bg-grey-200 {
+  background-color: $grey-200;
+}
+
+.bg-grey-400 {
+  background-color: $grey-400;
+}
+
+.bg-grey-600 {
+  background-color: $grey-600;
+}
+
+.bg-warm-grey {
+  background-color: $warm-grey;
+}
+
+.form-control[readonly] {
+  background-color: $input-group-addon-bg;
+}
+
+// INPUT
+.input-group-radius-left {
+  border-radius: $input-border-radius 0 0 $input-border-radius;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c2cfd6;
+}
+
+.input-group-radius-right {
+  border-radius: 0 $input-border-radius $input-border-radius 0;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c2cfd6;
+}
+
+//
+header.app-header.navbar {
+  background-color: $greyish-brown;
+  color: white;
+  // height: 40px;
+}
+
+// TEXT
+.text-pink {
+  color: $darkish-pink;
+}
+
+.text-indigo {
+  color: $indigo-100;
+}
+
+.text-dark-grey-small {
+  color: $grey-800;
+  font-size: 12px;
+}
+
+.text-grey-small {
+  color: $grey-500;
+  font-size: 12px;
+}
+
+.text-input-form {
+  font-size: 16px;
+}
+
+.text-queue-lg {
+  font-size: 2.75rem;
+}
+
+.text-queue-xs {
+  font-size: 0.625rem;
+}
+
+// .text-queue-md {
+//  font-size: 1.75rem;
+// }
+.text-queue-s {
+  font-size: 0.8rem;
+}
+
+.text-queue-sm {
+  font-size: 0.875rem;
+}
+
+.font-weight-500 {
+  font-weight: 500;
+}
+
+.plan-details span {
+  font-weight: 500;
+  color: #333333;
+}
+
+.plan-details {
+  @extend .modal-body1;
+  @extend .pl-1;
+  @extend .pt-3;
+  @extend .pb-4;
+  font-weight: normal; // font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+  text-align: left;
+}
+
+.text-header-sm {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.text-header-consultation {
+  @extend .font-weight-semi-bold; // font-size: 1rem;
+  color: $brownish-grey;
+}
+
+.report-header {
+  @extend .font-weight-semi-bold; // font-size: 1rem;
+  color: $warm-grey;
+}
+
+.text-content-consultation {
+  font-size: 14px;
+  color: $grey-800;
+  font-weight: 500;
+}
+
+.text-content-payment {
+  font-size: 14px;
+  font-weight: 500;
+  color: $grey-800;
+}
+
+//modal
+.separator {
+  border: none;
+  border-top: 1px dotted $black;
+  height: 1px;
+}
+
+.modal-header1 {
+  background-color: $grey-400;
+  min-height: 2rem;
+  line-height: 2rem;
+}
+
+.modal-input1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-body-main {
+  border-style: solid;
+  border-width: 1px;
+  border-color: $grey-100;
+  border-radius: 5px;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+}
+
+.thin-bottom-border {
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+  border-bottom-width: 1px;
+}
+
+.modal-body1 {
+  min-height: 8.5rem;
+  line-height: 1.1rem;
+  font-size: 0.7rem;
+}
+
+.sidebar-brand-main {
+  background: theme-color('brand-main');
+}
+
+.nav-item-brand-main {
+  background: theme-color('brand-main');
+}
+
+.plan-remark-headers div {
+  padding: 5px;
+  background-color: $warm-grey;
+  min-height: 2rem; // line-height: 2rem;
+  border-style: solid;
+  border-width: 0;
+  border-right-width: 1px;
+  border-color: #ffffff;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.modal-content {
+  border-radius: 5px;
+}
+
+.modal-sub-header {
+  @extend .pl-2;
+  @extend .py-2;
+  background-color: #f2f4f7;
+  border-bottom-style: solid;
+  border-bottom-color: white;
+  vertical-align: center;
+  // align-items: center;
+  font-size: 0.8rem;
+  color: #4a4a4a;
+  line-height: 1.4;
+}
+
+.modal-sub-header-expanded {
+  @extend .pl-2;
+  @extend .py-2;
+  background-color: lightgray;
+  vertical-align: center;
+  // align-items: center;
+  border-top-style: solid;
+  /* border-top-width: initial; */
+  border-top-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #c1c1c1; // text-align: center;
+  font-size: 0.8rem;
+  color: #4a4a4a;
+  line-height: 1.4;
+}
+
+// NGX-DATATABLE HEADER
+.ngx-datatable.bootstrap {
+  // width: max-content;
+  // min-width: max-content;
+  overflow: hidden;
+}
+
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell {
+  color: white;
+  // background-color: $warm-grey; // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: $warm-grey; // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  // font-size: 16px;
+  text-align: left;
+  line-height: 40px;
+  font-style: bold;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even {
+  background-color: $pale-grey;
+  height: auto;
+}
+
+// To make row item center vertically
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell>div {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+// End of -- To make row item center vertically
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row {
+  border-top-style: none;
+}
+
+.datatable-body-row.datatable-body-row {
+
+  &.datatable-row-even.row-emergency,
+  .datatable-row-odd.row-emergency {
+    border-style: solid;
+    border-color: red;
+  }
+}
+
+.ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
+.ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
+  background: $light-gray;
+}
+
+.ngx-datatable.bootstrap .datatable-footer {
+  background-color: #c6cbd4;
+  color: $grey-800 !important;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager {
+  color: $grey-800 !important;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager a {
+  color: $grey-800 !important;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager a {
+  color: $grey-800 !important;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager .pages.active a {
+  color: white !important;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager a:hover {
+  color: white !important;
+}
+
+ngx-datatable.bootstrap.custom-datatable .datatable-header .datatable-header-cell {
+  height: 48px;
+}
+
+// NGX DATABLE CELL
+.datatable-header-cell.datatable-header-cell.sortable.headerAlignCenter {
+  text-align: center !important;
+}
+
+.datatable-header-cell.datatable-header-cell.sortable.headerAlignRight {
+  text-align: right !important;
+}
+
+.centerContent {
+  // cell class
+  text-align: center;
+  padding-right: 2rem;
+}
+
+//  POPOVER
+.popover {
+  max-width: 30rem;
+  max-height: $popover-max-height;
+  width: auto;
+  z-index: 10;
+}
+
+.popover-body {
+  padding: 0.2rem;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+popover-container {
+  color: red; // overflow-y: auto;
+}
+
+.i-dot {
+  position: relative;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 2;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.profile {
+  height: 30px;
+  width: 30px;
+  background-color: lightblue;
+  color: $greyish-brown;
+  padding: 0.6em;
+  border-radius: 50%;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+//Phone prefix
+.input-group-addon.flagInput {
+  border-color: lightgrey;
+  border-width: thin;
+  border-style: solid;
+  border-right-style: none;
+}
+
+int-phone-prefix .form-control {
+  border-left-style: none;
+}
+
+Patient-Registry Remarks Popover .remarks-popover.show {
+  .popover-arrow.arrow {
+    margin: 0 -0.5rem;
+  }
+
+  .popover-body {
+    padding: 0.5rem;
+  }
+}
+
+// Notification Popover
+.notification-popover.show {
+  width: 12rem;
+
+  .popover-arrow.arrow {
+    margin: 0 -0.5rem;
+  }
+
+  .popover-body {
+    padding: 0.2rem;
+  }
+}
+
+.popover-content.popover-body {
+  overflow-y: auto;
+  max-height: $popover-max-height;
+  max-width: 20em;
+}
+
+// Profile Popover
+.profile-popover.show {
+  width: 18rem;
+
+  .popover-arrow.arrow {
+    margin: 0 -0.5rem;
+  }
+
+  .popover-body {
+    padding: 0.5rem;
+  }
+}
+
+// CARD
+.card-header {
+  background-color: $duck-egg-blue;
+  font-weight: 500; // padding: 0.75rem;
+}
+
+.card-header-grey {
+  background-color: $grey-600;
+  color: $white;
+}
+
+.card-header-red {
+  background-color: #ef899ae8;
+  font-weight: 500;
+  font-size: 15px;
+  height: 42.2px;
+  color: #fff;
+  padding: 10px 0 0 20px;
+  border-width: 0px;
+}
+
+// DATEPICKER
+.datepicker.form-control[readonly] {
+  background-color: transparent;
+}
+
+.ngx-datatable.material.cell-selection .datatable-body-cell.active,
+.ngx-datatable.material.cell-selection .datatable-body-cell.active .datatable-row-group {
+  background-color: #ebebeb !important;
+  color: #fff;
+}
+
+.ngx-datatable.material.single-selection .datatable-body-row.active,
+.ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group,
+.ngx-datatable.material.multi-selection .datatable-body-row.active,
+.ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
+  background-color: #cdecfc;
+  color: #fff;
+}
+
+.ngx-datatable.material.single-selection .datatable-body-row.active:hover,
+.ngx-datatable.material.single-selection .datatable-body-row.active:hover .datatable-row-group,
+.ngx-datatable.material.multi-selection .datatable-body-row.active:hover,
+.ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover,
+.ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
+  background-color: #7feaff;
+  color: #fff;
+}
+
+.panel.card.panel-default {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+// PATIENT LIST NGX-DATATABLE CELL CUSTOM
+// PATIENT LIST --> ROW STATES
+.consultation {
+  &.pre {
+    color: gray;
+  }
+
+  &.consult {
+    color: #f5a623;
+  }
+
+  &.payment {
+    color: #7ed321;
+  }
+
+  &.post {
+    color: #0094c9;
+  }
+
+  &.completed {
+    color: $warm-grey;
+  }
+}
+
+.backgorund-soft-yellow {
+  background-color: #f8e71c33
+}
+
+.row-active {
+  width: max-content;
+}
+
+.row-inactive {
+  color: $warm-grey;
+  width: max-content;
+}
+
+.row-emergency {
+  color: $maroon;
+  border-color: #d84747;
+  border-style: solid;
+  border-top-style: solid;
+  border-width: 1px;
+}
+
+// SEARCHFIELD
+.search-input {
+  border-radius: 25px;
+  border: none;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 3px 11px 0 rgba(189, 159, 189, 0.11);
+  box-shadow: 0 3px 11px 0 rgba(189, 159, 189, 0.11);
+  -webkit-transition: -webkit-transform 250ms ease-in-out;
+  transition: -webkit-transform 250ms ease-in-out;
+  transition: transform 250ms ease-in-out;
+  transition: transform 250ms ease-in-out, -webkit-transform 250ms ease-in-out;
+  padding: 13px 25px 13px 25px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  &::-webkit-input-placeholder {
+    letter-spacing: -0.1px;
+    text-align: left;
+    color: #a8b2b9;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  &:-ms-input-placeholder {
+    letter-spacing: -0.1px;
+    text-align: left;
+    color: #a8b2b9;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  &::placeholder {
+    letter-spacing: -0.1px;
+    text-align: left;
+    color: #a8b2b9;
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
+
+.ng-touched.ng-invalid:not(form) {
+  @extend .is-invalid;
+}
+
+ng-select.custom.ng-touched.ng-invalid div {
+  @extend .is-invalid;
+}
+
+.in-line-icon {
+  position: absolute;
+  top: -0.5rem;
+  right: 0.5rem;
+  width: 2.125rem;
+  line-height: 2.8125rem;
+  text-align: center;
+  color: #a8b2b9;
+  font-size: 0.875rem;
+}
+
+.search-icon {
+  @extend .in-line-icon;
+}
+
+.search-icon-patient-list {
+  padding: 3px 0 0 3px;
+  height: 28px;
+  width: 30px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  background-color: #9a9b9a;
+}
+
+.search-icon-patient-search {
+  color: $warm-grey;
+  font-weight: 200;
+}
+
+.calendar-icon {
+  @extend .in-line-icon;
+  font-size: 16px;
+  line-height: 41px;
+  color: gray;
+}
+
+.filter-icon {
+  color: gray;
+}
+
+.greyish-brown {
+  color: $greyish-brown;
+}
+
+#filter {
+  display: none;
+}
+
+#filter.collapsed {
+  display: inline;
+}
+
+#filter {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+  background-color: #f9f9fa;
+  border: solid 1px #ededed;
+}
+
+// PATIENT ADD
+.addMorePatientInformation {
+  border: dashed 2px #cccacd;
+  height: 80px;
+  width: 100%;
+  color: #e64a79;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  padding-top: 30px;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+.hidden {
+  display: none;
+}
+
+.search-input-flat {
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: solid 1px;
+  border-bottom-color: $warm-grey; // $dark-sky-blue;
+  font-size: 1rem;
+  color: $greyish-brown; // $dark-sky-blue;
+}
+
+.search-input-flat:focus {
+  border-bottom-color: $warm-grey; //$dark-sky-blue;
+  outline: none;
+}
+
+.dropdown-menu-registry {
+  width: 30rem;
+}
+
+.word-wrap-break {
+  word-wrap: break-word;
+}
+
+.top-margin {
+  margin-top: 2em;
+}
+
+.footer-copyright {
+  font-size: 12px;
+}
+
+.width-90 {
+  width: 90%;
+}
+
+.fixed-div-payment {
+  background-color: white;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  margin-top: -0.25em;
+  -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+  margin-left: -2em;
+  padding-left: 2em;
+  height: -webkit-max-content; // top: 0;
+}
+
+.pb-lg-offset {
+  margin-top: 10rem;
+  padding-bottom: 18rem;
+}
+
+.clinicBox {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  border: solid 1px #cccacd;
+}
+
+#hmcImage {
+  width: 50%;
+  height: 50%;
+}
+
+.hmcClinic {
+  font-family: Roboto;
+  text-align: center;
+  color: #4a4a4a; //text-overflow: ellipsis;
+  //overflow: hidden;
+  //white-space: nowrap;
+}
+
+.header1 {
+  font-size: 48px;
+}
+
+.modal-x-lg {
+  max-width: 90%
+}
+
+bs-modal-backdrop.modal-backdrop.show app-root {
+  -webkit-filter: blur(24px);
+  -moz-filter: blur(24px);
+  -o-filter: blur(24px);
+  -ms-filter: blur(24px);
+  filter: blur(24px);
+}
+
+.consultation-history {
+  max-height: 45rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.borderless-tab {
+  & .nav-item {
+    @extend .font-weight-semi-bold;
+  }
+
+  & .nav-item .active {
+    color: $cerulean;
+  }
+
+  & .tab-content {
+    border-top: 1px solid #a4b7c1;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+
+  & .nav-tabs {
+    padding-left: 5px !important;
+  }
+}
+
+.patient-info-label {
+  &__title {
+    font-size: 12px;
+    color: $warm-grey;
+    padding-top: 10px;
+  }
+
+  &__description {
+    @extend .font-weight-semi-bold;
+    font-size: 12px;
+    color: $greyish-brown;
+    line-height: 1.3;
+  }
+}
+
+.form-control.patient-info-label__description {
+  padding-top: 3px !important;
+}
+
+.form-control.patient-info-label__description.address2 {
+  padding-top: 0px !important;
+}
+
+.cke_editable {
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.cke_consultation {
+  .cke_editable {
+    p {
+      line-height: 1.0
+    }
+  }
+}
+
+.checkmarkUpdate {
+  width: 1rem;
+}
+
+.policyHolderExpired {
+  color: red;
+}
+
+// .case-card-header {
+//     background-color: white;
+//     padding: 10px;
+// }
+
+// .case-card-search {
+//     background-color: white;
+//     padding: 2px;
+//     margin-top: 10px;
+//     margin-left: 4px;
+//     margin-right: 4px;
+//     padding-bottom: 10px;
+// }
+
+.case-hr {
+  margin-top: 0;
+}
+
+.case-background {
+  background-color: #ececec;
+  min-height: 100vh;
+}
+
+.negative {
+  color: red;
+}
+
+.app-modal-window .modal-dialog {
+  width: 500px;
+}
+
+.back-btn {
+  background: #f5f7fa;
+  color: #333;
+  padding: 7px 10px 7px 0;
+  border: 1px solid #88888861;
+  text-decoration: none !important;
+  display: block;
+  margin-top: 8px;
+  // width: 55%;
+  font-size: 13px;
+  text-align: center;
+
+  i {
+    padding-right: 5px;
+  }
+
+  :hover {
+    background: #ddd;
+  }
+}
+
+.total-due-green {
+  background: #15a080;
+}
+
+.total-due-red {
+  background: #ef899ae8;
+}
+
+.total-due {
+  color: #fff;
+  padding: 10px 15px;
+  width: 200px;
+  margin-left: auto;
+  text-align: center;
+  height: 100%;
+  font-size: 15px;
+
+  label {
+    margin-top: 5px;
+    color: #fff;
+  }
+
+  span {
+    padding-left: 10px;
+    margin-top: 7px;
+  }
+}
+
+.section-title {
+  color: #333;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 38px;
+  display: inline-block;
+}
+
+
+/*Default pannel*/
+
+.default-panel {
+  background: #fff;
+  margin-bottom: 30px;
+  box-shadow: 0px 0px 20px #3333333d;
+  padding-bottom: 10px;
+
+  .default-panel-head {
+    background: #e3f2fa;
+    padding: 10px;
+  }
+
+  .default-panel-sub-head {
+    background: #fff;
+    padding: 10px;
+  }
+
+  .dropdown {
+    float: right;
+
+    .btn-print {
+      margin: 0 10px 0 0;
+      color: #fff !important;
+      background-color: #9b9b9b;
+    }
+
+    .btn-invoice {
+      color: #fff !important;
+      background-color: #555194;
+    }
+  }
+}
+
+
+/*Data table*/
+
+.data-table {
+  background: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 0;
+
+  thead tr {
+    background: #9b9b9b;
+
+    th {
+      border: none;
+      color: #fff;
+      font-weight: 400;
+      padding: 10px 5px;
+    }
+  }
+
+  tbody tr td {
+    padding: 0 3px;
+    padding-top: .6em;
+    padding-bottom: .6em;
+  }
+}
+
+.data-div {
+  background: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 0;
+
+  .header {
+    div {
+      background: #9b9b9b;
+      border: none;
+      color: #fff;
+      font-weight: 400;
+      padding: 10px 5px;
+    }
+  }
+
+  .body {
+    div {
+      border-top: 0.1px solid #a4b7c1;
+      padding: 0 3px;
+      padding-top: .6em;
+      padding-bottom: .6em;
+    }
+  }
+}
+
+
+/*Visits section (Left Column)*/
+
+.visits-head {
+  background: #e3f2fa;
+  padding: 5px 5px 0px 5px;
+
+  label {
+    font-weight: 500;
+    line-height: 34px;
+  }
+
+  a.btn {
+    color: #fff;
+    float: right;
+  }
+
+  a.btn:hover {
+    color: #fff;
+    float: right;
+  }
+}
+
+.visits-data td {
+  padding-left: 10px;
+}
+
+
+/*Diagnosis/Dispensed Section*/
+
+.diagnosis-dispensed-section {
+  background: #fff;
+  font-size: 14px;
+
+  .section-title {
+    padding-left: 15px;
+  }
+
+  thead th {
+    font-weight: 500;
+    padding: 10px 10px 5px 10px;
+  }
+}
+
+
+/*Charges Section*/
+
+.default-panel-body {
+  padding: 0px 10px 0px 10px;
+
+  .align-right {
+    text-align: right;
+  }
+
+  .align-center {
+    text-align: center;
+  }
+
+  table {
+    border-collapse: collapse;
+    empty-cells: show;
+  }
+
+  td {
+    position: relative;
+  }
+
+  tr.strikeout td:before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 1px solid #777;
+    width: 100%;
+  }
+
+  tr.strikeout td:after {
+    content: "\00B7";
+    font-size: 1px;
+  }
+
+  tr.disable {
+    background: #e3f2fa;
+  }
+}
+
+.default-case-footer {
+  background: #f5f7fa;
+  padding: 0px 10px 0px 10px;
+
+  .btn-save {
+    color: #fff !important;
+    float: right;
+    margin: 10px 0;
+  }
+
+  .btn-close {
+    float: right;
+    color: #fff !important;
+    margin: 10px 10px 10px 0;
+  }
+}
+
+.default-panel-info table {
+  font-size: 14px;
+
+  th,
+  td {
+    padding: 0;
+  }
+
+  th {
+    color: #39add7;
+    font-weight: 400;
+  }
+}
+
+
+/*Charges Breakdown section*/
+
+.sales-ref {
+  float: right;
+
+  input {
+    padding-left: 7px;
+    margin-left: 7px;
+  }
+}
+
+.all-border {
+  border: 1px solid #777;
+}
+
+.left-border {
+  border-left: 1px solid #777 !important;
+}
+
+
+/*Packages*/
+
+.default-panel-head {
+  i.toggle-ico {
+    float: right;
+  }
+}
+
+.btn-cancel {
+  color: black !important;
+  background-color: #9b9b9b !important;
+  border-radius: 0;
+}
+
+nav {
+  // box-shadow: 0px 0px 13px #f4f4f4;
+  margin-bottom: 20px;
+
+  .container-fluid>.row {
+    background: #fff;
+    box-shadow: 0px 0px 13px #33333329;
+    height: 52px;
+
+    .parameter {
+      font-size: 13px;
+
+      label {
+        color: #a4b7c1;
+        margin-bottom: 0;
+        margin-top: 7px;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.case-content-wraper {
+  background: #f4f4f4;
+}

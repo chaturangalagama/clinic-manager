@@ -1,0 +1,88 @@
+<form [formGroup]="alertFormGroup" novalidate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{title}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="onBtnExit(alertFormGroup)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <alert></alert>
+        <div class="row bg-grey-400 pt-2 pb-2 ml-0 mr-0 mb-2">
+            <div class="col-md-3">
+                Allergy Type
+            </div>
+            <div class="col-md-3">
+                Allergy To
+            </div>
+            <div class="col-md-3">
+                Remarks
+            </div>
+            <div class="col-md-3">
+                Date Added
+            </div>
+        </div>
+        <form *ngFor="let form of alertFormGroup.get('alertArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+            <div class="row pt-2 pb-2 ml-0 mr-0 mb-2">
+                <div class="col-md-3">
+                    <ng-select class="p-0 form-control form-control-sm custom-select" [items]="form.value.types.value" bindLabel="label" bindValue="value" placeholder="Select Type" formControlName="type"  [clearable]=false>
+                    </ng-select>
+                </div>
+                <div class="col-md-3">
+                    <div [ngSwitch]="form.value.type">
+                        <ng-select *ngSwitchCase="'NAME_CONTAINING'" class="p-0 form-control form-control-sm custom-select" [items]="this.drugList" placeholder="Type or search for drug name" formControlName="name" [clearable]=false notFoundMsg="Enter to add new name.." [addTag]="true"
+                            bindLabel="name" bindValue="name">
+                        </ng-select>
+                        <ng-select *ngSwitchCase="'NAME_STARTING_WITH'" class="p-0 form-control form-control-sm custom-select" [items]="this.drugList" placeholder="Type or search for drug name" formControlName="name" [clearable]=false notFoundMsg="Enter to add new name.." [addTag]="true"
+                            bindLabel="name" bindValue="name">
+                        </ng-select>
+                        <ng-select *ngSwitchCase="'ALLERGY_GROUP'" class="p-0 form-control form-control-sm custom-select" [items]="this.allergyGroupList" placeholder="Type or search for drug group" formControlName="name" [clearable]=false notFoundMsg="Enter to add new name.."
+                            [addTag]="true" bindLabel="groupCode" bindValue="groupCode" (change)="onSelect($event)">
+                        </ng-select>
+                        <input *ngSwitchCase="'FOOD'" class="form-control form-control-sm" formControlName="name" value="" />
+                        <input *ngSwitchCase="'OTHER'" class="form-control form-control-sm" formControlName="name" value="" />
+                        <ng-select *ngSwitchDefault class="p-0 form-control form-control-sm custom-select" [items]="this.drugList" placeholder="Type or search for drug name" formControlName="name" [clearable]=false notFoundMsg="Enter to add new name.." bindLabel="name" bindValue="name"
+                            (change)="onSelect($event)">
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control form-control-sm" formControlName="remarks" />
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input class="form-control form-control-sm" formControlName="addedDate" readonly/>
+                        </div>
+                        <div class="col-md-2 float-right" dropdown>
+                            <button type="button " class="btn menu-button remarks p-1" [popover]="popTemplate2 " placement="top " [outsideClick]="true ">
+                               <i class="icon-ellipsis-vert "></i>
+                           </button>
+                            <ng-template #popTemplate2>
+                                <div class="row ">
+                                    <button class="btn btn-link-grey p-1" (click)="onDelete(form, i)">
+                                       <i class="icon-trash "></i>
+                                   </button>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <div class="row pt-2">
+            <div class="col-md-12">
+                <div class="btn-toolbar float-right" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-medium btn-outline-pink" (click)="onBtnAdd(alertFormGroup)" [disabled]="!alertFormGroup.valid">
+              + Add Another Allergy
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-pink" (click)="onBtnSave(alertFormGroup)" [disabled]="!alertFormGroup.valid">Save</button>
+    </div>
+</form>

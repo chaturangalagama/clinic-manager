@@ -1,0 +1,88 @@
+<div class="card" style="height:90vh;padding-bottom:90px;">
+    <!-- <div class="card"> -->
+
+    <div class="card-header">
+        CHARGES
+    </div>
+    <!-- {{ dispatchItemEntities.value | json}} -->
+    <div class="p-1" style="display: -webkit-inline-box;">
+        <div class="col-11">
+            <!-- <input class="form-control form-control-sm" type="text" placeholder="Advanced Search... "/> -->
+            <ng-select name="drug-code" class='p-0 form-control form-control-sm  custom-select custom-select-medium-width' [items]="items" bindLabel='item.code' bindValue='item.id' (change)="onDrugSelect($event)" [addTag]="false" [virtualScroll]="true" [typeahead]="codesTypeahead"
+                [clearable]=false placeholder="Type to Search For New Item..." [formControl]="searchKey">
+                <ng-template ng-header-tmp>
+                    <div class="row">
+                        <div class="col-md-4 font-weight-semi-bold">Code</div>
+                        <div class="col-md-6 font-weight-semi-bold">Name</div>
+                        <!-- <div class="col-md-2 font-weight-semi-bold">Brand</div> -->
+                    </div>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item.item" let-index="index" let-search="searchTerm">
+                    <div class="row">
+                        <div class="col-md-4">{{item.code}}</div>
+                        <div class="col-md-6">{{item.name}}</div>
+                        <!-- <div class="col-md-2">{{item.brand}}</div> -->
+                    </div>
+                </ng-template>
+            </ng-select>
+        </div>
+        <div class="col-1 pl-0">
+            <button class="btn btn-sm btn-outline-gray-200">
+                <i class="icon-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="sub-heading-grey mx-0 cursor-pointer" (click)="onSearchClicked()">
+        <div class="btn-link">Advanced Search</div>
+    </div>
+    <div class="card-header bg-white">
+
+        <div class="row">
+            <div class="col-md-4 text-small  text-indigo">Charge</div>
+            <!-- charge item : {{chargeItemDescription.qty }} -->
+            <div class="col-md-8 text-brand-secondary font-weight-bold">{{chargeItemDescription.charge}}
+                <span *ngIf="chargeItemDescription.charge">/</span> {{chargeItemDescription.qty}} {{chargeItemDescription.uom}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4  text-small text-indigo">SIG & Indication</div>
+            <div class="col-md-8 text-brand-secondary">{{chargeItemDescription.dosageInstruction}} {{chargeItemDescription.sig}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4  text-small text-indigo ">Cautionary</div>
+            <div class="col-md-8text-brand-secondary">{{chargeItemDescription.cautionary}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4  text-small text-indigo ">Remarks</div>
+            <div class="col-md-8 text-brand-secondary">{{chargeItemDescription.remarks}}</div>
+        </div>
+
+    </div>
+    <div class="mx-0" style="display: -webkit-inline-box;">
+        <div class="col-6 p-1 pl-4 bg-warm-grey text-white">
+            Item Code
+        </div>
+        <div class="col-6 p-1 pl-4 bg-warm-grey text-white">
+            Price ($)
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0" style="
+    overflow: scroll;
+    padding-bottom:50px;">
+        <app-prescription-item *ngFor="let item of dispatchItemEntities.controls; let i=index" [index]="i" [prescriptionItem]="item" (onTopChargeItemDescriptionChanged)="onTopChargeItemDescriptionChanged($event)" (onDelete)="onDelete($event)" (updatePrice)="updateOverallPrice($event)"></app-prescription-item>
+        <br>
+        <br>
+        <br>
+        <div class="row p-2 mx-0" style="
+            background-color:#e3f2fa;
+            position: fixed;
+            bottom: 35px;
+            width: 100%;">
+            <div class="col-2">
+                Total Bill Amount
+            </div>
+            <div class="col-1">
+                ${{ totalPrice.toFixed(2) }}
+            </div>
+        </div>
+    </div>
+</div>

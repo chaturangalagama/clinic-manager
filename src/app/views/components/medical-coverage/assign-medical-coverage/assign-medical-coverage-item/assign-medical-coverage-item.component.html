@@ -1,0 +1,159 @@
+<div [class]="getSubHeaderClass()" [formGroup]="medicalCoverage">
+    <!-- <pre>{{medicalCoverage.value|json}}</pre> -->
+    <!-- <code>{{medicalCoverage.value.isNew|json}}</code> -->
+    <div class="col-2 pb-2">
+        <span *ngIf="medicalCoverage.value.isNew">
+      <ng-select class="form-control form-control-sm custom-select custom-select-extra-width" [items]="medicalCoverageSelect" bindLabel='name'
+        bindValue='id' [addTag]="false" [loading]="loading" [virtualScroll]="true" [typeahead]="codesTypeahead" (change)="onCoverageSelected($event)"
+        formControlName='medicalCoverageId'>
+      </ng-select>
+    </span>
+        <span *ngIf="!medicalCoverage.value.isNew">{{ medicalCoverage.value.medicalCoverageName}}</span>
+        <!-- <input class="form-control form-control-sm " *ngIf="!medicalCoverage.value.isNew" type="text" value="medicalCoverageName" formControlName="medicalCoverageName" readonly /> -->
+    </div>
+
+    <div class="col-2 pb-2">
+        <span *ngIf="medicalCoverage.value.isNew">
+      <ng-select class="form-control form-control-sm custom-select custom-select-extra-width" [items]="planSelect" bindLabel='name'
+        bindValue='id' (change)="onPlanSelected($event)" formControlName='planId'></ng-select>
+    </span>
+        <span *ngIf="!medicalCoverage.value.isNew">{{ medicalCoverage.value.planSelected.name}}</span>
+    </div>
+    <div class="col-1 d-flex justify-content-between pb-2">
+        <span *ngIf="medicalCoverage.value.isNew">
+      <input class="form-control form-control-sm" type="text" (keyup)="onEmployeeIdChanged()" formControlName='patientCoverageId'
+      />
+    </span>
+        <span *ngIf="!medicalCoverage.value.isNew">{{ medicalCoverage.value.patientCoverageId}}</span>
+    </div>
+    <div class="col-2 pb-2">
+        <span *ngIf="medicalCoverage.value.isNew">
+      <input class="form-control form-control-sm datepicker" placeholder="DD-MM-YYYY" #dp="bsDatepicker" bsDatepicker formControlName="startDate"
+        values="startDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+            'theme-blue'}">
+    </span>
+        <span *ngIf="!medicalCoverage.value.isNew">{{ medicalCoverage.value.startDate}}</span>
+    </div>
+    <div class="col-2 pb-2">
+        <span *ngIf="medicalCoverage.value.isNew">
+      <input class="form-control form-control-sm datepicker" placeholder="DD-MM-YYYY" #dp="bsDatepicker" bsDatepicker [minDate]="minDate"
+        formControlName="endDate" values="endDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+            'theme-blue'}">
+    </span>
+        <span *ngIf="!medicalCoverage.value.isNew">{{ medicalCoverage.value.endDate}}</span>
+    </div>
+    <div class="col-1 pb-2">
+        <span *ngIf="medicalCoverage.value.isNew">
+      <input class="form-control form-control-sm" type="text" formControlName='costCenter' />
+    </span>
+        <span *ngIf="!medicalCoverage.value.isNew">{{ medicalCoverage.value.costCenter}}</span>
+    </div>
+    <div class="col-1 d-flex justify-content-between pb-2">
+        <span *ngIf="medicalCoverage.value.isNew">
+      <input class="form-control form-control-sm" type="text" (keyup)="onEmployeeIdChanged()" formControlName='remarks' />
+    </span>
+        <span *ngIf="!medicalCoverage.value.isNew">{{ medicalCoverage.value.remarks}}</span>
+    </div>
+    <div class="col-1 d-flex justify-content-between">
+        <button type="button" class="btn menu-button remarks p-0" (click)="onShowExtraClicked()">
+      <i [ngClass]="!isShowExtra() ? 'icon-down-open-big':'icon-up-open-big'"></i>
+    </button>
+        <button type="button" class="btn menu-button remarks p-1" [popover]="popTemplate2 " placement="top " [outsideClick]="true ">
+      <i class="icon-ellipsis-vert "></i>
+    </button>
+        <ng-template #popTemplate2>
+            <div class="row">
+                <button class="btn btn-link-grey p-1" (click)="onbtnDeleteClicked() ">
+          <i class="icon-trash"></i>
+        </button>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<div *ngIf="showExtra">
+    <div class="row modal-body1 thin-bottom-border align-middle ">
+        <div class="col-4 ">
+            <!-- <div class="text-queue-s text-indigo mb-1 pl-1 ">Plan Details</div> -->
+            <!-- <div class="plan-details pl-1 "> -->
+            <!-- <div class="text-queue-s text-indigo mb-1 pl-1">Plan Details</div> -->
+            <div class="plan-details pl-1 pt-2 ">
+                <div class="text-indigo">Plan Details</div>
+                <span>Cap Per Visit:</span> {{medicalCoverage.value.planSelected.capPerVisit.limit | currency:'SGD':false}}
+                <br>
+                <span>Cap Per Month:</span> {{medicalCoverage.value.planSelected.capPerMonth.limit | currency:'SGD':false}}
+                <br>
+                <span>Cap Per Week:</span> {{medicalCoverage.value.planSelected.capPerWeek.limit | currency:'SGD':false}}
+                <br>
+                <br>
+                <span>Remarks:</span> {{medicalCoverage.value.remarks}}
+                <br>
+            </div>
+        </div>
+        <div class="col-4 ">
+            <!-- <div class="text-queue-s text-indigo mb-1 pl-1">Plan Details</div> -->
+            <div class="plan-details pl-1 pt-2">
+                <br>
+                <span>Cap Per Year:</span> {{medicalCoverage.value.planSelected.capPerYear.limit | currency:'SGD':false}}
+                <br>
+                <span>Cap Per Lifetime:</span> {{medicalCoverage.value.planSelected.capPerLifeTime.limit | currency:'SGD':false}}
+                <br>
+                <div *ngIf="medicalCoverage.value.planSelected.copayment.value > 0 ">
+                    <span>Co-Payment:</span> {{medicalCoverage.value.planSelected.copayment.value > 0 ? "Yes " : "No "}}
+                    <div *ngIf="medicalCoverage.value.planSelected.copayment.paymentType=='DOLLAR'">
+                        <span>Co-Payment Amount: </span> {{medicalCoverage.value.planSelected.copayment.value | currency:'SGD':false}}
+                    </div>
+                    <div *ngIf="medicalCoverage.value.planSelected.copayment.paymentType=='PERCENTAGE'">
+                        <span>Co-Payment Percentage: </span> {{medicalCoverage.value.planSelected.copayment.value}}%
+                    </div>
+                </div>
+                <br>
+                <span>Start Date:</span> {{medicalCoverage.value.startDate}}
+                <br>
+                <span>End Date:</span> {{medicalCoverage.value.endDate}}
+                <br>
+            </div>
+        </div>
+        <div class="col-4">
+            <!-- <div class="text-queue-s text-indigo mb-1 pl-1">Company Details</div> -->
+            <!-- <ng-container *ngIf="medicalCoverage.value.coverageSelected.contacts.length>0"> -->
+            <ng-container *ngIf="hasContact()">
+                <div class="plan-details pl-1 pt-2 ">
+                    <div class="text-indigo">Company Details</div>
+                    <span>Contact Person:</span> {{ medicalCoverage.value.isNew ? medicalCoverage.value.coverageSelected.contacts[0].name : medicalCoverage.value.contacts[0].name }}
+                    <br>
+                    <span>Address:</span> {{ medicalCoverage.value.isNew ? medicalCoverage.value.coverageSelected.address.address + ' ' + medicalCoverage.value.coverageSelected.address.postalCode : medicalCoverage.value.address.address + ' ' + medicalCoverage.value.address.postalCode
+                    }}
+                    <br>
+                    <span>Email:</span> {{ medicalCoverage.value.isNew ? medicalCoverage.value.coverageSelected.contacts[0].email : medicalCoverage.value.contacts[0].email }}
+                    <br>
+                    <span>Telephone:</span> {{ medicalCoverage.value.isNew ? medicalCoverage.value.coverageSelected.contacts[0].directNumber : medicalCoverage.value.contacts[0].directNumber }}
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="row modal-body1 ">
+        <div class="col-4">
+            <!-- <div class="text-queue-s text-indigo mb-1 pl-1">Clinic Remarks</div> -->
+            <div class="plan-details pl-1 pt-2 ">
+                <div class="text-indigo">Clinic Remarks</div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="plan-details pl-1 pt-2 ">
+                <div class="text-indigo">Registration Remarks</div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="plan-details pl-1 pt-2 ">
+                <div class="text-indigo">Payment Remarks</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row modal-body1 pl-1 ">
+        <div class="col-4 ">{{medicalCoverage.value.planSelected.clinicRemarks}}</div>
+        <div class="col-4 ">{{medicalCoverage.value.planSelected.registrationRemarks}}</div>
+        <div class="col-4 ">{{medicalCoverage.value.planSelected.paymentRemarks}}</div>
+    </div>
+</div>

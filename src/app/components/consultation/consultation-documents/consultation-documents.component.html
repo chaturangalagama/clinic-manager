@@ -1,0 +1,20 @@
+<!-- TOP SECTION -->
+<form novalidate [formGroup]='consultationDocument'>
+
+    <!-- Version 2 -->
+    <div class="card mb-1 mt-1">
+        <div class="card-header card-header-transparent d-flex justify-content-between">
+            <span class='font-weight-semi-bold'>DOCUMENTS</span>
+        </div>
+        <div *ngFor="let row of flatDocuments; let i=index;">
+            <span *ngIf="i!==0"><hr class="m-0"></span>
+            <div class="p-2">
+                <i class="icon-clipboard-1 cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
+                <span [title]="row.fileName" class='link' (click)="onDownloadNewDocument(row.fileId,row.fileName, row.listType, row.downloadId)" *ngxPermissionsOnly="['ROLE_FILE_DOWNLOAD']">{{ row.fileName }}</span>
+            </div>
+        </div>
+        <div class="text-grey  p-2" *ngIf="!flatDocuments || flatDocuments.length===0">
+            <i>No Documents Found.</i>
+        </div>
+    </div>
+</form>

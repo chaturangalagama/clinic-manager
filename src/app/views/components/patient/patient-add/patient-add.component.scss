@@ -1,0 +1,32 @@
+label input[type='radio'] {
+    display: none;
+}
+
+label input[type='radio'] ~ i.fa.fa-circle-o {
+    color: #c8c8c8;
+    display: inline;
+}
+label input[type='radio'] ~ i.fa.fa-dot-circle-o {
+    display: none;
+}
+label input[type='radio']:checked ~ i.fa.fa-circle-o {
+    display: none;
+}
+label input[type='radio']:checked ~ i.fa.fa-dot-circle-o {
+    color: #7aa3cc;
+    display: inline;
+}
+label:hover input[type='radio'] ~ i.fa {
+    color: #7aa3cc;
+}
+
+// fieldset {
+//     display: block;
+//     margin-left: 2px;
+//     margin-right: 2px;
+//     padding-top: 0.35em;
+//     padding-bottom: 0.625em;
+//     padding-left: 0.75em;
+//     padding-right: 0.75em;
+//     border: 2px groove;
+// }

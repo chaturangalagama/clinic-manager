@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+</div>
+<div class="container confirmation" style="overflow-x: hidden">
+    <tabset [class.nav-hidden]="hideTabs()" type="pills" #confirmationTabs>
+        <tab heading="Add to the Registry" (select)="onSelect($event)">
+            <div class="container-fluid h-100">
+                <div class="row p-2 pb-3">
+                    <div class="col-12">
+                        <div class="card" [hidden]="hideConsultationInfo()">
+                            <div class="card-header">
+                                Patient Information
+                            </div>
+                            <div class="card-body">
+                                <alert></alert>
+                                <app-patient-add-consultation [hidden]="hideConsultationInfo()" [consultationInfoFormGroup]="consultationFormGroup" [showPrioritySelect]="true"></app-patient-add-consultation>
+                            </div>
+                        </div>
+                        <app-medical-coverage [hasUpdatePriority]='true' [patientCoverages]="medicalCoverageSummaryFormGroup.get('patientCoverages')" [selectedCoverages]="selectedCoverages" *ngxPermissionsOnly="['ROLE_MEDICAL_COVERAGE_MANAGEMENT']"></app-medical-coverage>
+                        <div class="btn-toolbar float-right" role="toolbar">
+                            <div class="btn-group" role="group">
+                                <button [hidden]="type ==='DISPLAY_MEDICAL_COVERAGE'" class="btn btn-large btn-brand-secondary mr-2" (click)="hideModal()">Back</button>
+                                <button [hidden]="type ==='DISPLAY_MEDICAL_COVERAGE'" class="btn btn-large btn-brand-primary" (click)="onBtnSaveClicked($event)" [disabled]="disableConfirmBtn()">Confirm
+                                    & Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Schedule Appointment" (select)="onSelect($event)">
+            <div class="container-fluid h-100">
+                <div class="row p-2 pb-3">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Schedule Appointment
+                            </div>
+                            <div class="card-body">
+                                <alert></alert>
+                                <app-add-appointment></app-add-appointment>
+                                <app-patient-add-consultation [hidden]="hideConsultationInfo()" [consultationInfoFormGroup]="consultationFormGroup"></app-patient-add-consultation>
+
+                            </div>
+
+                        </div>
+                        <div class="btn-toolbar float-right" role="toolbar">
+                            <div class="btn-group" role="group">
+                                <button [hidden]="type ==='DISPLAY_MEDICAL_COVERAGE'" class="btn btn-large btn-brand-secondary mr-2" (click)="hideModal()">Cancel</button>
+                                <button [hidden]="type ==='DISPLAY_MEDICAL_COVERAGE'" class="btn btn-large btn-brand-primary" (click)="onBtnSaveClicked($event)" [disabled]="!consultationFormGroup.valid">Save
+                                    Appointment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+</div>
+
+
+
+
+<!-- <code>{{medicalCoverageSummaryFormGroup.value|json}}</code> -->

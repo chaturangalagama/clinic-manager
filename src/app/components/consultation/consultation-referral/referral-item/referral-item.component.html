@@ -1,0 +1,83 @@
+<div [formGroup]='referralItem'>
+    <!-- {{ referralItem.value | json }} -->
+    <div class="row mb-2">
+        <div class="col-md-4">
+            <label class="mb-0">Referral Type</label>
+            <ng-select class="p-0 form-control form-control-sm  custom-select" [items]="referralTypes" [clearable]=false [virtualScroll]="true" [(ngModel)]="referralType" bindValue='value' [ngModelOptions]="{standalone: true}" (change)="onReferralTypeSelected($event)">
+            </ng-select>
+            <!-- <errors [control]="referralItem.get('practice')"></errors> -->
+        </div>
+        <div class="col-md-4">
+            <label class="mb-0">Clinic</label>
+            <ng-select class="p-0 form-control form-control-sm  custom-select" [items]="clinics" [virtualScroll]="true" bindLabel='clinicCode' bindValue='clinicId' placeholder="Select Clinic" formControlName="clinicId" (change)="onClinicSelected($event)">
+            </ng-select>
+            <errors [control]="referralItem.get('clinicId')"></errors>
+        </div>
+        <div class="col-md-3">
+            <label class="mb-0">Attending Doctor</label>
+            <ng-select class="p-0 form-control form-control-sm  custom-select" [items]="doctors" [virtualScroll]="true" bindLabel='name' bindValue='id' placeholder="Select Attending Doctor" formControlName="doctorId" (change)="onDoctorSelected($event)">
+            </ng-select>
+            <errors [control]="referralItem.get('doctorId')"></errors>
+        </div>
+        <div class="col-md-1 pt-2 align-self-center">
+            <div class="row no-gutters">
+                <label class="mb-0 "></label>
+                <i class="icon-ellipsis-vert" [popover]="popTemplate2" placement="top" [outsideClick]="true"></i>
+            </div>
+        </div>
+        <div [hidden]=true>
+            <label class="mb-0 ">Appt Date</label>
+            <input type="text " class="form-control form-control-sm datepicker " #dp="bsDatepicker" bsDatepicker [bsConfig]="{containerClass:
+        'theme-blue', dateInputFormat: 'DD-MM-YYYY'}" formControlName="appointmentDateTime">
+        </div>
+        <ng-template #popTemplate2>
+            <div class="row">
+                <button class="btn btn-link-grey p-1 " (click)="onbtnDeleteClicked()">
+                  <i class="icon-trash"></i>
+                </button>
+            </div>
+        </ng-template>
+    </div>
+    <div class="row align-items-center mb-2 ">
+        <div class="col-md-3">
+            <label class="mb-0">Speciality</label>
+            <ng-select class="p-0 form-control form-control-sm custom-select custom-select-extra-medium-width" [items]="practices" [virtualScroll]="true" bindLabel='label' bindValue='practice' placeholder="Select Speciality" formControlName="practice" (change)="onPracticeSelected($event)">
+            </ng-select>
+            <errors [control]="referralItem.get('practice')"></errors>
+        </div>
+        <div class="col-md-9" [formGroup]="referralItem.get('externalReferralDetails')">
+            <!-- {{ referralItem.get('externalReferralDetails').value | json }} -->
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="mb-0 ">Doctor's Name</label>
+                    <input type="text" class="form-control form-control-sm" formControlName="doctorName">
+                    <errors [control]="referralItem.get('externalReferralDetails').get('doctorName')"></errors>
+                </div>
+                <div class="col-md-6">
+                    <label class="mb-0 ">Address</label>
+                    <input type="text " class="form-control form-control-sm" formControlName="address">
+                    <errors [control]="referralItem.get('externalReferralDetails').get('address')"></errors>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-12 ">
+            <!-- <label class="mb-0 ">Remarks</label> -->
+            <label class="mb-0 ">Dear Dr {{referralItem.get('externalReferralDetails').get('doctorName')?.value}}</label>
+            <!-- <textarea cols="10 " rows="5 " class="form-control fomr-control-sm " formControlName="memo"></textarea> -->
+            <ckeditor formControlName="memo" debounce="500" [config]="ckeConfig" class="cke_consultation">
+                <p>Hello
+                    <strong>world</strong>
+                </p>
+            </ckeditor>
+        </div>
+        <errors [control]="referralItem.get('memo')"></errors>
+    </div>
+    <div class="row ">
+        <div class="col-md-12 ">
+            <span class="float-right"><label class="mb-0 ">Kind Regards</label></span>
+        </div>
+    </div>
+</div>
+<hr>

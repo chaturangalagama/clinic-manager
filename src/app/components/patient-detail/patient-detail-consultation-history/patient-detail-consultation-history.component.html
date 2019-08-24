@@ -1,0 +1,55 @@
+<form [formGroup]="consultationFormGroup" novalidate>
+    <div class="card">
+        <div class="card-header">
+            CONSULTATION HISTORY
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <label>Search</label>
+                </div>
+                <div class="col-md-2">
+                    <label>Date From</label>
+                </div>
+                <div class="col-md-2">
+                    <label>Date To</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <input class="form-control form-control-sm" formControlName="search" />
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <input class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker formControlName="dateFrom">
+                        <div class="input-group-append">
+                            <span class="input-group-text glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <input class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker formControlName="dateTo">
+                        <div class="input-group-append">
+                            <span class="input-group-text glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-md-1">
+                    <label>Date</label>
+                </div>
+                <div class="col-md-4">
+                    <label>Diagnosis</label>
+                </div>
+                <div class="col-md-5">
+                    <label>Treatment Notes / Documents</label>
+                </div>
+                <div class="col-md-2">
+                    <label>Doctor</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,24 @@
+<div class="container">
+    <!-- <code>{{ loginFormGroup.value | json }} </code> -->
+    <div class="form-content">
+        <form (ngSubmit)="onLoginSubmit()" #loginForm="ngForm" class="form-signin card  rectangle-2 col-md-6">
+            <div class="card-body" [formGroup]="loginFormGroup">
+                <div class="div-header">
+                    <label class="form-signin-heading">Login</label>
+                    <img src="../../../assets/img/logo.png" class="img-logo rounded float-right" alt="logo">
+                </div>
+                <alert></alert>
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input class="form-control form-control-sm" formControlName="username" />
+                </div>
+                <div class="form-group ">
+                    <label>Password</label>
+                    <input class="form-control form-control-sm" type="password" formControlName="password" />
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginFormGroup.valid">Sign in</button>
+            </div>
+        </form>
+
+    </div>
+</div>

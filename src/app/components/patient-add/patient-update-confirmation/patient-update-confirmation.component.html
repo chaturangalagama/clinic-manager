@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+  </div>
+</div>
+<div class="container-fluid h-100">
+  <div class="row p-2 pb-3">
+    <div class="col-12">
+      <app-patient-add-medical-coverage-summary [selectedPlans]="selectedPlans"></app-patient-add-medical-coverage-summary>
+      <div class="btn-toolbar float-right" role="toolbar">
+        <div class="btn-group" role="group">
+          <button class="btn btn-large btn-pink" (click)="onBtnSaveClicked($event)">Confirm & Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

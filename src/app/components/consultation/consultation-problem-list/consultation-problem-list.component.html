@@ -1,0 +1,72 @@
+<!-- TOP SECTION -->
+<form class="h-100" novalidate [formGroup]="patientNotesForm">
+    <!-- Search Section -->
+    <div class="card h-100">
+        <div class="card-header">
+            PROBLEM LIST
+        </div>
+        <div class="card-body-grey">
+
+            <div class="row align-items-center p-2 mb-0 add-note-bg">
+                <div class="col-md-2">
+                    Date Range
+                </div>
+                <div class="col-md-5">
+                    <input class='form-control form-control-sm' #drp="bsDaterangepicker" bsDaterangepicker [bsConfig]="{rangeInputFormat: 'DD-MM-YYYY', containerClass:'theme-blue'}" placement="top" formControlName="range" />
+                    <span class="pl-2 icon-search search-icon"></span>
+                </div>
+            </div>
+
+            <!-- Add New Note Section -->
+
+            <div class="form-group p-2 mb-0">
+                Problem Description
+                <textarea class="form-control" formControlName='note'></textarea>
+            </div>
+
+            <div class="row p-2 m-0 border-bottom">
+                <div class="form-group p-0 col-md-3">
+                    Type
+                    <input class="form-control form-control-sm" />
+                </div>
+                <div class="form-group col-md-3">
+                    Date of Onset
+                    <input class='form-control form-control-sm' #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:'theme-blue'}" placement="top" formControlName="range">
+                </div>
+                <div class="form-group col-md-4"></div>
+                <div class="form-group col-md-2 mb-0 align-self-center">
+                    <button class='btn-sm-sub btn-brand-secondary brand pull-right' (click)='onAddNote()'>+Add Note</button>
+                </div>
+            </div>
+
+            <!-- Display All Notes Section -->
+            <div class="px-2">
+                <ng-container *ngIf="patientNotesGrouped">
+                    <!-- GROUP ICON -->
+                    <ng-container *ngFor='let key of patientNotesGrouped; let id = index'>
+                        <div class='timeline__container_group'>
+                            <div class='timeline__left'>
+                            </div>
+                            <div class='timeline__right'>
+                                <div class="timeline__group_dot">
+                                    {{key.key}}
+                                </div>
+                                <p class='timeline__content'>
+                                </p>
+                                <div class='timeline__author'>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- patientNotesGroup: {{ patientNotesGrouped.value | json }}
+                        <br> patientNotes: {{ patientNotesGrouped.value | json }} -->
+
+                        <ng-container *ngFor='let item of patientNotes; let id = index'>
+                            <app-problem-list-item *ngIf="item.status!=='INACTIVE'" [item]="item"></app-problem-list-item>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+</form>

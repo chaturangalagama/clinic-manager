@@ -1,0 +1,25 @@
+<div class="card h-100">
+    <div class="card-header font-weight-semi-bold">
+        FOLLOW UPS
+    </div>
+    <div class="card-body" [formGroup]="item">
+        <div class="container-fluid px-0">
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label class="mb-0">Date</label>
+                    <input type="text " class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+                    'theme-blue'}" formControlName='followupDate' [minDate]="minDate">
+                    <span class="pt-3 icon-search search-icon"></span>
+                    <errors [control]="item.get('followupDate')"></errors>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="mb-0">Remarks</label>
+                    <textarea cols="10" rows="5" class="form-control follow-up-remarks" formControlName='remarks'></textarea>
+                    <errors [control]="item.get('remarks')"></errors>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

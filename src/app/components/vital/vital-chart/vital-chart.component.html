@@ -1,0 +1,56 @@
+<div class="container mb-4">
+  <!-- Search Criteria -->
+  <div class="row">
+    <div class="form-group col-md-6 col-sm-12">
+      <label class="mb-0">Date from</label>
+      <div class="right-inner-addon" [formGroup]="fgDate">
+        <input type="text" class="form-control form-control-sm datepicker" #drp="bsDaterangepicker" bsDaterangepicker
+          placement="bottom" [bsConfig]="{rangeInputFormat: 'DD-MM-YYYY',containerClass:'theme-blue'}" formControlName='dateRange'
+          [maxDate]="maxDate">
+        <i class="icon-calendar inner-icon"></i>
+      </div>
+    </div>
+    <div class="col-md-1 align-self-center">
+      <button class="btn btn-sm btn-brand-primary" (click)="searchVitals()">Search</button>
+    </div>
+    <!-- <pre>{{fgDate.value.dateRange}}</pre> -->
+  </div>
+
+  <div class="row" *ngIf="vitals.length>0">
+    <div class="col-md">
+      <ng-select class="p-0 form-control form-control-sm custom-select" id="vitalTrendSelect" [dropdownPosition]="'bottom'"
+        [items]="vitals" bindLabel='name' bindValue='code' (change)="onVitalOptionSelected($event)" [(ngModel)]='vitalSelecteds'
+        [virtualScroll]="true" [multiple]="true" appendTo="body"></ng-select>
+    </div>
+
+
+  </div>
+
+  <div class="row mb-4" *ngIf="vitals.length>0">
+    <div class="w-100 h-100">
+      <canvas baseChart *ngIf="chartData.length>0" [chartType]="lineChartType" [datasets]="chartData" [options]="chartOptions"
+        (chartClick)="onChartClick($event)">
+      </canvas>
+    </div>
+  </div>
+  <div class="mt-4 table-responsive-md" *ngIf='vitals.length>0'>
+    <table class="table table-bordered table-striped">
+      <!-- X-axis -->
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col" colspan="1" *ngFor="let label of vitals">{{label.name}}({{label.uom}})</th>
+
+        </tr>
+      </thead>
+      <!-- Y-axis -->
+      <tbody>
+        <tr *ngFor="let time of getTimeKeys()">
+          <th scope="row">{{time}}</th>
+          <td colspan="1" *ngFor="let label of vitals">{{getCurrentTimeData(time,label)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

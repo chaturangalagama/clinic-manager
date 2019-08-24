@@ -1,0 +1,15 @@
+<ckeditor [formControl]="consultationNotes" debounce="500" [config]="ckeConfig"  class="cke_consultation">
+    <p>Hello
+        <strong>world</strong>
+    </p>
+</ckeditor>
+<br>
+<div class="row">
+    <div class="col-10">
+        <ng-select class="form-control  form-control-sm custom-select p-0" bindLabel="name" bindValue="id" groupBy="type" [items]="templates" [virtualScroll]="true" appendTo="body" (change)="onTemplateChange($event)" [(ngModel)]="template" [ngModelOptions]="{standalone: true}"
+            placeholder="Select Template"></ng-select>
+    </div>
+    <div class="col-2">
+        <button class="btn-sm-sub btn-brand-secondary float-right" (click)="onBtnAddClicked()">Create Template</button>
+    </div>
+</div>

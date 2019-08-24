@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="row justify-content-md-center pt-3">
+        <h3>Please select your clinic</h3>
+    </div>
+    <div class="row justify-content-md-center pb-3 px-3">
+        <div *ngFor="let clinic of authorizedClinicList" class="col-md-2 p-3">
+            <button id="" class="clinicBtn w-100" style="text-align:center; color:black" (click)="onSelect(clinic)" value="clinic.clinicCode">
+                 <img src="../../../assets/img/logo.png" style="width: 40%;
+                         height: 30%;" class="pt-2">
+                 <div class="hmcClinic">
+                   <div style="font-size:22px;">{{clinic.clinicCode}}</div>
+                   <div style="font-size:11px;">{{clinic.name}}</div>
+                 </div>
+                 <div class="hmcClinic" style="font-size:11px;text-overflow:ellipsis; overflow:hidden; white-space: nowrap">{{formatAddressMultiLine(clinic.address.address, 0)}}</div>
+                 <div class="hmcClinic" style="font-size:11px;text-overflow:ellipsis; overflow:hidden; white-space: nowrap" *ngIf="clinic.address.address && clinic.address.address.length>maxWidthPerLine">{{formatAddressMultiLine(clinic.address.address, 1)}}</div>
+                 <div class="hmcClinic" style="font-size:11px;" *ngIf="clinic.address.address && !checkPostalCodeExistsInAddressParam(clinic.address.address)">SINGAPORE {{clinic.address.postalCode}}</div>
+               </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="rl-multi-step numbered">
+    <ul class="rl-multi-step-list mb-0 white">
+        <li class="rl-multi-step-item" routerLink="./charge" routerLinkActive="current">
+            <div class="rl-item-wrap">
+                <p class="rl-item-title">Diagnosis / Prescription & Charges</p>
+            </div>
+        </li>
+        <li class="rl-multi-step-item" routerLink="./collect" routerLinkActive="current">
+            <div class="rl-item-wrap">
+                <p class="rl-item-title">Collect Charge Payment</p>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="container-remaining-part h-100">
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>

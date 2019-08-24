@@ -1,0 +1,26 @@
+<ng-container *ngIf="(forDisplayOnly&&isChecked)||(!forDisplayOnly)">
+    <!-- ITEM LEVEL: {{ item}} -->
+    <div [class]="getSubHeaderClass()">
+        <div *ngIf="hasUpdatePriority" class="col-1 text-queue-md">
+            <strong> {{selectedIndex>0?selectedIndex:''}}</strong>
+            <input type='checkbox' (click)="checkClick()" [(ngModel)]='isChecked' [disabled]="!checkCompatibility()" />
+        </div>
+        <div class="col text-queue-md">
+            {{ item.medicalCoverageName }}
+        </div>
+        <div class="col text-queue-md">
+            {{ item.coveragePlan.name }}
+        </div>
+        <div class="col text-queue-md">
+            {{ item.policyHolder.patientCoverageId}}
+        </div>
+        <div class="col-1 text-queue-md">
+            <a class="btn btn-sm" (click)="isCollapsed = !isCollapsed">
+                <i [ngClass]="isCollapsed?'icon-down-open-big':'icon-up-open-big'"></i>
+            </a>
+        </div>
+    </div>
+    <div [collapse]="isCollapsed">
+        <!-- <app-medical-coverage-item-detail [inputObject]="item" [inputIsFormGroup]=false></app-medical-coverage-item-detail> -->
+    </div>
+</ng-container>

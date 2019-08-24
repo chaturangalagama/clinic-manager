@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{title}}</h4>
+    </div>
+    <!-- <code>{{medicalCoverages.value|json}}</code> -->
+</div>
+<div class="container-fluid h-100">
+    <div class="row p-2 pb-3">
+        <div class="col-12">
+            <app-patient-add-consultation [consultationInfoFormGroup]="consultationFormGroup"></app-patient-add-consultation>
+            <app-medical-coverage [hasUpdatePriority]=true [patientCoverages]="selectedPlans" [selectedCoverages]="selectedCoverages"></app-medical-coverage>
+            <div class="btn-toolbar float-right" role="toolbar">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-large btn-brand-secondary" (click)="onBtnSaveClicked($event)" [disabled]="!consultationFormGroup.valid">Confirm & Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

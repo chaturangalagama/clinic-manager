@@ -1,0 +1,65 @@
+<form novalidate [formGroup]="visitManagementFormGroup">
+    <div class="row">
+        <!-- selectedTabIndex = {{ selectedTabIndex}} visitStatus = {{ visitStatus }} -->
+        <tabset #consultationTabs class="consultation" type="pills">
+            <!-- Profile Tab -->
+            <tab heading="Profile" (select)="onSelect($event)">
+                <app-patient-profile [profileFormGroup]="visitManagementFormGroup.get('profileFormGroup')" [patientInfo]='patientInfo' [needRefresh]='needRefresh'></app-patient-profile>
+            </tab>
+            <!--
+            <div *ngIf="selectedTabIndex===0" class="col-md-2">
+                <button *ngIf="!editMode" class="btn btn-md btn-warm-grey btn-block white pull-right edit-detail-btn" (click)="onEnableEdit()">Edit Patient Details</button>
+                <button *ngIf="editMode" class="btn btn-md btn-bluish btn-block white pull-right edit-detail-btn" (click)="onBtnSaveDetailsClicked()">Save</button>
+            </div> -->
+
+            <!-- Vital Signs Tab -->
+            <tab heading="Vital Signs" (select)="onSelect($event)">
+                <!-- <app-vital [vitalForm]="getVitalForm()" *ngxPermissionsOnly="['ROLE_VIEW_VITALS']"></app-vital> -->
+                <app-vital-container></app-vital-container>
+            </tab>
+
+            <!-- Consultation Tab -->
+            <tab heading="Consultation" (select)="onSelect($event)">
+                <app-patient-consultation *ngIf="visitStatus==='CONSULT'" [visitManagementFormGroup]='visitManagementFormGroup' [needRefresh]='needRefresh' [patientInfo]='patientInfo' [attachedMedicalCoverages]="attachedMedicalCoverages" (copiedPrescription)="copyPrescription($event)"></app-patient-consultation>
+            </tab>
+
+            <!-- Labs Tab -->
+            <tab heading="Medical Services" (select)="onSelect($event)">
+                <app-patient-medical-services [consultationFormGroup]="visitManagementFormGroup.get('consultationFormGroup')"></app-patient-medical-services>
+            </tab>
+
+            <!-- Medical Coverage Tab -->
+            <tab heading="Coverage" (select)="onSelect($event)">
+                <span *ngIf="selectedPlans">
+                    <app-medical-coverage [hasAdd]='false' [hasDelete]='false' [popUpAddCoverage]='false' [hasUpdatePriority]='true'
+                        [patientCoverages]="selectedPlans" [selectedCoverages]="attachedMedicalCoverages" [policyHolderInfo]='policyHolderInfo'
+                        *ngxPermissionsOnly="['ROLE_MEDICAL_COVERAGE_MANAGEMENT']"></app-medical-coverage>
+                </span>
+            </tab>
+
+            <!-- Documents Tab -->
+            <tab heading="Documents" (select)="onSelect($event)">
+                <app-patient-detail-document [formGroup]="visitManagementFormGroup.get('documentsFormGroup')" [needRefresh]='needRefresh' *ngxPermissionsOnly="['ROLE_FILE_MANAGEMENT']">
+                </app-patient-detail-document>
+            </tab>
+
+            <!-- Dispensing Tab -->
+            <tab heading="Dispensing" (select)="onSelect($event)">
+                <app-patient-dispensing *ngIf="isVisitInPostConsult()" [chargeFormGroup]="visitManagementFormGroup.get('chargeFormGroup')" [attachedMedicalCoverages]="attachedMedicalCoverages" [consultationFormGroup]="visitManagementFormGroup.get('consultationFormGroup')"
+                    (tabSelected)="toggleTabTo($event)"></app-patient-dispensing>
+            </tab>
+
+            <!-- Printing Tab -->
+            <tab heading="Printing" (select)="onSelect($event)">
+                <app-payment-print *ngIf="isVisitInPostConsult() || isVisitInPayment()" [chargeFormGroup]="visitManagementFormGroup.get('chargeFormGroup')" [consultationFormGroup]="visitManagementFormGroup.get('consultationFormGroup')" [patientInfo]="patientInfo" [consultationInfo]="consultationInfo"
+                    (tabSelected)="toggleTabTo($event)"></app-payment-print>
+            </tab>
+
+            <!-- Payment Tab -->
+            <tab heading="Payment" (select)="onSelect($event)">
+                <app-payment-collect *ngIf="isVisitInPayment()" (isRollbacked)="isRollbacked($event)"></app-payment-collect>
+            </tab>
+        </tabset>
+
+    </div>
+</form>

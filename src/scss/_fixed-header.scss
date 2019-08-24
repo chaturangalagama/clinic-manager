@@ -1,0 +1,54 @@
+.fixed-div-consultation-add {
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 9;
+    height: -webkit-max-content;
+    background-color: white;
+    -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.fixed-div-patient-list {
+    height: 48px;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    z-index: 1;
+    -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.fixed-div-patient-list button {
+    position: fixed;
+    margin-top: 10px;
+    right: 25px;
+}
+
+.sidebar-fixed {
+    .fixed-div-consultation-add {
+        margin-left: $sidebar-width;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .sidebar-minimized {
+        &.sidebar-fixed {
+            .fixed-div-consultation-add {
+                margin-left: $sidebar-minimized-width;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .fixed-div-consultation-add {
+        margin-left: 0 !important;
+    }
+    .sidebar-mobile-show {
+        .fixed-div-consultation-add {
+            margin-right: - $mobile-sidebar-width !important;
+            margin-left: $mobile-sidebar-width !important;
+        }
+    }
+}

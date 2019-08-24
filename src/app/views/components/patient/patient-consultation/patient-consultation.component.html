@@ -1,0 +1,28 @@
+<!-- Diagnosis / Prescription : Text Editor and Diagnosis Code Dropdown Selections -->
+<div class="pb-4" id="consultation-note-div">
+    <div class="card mb-0">
+        <div class="card-header d-flex justify-content-between">
+            <span class='font-weight-semi-bold'>Diagnosis/Notes</span>
+        </div>
+        <div class="card-body">
+            <app-consultation-notes [consultationNotes]="visitManagementFormGroup.get('consultationFormGroup').get('consultation').get('consultationNotes')"></app-consultation-notes>
+            <hr>
+            <app-consultation-diagnosis [diagnosisIds]="visitManagementFormGroup.get('consultationFormGroup').get('diagnosisIds')" [attachedMedicalCoverages]="attachedMedicalCoverages"></app-consultation-diagnosis>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Visit -->
+<div class="pb-4">
+    <div class="card mb-0 ">
+        <div class="card-header d-flex justify-content-between ">
+            <span class='font-weight-semi-bold'>RECENT VISIT</span>
+        </div>
+        <app-consultation-history-main-container [needRefresh]='needRefresh' (copiedPrescription)='copyPrescription($event)' (recentVisitEmitter)='getRecentVisit($event)'></app-consultation-history-main-container>
+    </div>
+</div>
+
+<!-- Clinic Notes -->
+<div>
+    <app-clinic-notes [clinicNotes]="visitManagementFormGroup.get('consultationFormGroup').get('consultation').get('clinicNotes')"></app-clinic-notes>
+</div>

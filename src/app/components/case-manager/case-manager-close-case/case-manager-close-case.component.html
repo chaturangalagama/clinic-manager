@@ -1,0 +1,47 @@
+<div class="card">
+  <div class="card-header">{{title}}</div>
+  <div class="card-body">
+
+    <div *ngIf="hasOutstanding(); else noOutstanding">
+      Closing this case will forfeit all outstanding balances pending for this patient. Are you sure?
+    </div>
+
+    <ng-template #noOutstanding>
+      Are you sure you want to close the case?
+    </ng-template>
+
+    <div *ngIf="hasOutstanding()" class="case-card-search row pale-grey pt-3 mb-1 mt-1" style="background-color: #f2f4f7">
+
+      <div class="col-12 row">
+        <div class="col-1 icon-attention" style="color: red"></div>
+        <div class="col-11">CURRENT OUTSTANDING AMOUNT</div>
+      </div>
+
+      <div class="col-12 mt-2 row">
+        <div class="col-1"></div>
+        <div class="col-11" style="color: red">{{outstanding}}</div>
+      </div>
+
+    </div>
+
+    <div *ngIf="message != null || message != undefined" class="case-card-search row pale-grey pt-3 mb-1 mt-1" style="background-color: #f2f4f7">
+      <div class="col-12 row">
+        <div class="col-11" style="color: red">{{message}}</div>
+      </div>
+    </div>
+
+    <div class="row pt-3 mb-1 mt-1">
+
+      <div class="col-5">
+        <button class="btn btn-small btn-cancel pr-2" (click)="cancelModal()"> Cancel </button>
+      </div>
+
+      <div class="col-1"></div>
+
+      <div class="col-5">
+        <button class="btn btn-pink btn-small" (click)="closeCase()"> Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

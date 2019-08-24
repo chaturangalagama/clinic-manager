@@ -1,0 +1,23 @@
+// CUSTOM RADIO BUTTON
+.radio {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    background-color: #f4f4f4;
+    border: 2px solid #34495e;
+    transition: 0.2s all linear;
+    outline: none;
+    // margin-right: 0.375rem;
+
+    position: relative;
+    top: 0.25rem;
+}
+
+input.radio:checked {
+    border: 0.25rem solid #358ed7;
+}
+// CUSTOM RADIO BUTTON

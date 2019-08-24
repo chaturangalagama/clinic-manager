@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <alert></alert>
+    <div class="row">
+      <div class="col-md font-weight-semi-bold">Name</div>
+      <div class="col-md font-weight-semi-bold">Value</div>
+      <div class="col-md font-weight-semi-bold">Units</div>
+      <div class="col-md font-weight-semi-bold">
+        <span>Comment</span>
+        <button class="btn btn-sm btn-brand-primary float-right my-1" (click)="addVital()">Add</button>
+      </div>
+    </div>
+    <div class="row justify-content-end">
+
+
+    </div>
+    <div *ngFor="let item of vitalFromArray.controls; let i=index">
+      <app-vital-add-item [vitalItem]='item' [index]='i' [vitals]='vitals'></app-vital-add-item>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-md-1">
+        <button class="btn btn-block btn-sm btn-brand-secondary ml-2" (click)="saveVital()" [disabled]='!vitalFromArray.valid||vitalFromArray.length<1'>Save</button>
+      </div> <!-- <code>{{item.value|json}}</code> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="card h-100">
+    <div class="card-header font-weight-semi-bold">
+        REFERRAL
+    </div>
+    <div class="card-body">
+        <div class="container-fluid px-0">
+            <!-- TITLE -->
+            <app-referral-item *ngFor="let item of itemsFormArray.controls; let i=index" [index]="i" [referralItem]="item" (onDelete)="onDelete($event)"></app-referral-item>
+            <button class=" btn btn-outline-brand-secondary float-right mt-3 " (click)="onBtnAddClicked() ">+ Add</button>
+        </div>
+    </div>
+</div>

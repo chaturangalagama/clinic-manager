@@ -1,0 +1,36 @@
+<div>
+    <alert></alert>
+    <div class="row">
+        <div class="col-6">
+            <app-clinic-notes [clinicNotes]="consultationFormGroup.get('consultation').get('clinicNotes')"></app-clinic-notes>
+        </div>
+        <div class="col-6">
+            <!-- {{ chargeFormGroup.get('overallChargeFormGroup').value | json}} -->
+            <app-payment-overall-charge [overallChargeFormGroup]="chargeFormGroup.get('overallChargeFormGroup')">
+            </app-payment-overall-charge>
+        </div>
+    </div>
+    <div class="card mb-0">
+        <div class="card-header d-flex justify-content-between">
+            <span class='font-weight-semi-bold'>DIAGNOSIS/PRESCRIPTION & CHARGES</span>
+        </div>
+        <div class="card-body">
+            <app-consultation-diagnosis [diagnosisIds]="consultationFormGroup.get('diagnosisIds')" [attachedMedicalCoverages]="attachedMedicalCoverages"></app-consultation-diagnosis>
+        </div>
+    </div>
+    <!-- dispatchitem: {{ this.consultationInfo.medicalReferenceEntity.dispatchItemEntities | json}} -->
+    <!-- <br> Patient Dispensing: {{ consultationFormGroup.get('dispatchItemEntities').value | json }} -->
+    <app-case-charge class="mt-0" [itemsFormArray]="consultationFormGroup.get('dispatchItemEntities')" [caseStatus]="caseStatus" (handleChargeItemChange)="handleChargeItemChange($event)"></app-case-charge>
+    <!-- <br>{{ attachedMedicalCoverages.value | json }} -->
+    <!-- <br>coverage limit: {{ chargeFormGroup.get('coverageLimitFormGroup').value | json }} -->
+    <app-payment-coverage-limit [coverageLimitFormGroup]="chargeFormGroup.get('coverageLimitFormGroup')">
+    </app-payment-coverage-limit>
+    <div class="btn-toolbar float-right" role="toolbar">
+        <div class="btn-group" role="group">
+            <button class="btn btn-large btn-brand-secondary" [disabled]="!(chargeFormGroup.valid && consultationFormGroup.valid)" (click)="onBtnSaveClicked()" (keyup)="onKeyUp($event)">SAVE & NEXT (F4)</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>

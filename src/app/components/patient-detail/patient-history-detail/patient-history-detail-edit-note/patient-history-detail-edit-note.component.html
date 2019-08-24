@@ -1,0 +1,16 @@
+<form [formGroup]="" novalidate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ckeditor [formControl]="consultationNotes" debounce="500">
+    </ckeditor>
+    <br>
+    <ng-select class="form-control form-control-sm custom-select p-0" bindLabel="name" bindValue="id" groupBy="type" [items]="templates" [virtualScroll]="true" appendTo="body"
+      (change)="onTemplateChange($event)" [(ngModel)]="template" [ngModelOptions]="{standalone: true}" placeholder="Select Template">
+    </ng-select>
+  </div>
+</form>

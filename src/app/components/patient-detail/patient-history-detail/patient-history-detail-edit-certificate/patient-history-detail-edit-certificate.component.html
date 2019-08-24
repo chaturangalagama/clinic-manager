@@ -1,0 +1,13 @@
+<form novalidate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{title}}</h4>
+    </div>
+    <div class="modal-body">
+        <app-patient-history-detail-edit-certificate-item *ngFor="let item of certificateArray.controls; let i=index" [index]="i" [medicalCertificateItem]="item" (removed)="certificateArray.removeAt($event)">
+        </app-patient-history-detail-edit-certificate-item>
+        <div class="row justify-content-end px-3">
+            <button class="btn btn-sm btn-outline-pink float-right mr-3" (click)="addItem() ">+ Add</button>
+            <button class="btn btn-sm btn-pink float-right" (click)="bsModalRef.hide()" [disabled]="!certificateArray.valid">Close</button>
+        </div>
+    </div>
+</form>

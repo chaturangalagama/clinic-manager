@@ -1,0 +1,34 @@
+<div class="row border alertsPanel">
+    <div class="col-9 pl-4">
+        <app-consultation-patient-alert-info [patientInfo]='patientInfo' [alerts]="alerts" [medicalAlerts]="medicalAlerts"></app-consultation-patient-alert-info>
+    </div>
+    <div class="col-md-1" *ngIf="isConsultStatus() || isPostConsultStatus()">
+        <button class="btn btn-md btn-bluish btn-block" (click)="onBtnSaveClicked()">Save</button>
+    </div>
+    <div *ngIf="isConsultStatus()" class="col-md-1">
+        <button class="btn btn-md btn-complete" style="margin-right:15px;" [disabled]="!visitManagementFormGroup.get('consultationFormGroup').valid" (click)="onBtnConsultSaveClicked()">Complete
+            Consultation</button>
+    </div>
+</div>
+<div class="row mt-5 ml-0 clearfix" style="background-color:#f2f2f2">
+    <div id="queue-pane" class="col-md-3 pl-0 pr-0">
+        <app-queue [isQueueHidden]="isQueueHidden" (onHide)="toggleBar($event)" (selectedPatient)="reloadPatientData($event)" [needRefresh]="needRefresh"></app-queue>
+    </div>
+    <div id="consultation-pane" class="col">
+        <!-- showSidePane: {{ showSidePane }} -->
+        <!-- <div>visit Id: {{this.store.getPatientVisitRegistryId()}}</div> -->
+        <!-- <br>
+        <div>dispatchItems : {{visitManagementFormGroup.get('consultationFormGroup').get('dispatchItemEntities').value|json}} </div>
+        <br> -->
+        <!--  <div>consultation : {{visitManagementFormGroup.get('consultationFormGroup').get('consultation').value|json}} </div> -->
+        <div *ngIf="selectedTabIndex>-1" class="row">
+            <div [ngClass]="{'col-md-8': showSidePane, 'col-md-12': !showSidePane}">
+                <app-consultation [visitManagementFormGroup]='visitManagementFormGroup' [needRefresh]="needRefresh" [patientInfo]='patientInfo' [selectedPlans]='selectedPlans' [attachedMedicalCoverages]='attachedMedicalCoverages' [policyHolderInfo]='policyHolderInfo'
+                    [selectedTabIndex]='selectedTabIndex' (tabSelected)='toggleTabs($event)'></app-consultation>
+            </div>
+            <div *ngIf="showSidePane" class="col-4 pl-0">
+                <app-consultation-prescription *ngIf="this.store.getVisitStatus()==='CONSULT'" class="mt-0" [dispatchItemEntities]="visitManagementFormGroup.get('consultationFormGroup').get('dispatchItemEntities')"></app-consultation-prescription>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="container-fluid m-0 p-0" style="background-color:white;">
+    <div class="row pl-0 pt-4 ">
+        <div class="col-md-12 ">
+            <label>PATIENT INFORMATION</label>
+        </div>
+    </div>
+    <div class="row pb-2" style="overflow:auto;">
+        <div class="col-md-12 pl-2 pr-2 ">
+            <form [formGroup]="patientInfoFormGroup " novalidate>
+                <div class="row text-header-payment pl-2">
+                    <div class="col-md-2">Patient</div>
+                    <div class="col-md-1">Age</div>
+                    <div class="col-md-1">Sex</div>
+                    <div class="col-md-1">Occupation</div>
+                    <div class="col-md-2">Address</div>
+                </div>
+                <div class="row  text-content-payment mt-0 mb-3 pl-2 ">
+                    <div class="col-md-2">{{patientInfoFormGroup.get('patientName').value}}</div>
+                    <div class="col-md-1">{{patientInfoFormGroup.get('age').value}}</div>
+                    <div class="col-md-1">{{ (patientInfoFormGroup.get('sex').value === 'MALE') ? 'M' : 'F' }}</div>
+                    <div class="col-md-1">{{patientInfoFormGroup.get('occupation').value}}</div>
+                    <div class="col-md-2">{{patientInfoFormGroup.get('address').value}}</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

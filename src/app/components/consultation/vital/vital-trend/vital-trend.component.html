@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <!-- <div class="col-md" [hidden]="lineChartLabels.length < 1"> -->
+    <div class="col-md" [hidden]="lineChartLabels.length < 1">
+      <ng-select class="p-0 form-control form-control-sm  custom-select" id="vitalTrendSelect" [dropdownPosition]="'bottom'" [items]="vitals"
+        bindLabel='label' bindValue='value' (change)="onVitalOptionSelected($event)" [(ngModel)]='vitalSelected' [clearable]=false [virtualScroll]="true"></ng-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md" [hidden]="lineChartLabels.length < 1">
+      <div class="col-md" [hidden]="lineChartLabels.length < 1">
+        <canvas baseChart [hidden]='isBp' [data]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType"></canvas>
+        <canvas baseChart [hidden]='!isBp' [datasets]="lineChartDataSet" [labels]="lineChartLabels" [options]="lineChartOptions"
+          [chartType]="lineChartType"></canvas>
+      </div>
+    </div>
+    <div class="row">
+      <span class="col-md" style="box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);" [hidden]="lineChartLabels.length > 0">No Data</span>
+    </div>
+  </div>

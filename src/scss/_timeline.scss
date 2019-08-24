@@ -1,0 +1,90 @@
+
+.timeline {
+  &__container {
+    @extend .row;
+    @extend .no-gutters;
+
+    min-height: 3rem;
+
+  }
+
+  &__container_group {
+    @extend .row;
+    @extend .no-gutters;
+    min-height: 3.125rem;
+
+  }
+
+  &__left {
+    @extend .col-md-2;
+
+    @extend .-pr-2 !optional;
+    padding-right: 1rem !important;
+    font-size: 12px;
+    color: $brownish-grey;
+    text-align: right;
+  }
+
+  &__right {
+    @extend .col-md-10;
+    @extend .p-0;
+    border-left: 2px solid #e0e0e0;
+
+  }
+  &__group_dot {
+    color:white;
+    margin-left: -1.125rem;
+    margin-top:0.625rem;
+    padding-left:0.1875rem;
+    padding-right:0.1875rem;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    background-color: $warm-grey;
+    width:-webkit-max-content;
+  }
+  &__dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    float: left;
+    background-color: $warm-grey;
+    border: solid 1px #ffffff;
+    border-radius: 0.3125rem;
+    margin-left: -0.375rem;
+    margin-top: 0.25rem;
+    font-size: 12px;
+  }
+
+  &__content {
+    color: $greyish-brown;
+    margin-left: 1rem;
+    vertical-align: top;
+    font-size: 12px;
+    margin-bottom: 0;
+    padding-bottom:0.5rem;
+  }
+
+  &__author {
+    font-size: 12px;
+    color: $warm-grey;
+    margin-left: 1rem;
+  }
+
+  &__separator {
+    @extend .mt-1;
+    border-bottom: 1px solid #e0e0e0;
+    margin-left: 1rem;
+  }
+}
+
+.add-note-bg{
+  background: $silver-10;
+}
+
+.btn-dotted{
+  @extend .btn-block;
+  height: 5.125rem;
+  background: #ffffff;
+  border:1px dotted #cccacd;
+  border-radius: 0.25rem;
+  color: $darkish-pink;
+}

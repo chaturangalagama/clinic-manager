@@ -1,0 +1,170 @@
+<div class="case-background container-fluid py-1 mh-100">
+
+  <!-- <div class="case-card-header row justify-content-end">
+    <div class="col-4 align-self-end pr-3">
+      <button class="btn btn-brand-primary pl-4 pr-4  float-right" (click)="addPatient()"> Create New Case </button>
+    </div>
+  </div> -->
+
+  <div class="container-fluid px-0 bg-white">
+
+    <!-- <alert></alert> -->
+
+    <div class="m-0 row bg-duck-egg-blue border-bottom border-light">
+      <h5 class="col">Search Cases</h5>
+    </div>
+
+
+    <div class="row py-2" [formGroup]='mainFormGroup'>
+
+
+
+      <div class="col-1 pt-2" style="text-align:right">
+        <span>Case Number</span>
+      </div>
+      <div class="col-1">
+        <input class="form-control form-control-sm" type="text" formControlName="caseIdValue" />
+      </div>
+
+      <div class="col-1 pt-2" style="text-align:right">
+        <span>Name/NRIC</span>
+      </div>
+      <div class="col-2">
+        <input class="form-control form-control-sm" type="text" formControlName="caseName" />
+      </div>
+
+      <div class="col-1 pt-2 pr-2" style="text-align:right">
+        <span>Date Range</span>
+      </div>
+
+      <div class="form-group col-1">
+        <!-- <div class="input-group"> -->
+        <input class="form-control form-control-sm" #dpStart="bsDatepicker" bsDatepicker placement="bottom" [bsConfig]="{dateInputFormat:'DD-MM-YYYY',containerClass: 'theme-blue'}"
+          formControlName="startDate">
+        <!-- <div class="icon-calendar"></div> -->
+        <!-- </div> -->
+      </div>
+
+      <div class="icon-calendar pt-2" (click)="dpStart.toggle()" [attr.aria-expanded]="dpStart.isOpen"></div>
+
+      <div class="col-0 pt-2 pl-3 pr-3" style="text-align:right">
+        <span>To</span>
+      </div>
+
+      <div class="form-group col-1">
+        <input class="form-control form-control-sm" #dpEnd="bsDatepicker" bsDatepicker [minDate]="endMinDate" placement="bottom"
+          [bsConfig]="{dateInputFormat:'DD-MM-YYYY',containerClass: 'theme-blue'}" formControlName="endDate">
+      </div>
+
+      <div class="icon-calendar pt-2 pr-3" (click)="dpEnd.toggle()" [attr.aria-expanded]="dpEnd.isOpen"></div>
+
+      <div class="col-0 pt-2 pl-4" style="text-align:right">
+        <span class="icon-filter filter-icon"></span>
+        <span>Status</span>
+      </div>
+
+      <div class="col-1">
+        <ng-select class="p-0 form-control form-control-sm custom-select" [items]="statusFilterDropdown.value"
+          placeholder="Any" value="" bindLabel="label" bindValue="value" [clearable]='false' [virtualScroll]="true"
+          style="position: absolute;top: 0px;" formControlName="status">
+        </ng-select>
+      </div>
+
+      <div class="col-1" style="margin-left:60px">
+        <button class="btn btn-brand-primary float-right" (click)="getSearchedList()">Search</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container-fluid bg-white py-2 mt-2 mb-4">
+
+
+    <ngx-datatable #table class='bootstrap custom-datatable expandable mb-4' [columns]="columns" [columnMode]="caseManagerExpand()"
+      [headerHeight]="40" [footerHeight]="40" [rowHeight]="40" [rows]='rows' (page)='setPage($event)' [externalPaging]="true"
+      [count]="page.totalElements" [offset]="page.pageNumber" [limit]="page.size">
+
+      <ngx-datatable-column name="Date" prop="date" minWidth="inherit" [canAutoResize]=true [flexGrow]=2>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div>{{ row.date }}</div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Case Number" prop="caseId" [canAutoResize]=true minWidth="inherit" [flexGrow]=2
+        headerClass="headerAlignCenter">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div [title]="row.caseNumber">{{ row.caseNumber }}</div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="NRIC" prop="nric" minWidth="inherit" [canAutoResize]=true [flexGrow]=2 headerClass="headerAlignCenter">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div>
+            <!-- <a [title]="row.nric" href="" class="font-weight-semi-bold" (click)='redirectToPatientDetail(row.patientid, row.nric)'>
+                {{ row.nric }}
+              </a> -->
+            <div [title]="row.nric">{{ row.nric }}</div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Name" prop="name" minWidth="inherit" [flexGrow]=1.5 headerClass="headerAlignCenter"
+        [canAutoResize]=true>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div>
+            <a [title]="row.name" href="" class="font-weight-semi-bold" (click)='redirectToPatientDetail(row.patientId, row.name)'>
+              {{ row.name }}
+            </a>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Amt Charged($)" prop="amtCharged" minWidth="inherit" [flexGrow]=2 headerClass="headerAlignCenter"
+        [canAutoResize]=true>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div [title]="row.totalPrice" class="centerContent">{{ row.salesOrder?.totalPrice }}</div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Amt Paid($)" prop="amtPaid" minWidth="inherit" [flexGrow]=2 headerClass="headerAlignCenter"
+        [canAutoResize]=true>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div [title]="row.amtPaid" class="centerContent">{{ row.salesOrder?.totalPaid }}</div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Amt Outstanding($)" prop="amtPaid" minWidth="inherit" [flexGrow]=2 headerClass="headerAlignCenter"
+        [canAutoResize]=true>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div [title]="row.amtOutstanding" class="centerContent">
+            <div *ngIf='row.salesOrder?.outstanding > 0'> <span class="negative"> {{row.salesOrder?.outstanding }}</span></div>
+            <div *ngIf='row.salesOrder?.outstanding <= 0'> {{row.salesOrder?.outstanding }}</div>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="No of Visits" prop="noOfVisits" minWidth="inherit" [flexGrow]=2 headerClass="headerAlignCenter"
+        [canAutoResize]=true>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div [title]="row.noOfVisits" class="centerContent">{{ row.noOfVisits?.length }}</div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name=" Status" prop="status" minWidth="inherit" [flexGrow]=2 headerClass="headerAlignCenter"
+        [canAutoResize]=true>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div [title]="row.status" class="centerContent">{{ row.status | titlecase}}
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="" prop="action" minWidth="inherit" [flexGrow]=1 [canAutoResize]=true>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <button class='btn btn-brand-secondary btn-circle' (click)="redirectToCaseDetail(row.caseId, row.patientId)">
+            <i class='icon-right-open'></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

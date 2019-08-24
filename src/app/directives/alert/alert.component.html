@@ -1,0 +1,23 @@
+<div id="alert" *ngIf="message" [ngClass]="{ 'alert': message,
+'alert-success': message.type === 'success',
+'alert-danger': message.type === 'warn'||message.type === 'error' }">
+  <div class="float-right">
+    <!-- <a class="nav-link" href='#'> -->
+    <i class="icon-cancel" (click)="toggleHide()"></i>
+    <!-- </a> -->
+  </div>
+  <div *ngIf="message.type==='success'">
+    <strong>Success!</strong>
+    <br>
+    <br> {{message.text}}.
+
+  </div>
+  <div *ngIf="message.type==='error'">
+    <strong>Oops!</strong> Something went wrong.
+    <br>
+    <br> {{message.text}}.
+  </div>
+  <div *ngIf="message.type==='warn'">
+    <br> {{message.text}}.
+  </div>
+</div>

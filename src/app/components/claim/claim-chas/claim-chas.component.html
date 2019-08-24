@@ -1,0 +1,269 @@
+<h6>Select Date</h6>
+
+<form [formGroup]="searchFormGroup">
+  <div class="row">
+    <div class="col-md-4">
+      <label>Date Range</label>
+      <div class="row">
+        <div class="col-md-5">
+          <input class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+            'theme-blue'}" formControlName="startDate">
+        </div>
+        <div class="col-md-1 align-self-center text-center">To</div>
+        <div class="col-md-5">
+          <input class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+            'theme-blue'}" formControlName="endDate">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <label>Status</label>
+      <ng-select class="p-0 form-control form-control-sm custom-select" placeholder="Select Status" [clearable]="false" [items]="statusList" formControlName="status">
+      </ng-select>
+    </div>
+
+    <div class="col-md-3">
+      <!-- <label>Clinic</label>
+      <button class="btn btn-pink align-self-bottom btn-small" style="display:block">+ Clinic Select</button> -->
+    </div>
+
+    <div class="col-md-3 align-self-end text-right">
+      <!-- <button class="btn btn-blue btn-medium mr-2">Check New Claims</button> -->
+      <button class="btn btn-blue btn-medium" (click)="onSearchClaimClicked()" [disabled]="!searchFormGroup.valid">Search Claims</button>
+    </div>
+  </div>
+</form>
+
+<!-- <hr>
+
+<h6>Selected Clinics</h6>
+
+<div class="row">
+
+  <div class="col-md-2">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox">
+      <label class="form-check-label" for="defaultCheck1">All Accessible Clinic</label>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <span class="badge badge-secondary">BBTW</span>
+    <span class="badge badge-secondary">HHB</span>
+    <span class="badge badge-secondary">AMK</span>
+  </div>
+
+  <div class="col-md-1 text-right">
+    <label><i class="icon-print i-dot"></i></label>
+    <label><i class="icon-print i-dot"></i></label>
+  </div>
+
+</div> -->
+
+<hr>
+<div *ngIf="showEdit">
+  <h5>Edit Claims</h5>
+  <form [formGroup]="formGroup">
+    <div class="row">
+      <div class="col-md-1">
+        <label>Date</label>
+        <input class="form-control form-control-sm datepicker" #dp="bsDatepicker" bsDatepicker  [bsConfig]="{dateInputFormat: 'DD-MM-YYYY',containerClass:
+              'theme-blue'}" formControlName="date">
+      </div>
+      <div class="col-md-1">
+        <label>Clinic</label>
+        <input class="form-control form-control-sm" type="text" formControlName="clinic">
+      </div>
+      <div class="col-md-1">
+        <label>HE Code</label>
+        <ng-select class="p-0 form-control form-control-sm custom-select" placeholder="Select Code" formControlName="HEcode"></ng-select>
+      </div>
+      <div class="col-md-1">
+        <label>Hospital Code</label>
+        <ng-select class="p-0 form-control form-control-sm custom-select" placeholder="Select Code" [clearable]="false" ></ng-select>
+      </div>
+      <div class="col-md-2">
+        <label>Patient Name</label>
+        <input class="form-control form-control-sm" type="text" formControlName="patientName">
+      </div>
+      <div class="col-md-2">
+        <label>Patient NRIC</label>
+        <input class="form-control form-control-sm" type="text" formControlName="patientNric">
+      </div>
+      <div class="col-md-2">
+        <label>Payer Name</label>
+        <input class="form-control form-control-sm" type="text" formControlName="payerName">
+      </div>
+      <div class="col-md-2">
+        <label>Payer NRIC</label>
+        <input class="form-control form-control-sm" type="text" formControlName="payerNric">
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-4">
+        <label>Doctor</label>
+        <ng-select class="p-0 form-control form-control-sm custom-select" placeholder="Select Code" [clearable]="false"  [items]="doctorList" bindLabel="displayName" bindValue="id" formControlName="doctor"></ng-select>
+      </div>
+      <div class="col-md-4">
+        <label>Ref No</label>
+        <input class="form-control form-control-sm" type="text" formControlName="referNo">
+      </div>
+      <div class="col-md-4">
+        <label>Receipt No</label>
+        <input class="form-control form-control-sm" type="text" formControlName="receiptNo">
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-4">
+        <label>Diagnosis Code</label>
+        
+        <ng-select class="form-control form-control-sm  custom-select custom-select-extra-width" [items]="codes" placeholder="Select Code"
+        formControlName="diagnosisCode" bindValue='icd10Code' bindLabel='icd10Code' [addTag]="false" [typeahead]="codesTypeahead" [loading]="diagnosisLoading"
+        [virtualScroll]="true" [multiple]="true" [clearable]="false" appendTo="body">
+          <ng-template ng-header-tmp>
+            <div class="row">
+              <div class="col-md-3 font-weight-semi-bold">Code</div>
+              <div class="col-md-9 font-weight-semi-bold">Term</div>
+            </div>
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+            <div class="row">
+              <div class="col-md-3">{{item.icd10Code}}</div>
+              <div class="col-md-9">{{item.icd10Term}}</div>
+            </div>
+          </ng-template>
+        </ng-select>
+        
+      </div>
+      <div class="col-md-1">
+        <label>Consultation Amt</label>
+        <input class="form-control form-control-sm" type="text" formControlName="conAmt">
+      </div>
+      <div class="col-md-1">
+        <label>Drug Amt</label>
+        <input class="form-control form-control-sm" type="text" formControlName="drugAmt">
+      </div>
+      <div class="col-md-1">
+        <label>Laboratory Amt</label>
+        <input class="form-control form-control-sm" type="text" formControlName="labAmt">
+      </div>
+      <div class="col-md-1">
+        <label>Other Amt</label>
+        <input class="form-control form-control-sm" type="text" formControlName="otherAmt">
+      </div>
+      <div class="col-md-2">
+        <label>Total Amt</label>
+        <input class="form-control form-control-sm" type="text" formControlName="totAmt">
+      </div>
+      <div class="col-md-2">
+        <label>Claim Amt</label>
+        <input class="form-control form-control-sm" type="text" formControlName="claimAmt">
+      </div>
+    </div>
+    <div class="row mt-3 mb-3">
+      <div class="col-md-12 text-right">
+        <button class="btn btn-blue btn-medium mr-2" (click)="resetFormGroup()">Cancel</button>
+        <button class="btn btn-blue btn-medium" (click)="onSaveClicked()">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- <hr> -->
+
+<ngx-datatable #myTable id="claim" class='bootstrap' [columnMode]="'flex'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+  [rows]='rows' >
+  <!-- Column Templates -->
+  <ngx-datatable-column name="Bill Date" prop="billDate" [resizeable]=false [flexGrow]=1>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.billDate }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Submit Date" prop="submitDate" [resizeable]=false [flexGrow]=1>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.submitDate }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Clinic" prop="clinic" [resizeable]=false [flexGrow]=0.7>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.clinic }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="HEcode" prop="hecode" [resizeable]=false [flexGrow]=1>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.HEcode }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Patient Name" prop="patientname" [resizeable]=false [flexGrow]=1>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.patientName }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Payer Name" prop="payername" [resizeable]=false [flexGrow]=1>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.payerName }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Doctor" prop="doctor" [resizeable]=false [flexGrow]=1>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.doctorName }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Ref No" prop="referno" [resizeable]=false [flexGrow]=1.5>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.referNo }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Diagnosis Code" prop="diagnosiscode" [resizeable]=false [flexGrow]=1>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.diagnosisCode.join(', ') }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Con Amt" prop="comamt" [resizeable]=false [flexGrow]=0.8>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.conAmt }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Drug Amt" prop="drugamt" [resizeable]=false [flexGrow]=0.8>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.drugAmt }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Lab Amt" prop="labamt" [resizeable]=false [flexGrow]=0.8>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.labAmt }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Other Amt" prop="otheramt" [resizeable]=false [flexGrow]=0.8>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.otherAmt }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Tot Amt" prop="totamt" [resizeable]=false [flexGrow]=0.8>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.totAmt }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Claim Amt" prop="claimamt" [resizeable]=false [flexGrow]=0.8>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.claimAmt }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Status" prop="status" [resizeable]=false [flexGrow]=1>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <div>{{ row.status }}</div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Action" prop="action" [resizeable]=false [flexGrow]=1.5>
+    <ng-template ngx-datatable-cell-template let-row="row">
+      <span *ngxPermissionsExcept="['ROLE_MHCP_CLAIM', 'ROLE_MHCP_CLAIM_SAVE']">N/A</span>
+      <button class="btn btn-extra-small btn-cerulean mt-1 rounded" (click)="onEditUserClicked(row)" [disabled]="row.status!=='PENDING' && row.status!=='REJECTED'" *ngxPermissionsOnly="['ROLE_MHCP_CLAIM_SAVE']">Edit</button>
+      <br>
+      <span *ngxPermissionsOnly="['ROLE_MHCP_CLAIM']"><button class="btn btn-cerulean btn-extra-small mt-1 mb-1 rounded" *ngIf="row.status==='REJECTED'" (click)="onResubmitClicked(row)" >Re-submit</button></span>
+      <span *ngxPermissionsOnly="['ROLE_MHCP_CLAIM']"><button class="btn btn-cerulean btn-extra-small mt-1 mb-1 rounded"*ngIf="row.status==='PENDING'" (click)="onSubmitClicked(row)">Submit</button></span>
+    </ng-template>
+  </ngx-datatable-column>
+
+</ngx-datatable>

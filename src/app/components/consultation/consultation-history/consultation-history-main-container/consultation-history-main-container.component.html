@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <ng-container *ngIf="recentVisit">
+                <app-consultation-history-item class="w-100" (copyPrescription)='copyPrescription($event)' [patientVisitHistory]="recentVisit"></app-consultation-history-item>
+            </ng-container>
+        </div>
+        <div class="col-4">
+            <app-consultation-documents [needRefresh]="needRefresh"></app-consultation-documents>
+        </div>
+    </div>
+</div>

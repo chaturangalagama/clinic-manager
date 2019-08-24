@@ -1,0 +1,12 @@
+<div class="card h-100" *ngxPermissionsOnly="['ROLE_DOCTOR']">
+    <div class="card-header font-weight-semi-bold">
+        MEDICAL CERTIFICATION
+    </div>
+    <div class="card-body">
+        <app-medical-certificate-item-control *ngFor="let item of itemsFormArray.controls; let i=index" [index]="i" [medicalCertificateItem]="item" (removed)="itemsFormArray.removeAt($event)">
+        </app-medical-certificate-item-control>
+        <div class="row justify-content-end px-3">
+            <button class="btn btn-sm btn-outline-brand-secondary float-right" (click)="addItem() ">+ Add</button>
+        </div>
+    </div>
+</div>

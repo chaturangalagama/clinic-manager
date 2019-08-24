@@ -1,0 +1,24 @@
+<div class="card" [formGroup]="paymentFormGroup">
+    <div class="card-header">
+        PAYMENT METHOD
+    </div>
+    <div class="card-body">
+        <app-payment-method-item *ngFor="let item of paymentFormGroup.get('paymentArray')['controls']; let i = index" [paymentMethodItemFormGroup]="item" [index]=i [paymentsUpdate]="paymentMethodSelectionsUpdate" (onDeletePressed)="onMethodDelete($event)"></app-payment-method-item>
+        <br>
+        <button class="btn btn-sm btn-outline-brand-secondary float-right" (click)="onMethodAdd()">+ Add Another Payment Method</button>
+    </div>
+
+    <div class="card-footer">
+        <div class="row" [ngClass]="{'font-weight-bold': multiplePayment}">
+            <div class="col-md-5 text-indigo">Total Amount Outstanding Balance</div>
+            <div class="col-md-7 text-pink">${{paymentFormGroup.value.totalOutstanding | displayDollar}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 text-indigo">Adjusted Outstanding Balance</div>
+            <div class="col-md-7 text-pink">
+                ${{paymentFormGroup.value.cashOutstanding | displayDollar}}
+                <span class="text-dark-grey-small">(Cash payment only)</span>
+            </div>
+        </div>
+    </div>
+</div>

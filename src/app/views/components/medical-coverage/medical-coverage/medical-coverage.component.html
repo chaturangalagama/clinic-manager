@@ -1,0 +1,74 @@
+<div class="card">
+    <div class="card-header">
+        Medical Coverage
+    </div>
+    <div class="card-body">
+        <div *ngIf="hasAdd" class="row">
+            <div class="col-md-6 pl-3 pb-2">
+                <label> (Fields marked as
+                    <span class="compulsory">*</span> are mandatory)
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div *ngIf="patientCoverages">
+                    <div class="row plan-remark-headers align-middle">
+                        <div *ngIf="hasUpdatePriority" class="col-1">
+                            Priority
+                        </div>
+                        <ng-container *ngIf="!hasAdd">
+                            <!-- For display, show these columns -->
+                            <div class="col">Company</div>
+                            <div class="col align-middle">Plan</div>
+                            <div class="col">Coverage No</div>
+                        </ng-container>
+                        <ng-container *ngIf="hasAdd">
+                            <!-- For adding new MC popup, show these columns -->
+                            <div class="col-2">Company <span class="compulsory">*</span></div>
+                            <div class="col-2">Plan<span class="compulsory">*</span></div>
+                            <div class="col-1">Policy No <span class="compulsory">*</span></div>
+                            <div class="col-2">Start Date <span class="compulsory">*</span></div>
+                            <div class="col-2">End Date <span class="compulsory">*</span></div>
+                            <div class="col-1">Cost Center </div>
+                            <div class="col-2">Remarks </div>
+                        </ng-container>
+                    </div>
+                    <div *ngFor="let item of patientCoverages.controls; let i = index;">
+                        <span *ngIf="hasUpdatePriority">
+                            <!-- For Update Visit Details in Add, Search and Add to Registry -->
+                            <app-medical-coverage-item [patientCoverageItem]='item' [policyHolderInfo]='policyHolderInfo.value[i]'
+                                [hasUpdatePriority]='hasUpdatePriority' [isCompatible]="!checkAgainstSelectedCoverages( item,i)"
+                                [selectedIndex]='getSelectedIndex(item)' [attachedMedicalCoverages]='selectedCoverages'></app-medical-coverage-item>
+                        </span>
+                        <span *ngIf="popUpAddCoverage || hasAdd">
+                            <!-- For pre-popup window and add MCs pop -->
+                            <app-medical-coverage-item [patientCoverageItem]='item' [policyHolderInfo]='policyHolderInfo.value[i]'
+                                [hasAdd]='hasAdd' [hasDelete]='hasDelete' (onDelete)="onbtnDeleteClicked(i,$event)"></app-medical-coverage-item>
+                        </span>
+                        <span *ngIf="displaySelectedCoverages">
+                            <!-- For Patient Consultation Info Popup -->
+                            <app-medical-coverage-item *ngIf="toDisplay(item.value)" [patientCoverageItem]='item'
+                                [policyHolderInfo]='policyHolderInfo.value[i]' [attachedMedicalCoverages]='selectedCoverages'
+                                [displaySelectedCoverages]='displaySelectedCoverages'></app-medical-coverage-item>
+                        </span>
+                    </div>
+                    <div class="text-right mt-3" *ngIf="hasAdd">
+                        <!-- Button for adding new row -->
+                        <button name="btnAdd" class="btn btn-outline-brand-secondary" [disabled]='!patientCoverages.valid' (click)="addNewItem()">+ Add Another Coverage</button>
+                    </div>
+                </div>
+                <div *ngIf="hasAdd">
+                    <!-- Button for closing popup -->
+                    <div class="text-right pt-3">
+                        <button name="btnSave" class="btn btn-brand-secondary" [disabled]='!patientCoverages.valid' (click)="onBtnSaveClicked()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid px-0" *ngIf="popUpAddCoverage">
+            <!-- Button for Pop-Up to add New Coverage -->
+            <button class="btn btn-outline-brand-secondary float-right mt-3" type="button" (click)="addMedicalCoverage($event)" *ngxPermissionsOnly="['ROLE_MEDICAL_MANAGE_POLICY_HOLDER']">+ Add Coverage</button>
+        </div>
+    </div>
+</div>

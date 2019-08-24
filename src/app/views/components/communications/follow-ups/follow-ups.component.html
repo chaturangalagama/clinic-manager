@@ -1,0 +1,47 @@
+<div class="row form-main mr-0 h-100" style="padding-top:34px">
+    <div class="col-12 mt-2 mb-2">
+        <div class="container-fluid">
+            <alert></alert>
+            <div class="row">
+                <div class="col-8">
+                    <h5 class="p-2 mb-3">Upcoming Follow Ups (Within Next 7 Days)</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <ngx-datatable #table class='bootstrap' [columns]="columns" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40" [rowHeight]="'auto'" [rows]='rows'>
+                        <ngx-datatable-column name="Date" prop="date" [flexGrow]="1">
+                            <ng-template ngx-datatable-cell-template let-row="row">
+                                <div>{{ row.date }}</div>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Name" prop="name" [flexGrow]="2">
+                            <ng-template ngx-datatable-cell-template let-row="row">
+                                <div>
+                                    <a href="" class="font-weight-semi-bold" (click)='redirectToPatientDetail(row.patientid, row.name)'>
+                                      {{ row.name }}
+                                    </a>
+                                </div>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Doctor" prop="doctor" [flexGrow]="2">
+                            <ng-template ngx-datatable-cell-template let-row="row">
+                                <div>{{ row.doctor }}</div>git
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Purpose" prop="purpose" [flexGrow]="2">
+                            <ng-template ngx-datatable-cell-template let-row="row">
+                                <div>{{ row.purpose }}</div>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Phone #" prop="phone" [flexGrow]="2">
+                            <ng-template ngx-datatable-cell-template let-row="row">
+                                <div>{{ row.phone }}</div>
+                            </ng-template>
+                        </ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

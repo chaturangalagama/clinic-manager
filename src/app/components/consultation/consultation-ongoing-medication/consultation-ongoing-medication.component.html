@@ -1,0 +1,27 @@
+<form class="h-100">
+    <div class="card h-100">
+        <div class="card-header">
+            ONGOING MEDICATION
+        </div>
+        <div class="card-body">
+            <div class="row mb-2 grey-header">
+                <div class="col-md-2">
+                    Item Code
+                </div>
+                <div class="col-md-4">
+                    Medication Name
+                </div>
+                <div class="col-md-3">
+                    Type
+                </div>
+                <div class="col-md-3">
+                    Start Date
+                </div>
+            </div>
+            <span *ngFor="let item of itemFormGroup.get('itemsFormArray')['controls']">
+                <app-ongoing-medication-item [item]='item'></app-ongoing-medication-item>
+            </span>
+            <button class="btn-sm-sub  btn-outline-black float-left" (click)="onBtnAddClicked()">+ Add Another Row</button>
+        </div>
+    </div>
+</form>

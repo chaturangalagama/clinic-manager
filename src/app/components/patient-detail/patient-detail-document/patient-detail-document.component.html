@@ -1,0 +1,92 @@
+<form [formGroup]="formGroup" novalidate>
+    <div class="card">
+        <div class="card-header">
+            DOCUMENTS
+        </div>
+        <div class="card-body">
+            <div class="row pb-4">
+                <div class="col-md-4">
+                    <input class="form-control form-control-sm" formControlName="filter" placeholder="Search By Document" />
+                </div>
+                <div class="col-sm-4">
+                    <input class='form-control form-control-sm' #drp="bsDaterangepicker" bsDaterangepicker [bsConfig]="{rangeInputFormat: 'DD-MM-YYYY', containerClass:'theme-blue'}" placement="bottom" placeholder="Date Range" formControlName="dateRange" />
+                    <span class="pl-2 icon-search search-icon"></span>
+                </div>
+                <div class="col-md-4" *ngxPermissionsOnly="['ROLE_FILE_UPLOAD']">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-secondary" type="button" type="button" (click)="openModal($event)">Uploaded Documents</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-0">
+                <div class="col-md-2">
+                    <label class="mb-0">Date</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">Document</label>
+                </div>
+                <div class="col-md-4">
+                    <label class="mb-0">Description</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">Type</label>
+                </div>
+                <div class="col-md-2">
+                    <label class="mb-0">Size (KB)</label>
+                </div>
+            </div>
+            <form *ngFor="let form of formGroup.get('documentsArray')['controls']; let i = index;" [formGroup]="form" novalidate>
+                <div class="row pt-2" *ngxPermissionsOnly="['ROLE_FILE_LIST']">
+                    <div class="col-md-2">
+                        {{form.value.date}}
+                    </div>
+                    <div class="col-md-2">
+                        <span class="link" (click)="onDownloadDocument(i)" *ngxPermissionsOnly="['ROLE_FILE_DOWNLOAD']">{{form.value.document}}</span>
+                    </div>
+                    <div class="col-md-4">
+                        {{form.value.description}}
+                    </div>
+                    <div class="col-md-2">
+                        {{form.value.type.split('.').slice(-1)}}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.value.size/1024 | number:'.2' }}
+                    </div>
+                </div>
+            </form>
+            <div ng2FileDrop [ngClass]="{'file-over': hasDropZoneOver}" (fileOver)="fileOver($event)" (onFileDrop)="openModal($event)" [uploader]="uploader" class="well drop-zone p-2 mt-2" *ngxPermissionsOnly="['ROLE_FILE_UPLOAD']">
+                Drag and Drop to upload or
+                <input type="file" ng2FileSelect (onFileSelected)="openModal($event)" [uploader]="uploader" multiple />
+            </div>
+            <div *ngFor="let item of uploader.queue; let i=index;">
+                <div class="row pt-2" *ngxPermissionsOnly="['ROLE_FILE_UPLOAD']">
+                    <div class="col-md-2">
+                        {{ item.file.name }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ item?.file?.size/1024/1024 | number:'.2' }} MB
+                    </div>
+                    <div class="col-md-4">
+                        <div class="progress mb-0">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                        <div *ngIf="item.errorMsg" style="color: red;"> {{ item.errorMsg }} </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-danger btn-xs" (click)="item.upload()" *ngIf="!item.isSuccess">
+                            <span class="glyphicon glyphicon-upload"></span> Retry
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs" (click)="onRemoveDocumemt(i)" *ngIf="!item.isSuccess">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                        <span *ngIf="item.isSuccess">
+                            File is successfully uploaded.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,43 @@
+<form [formGroup]="printFormGroup" novalidate>
+    <div class="card">
+        <div class="card-header">
+            PRINT
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col col-md-2">
+                    <label class="mb-0">8. (R)eceipt (optional)</label>
+                </div>
+                <br>
+                <div class="col col-md-6">
+                    <div class="row pb-2">
+                        <div *ngFor="let input of printFormGroup.value.receiptTypes.value;">
+                            <div class="col-md-4 input-group-addon">
+                                <input type="radio" value="{{input.value}}" formControlName="receiptType">
+                                <span class="ml-1">{{input.label}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-medium btn-brand-dark" (click)="onBtnPrintDraftBillReceipt()">Print Draft Receipt (F2)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header p-0"></div>
+        <div class="card-body" [hidden]="true">
+            <div class="btn-toolbar float-right" role="toolbar">
+                <div class="btn-group mr-4" role="group">
+                    <button class="btn btn-medium btn-outline-blue" (click)="onBtnPrintPOSClicked()">Print POS Collection</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button class="btn btn-medium btn-outline-blue" (click)="onBtnClosePOSClicked()">Close POS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

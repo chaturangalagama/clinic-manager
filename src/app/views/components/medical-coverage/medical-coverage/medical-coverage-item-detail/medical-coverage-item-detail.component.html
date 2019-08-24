@@ -1,0 +1,67 @@
+<div class="row thin-bottom-border plan-details">
+    <div class="col-4">
+        <div>
+            <div class="text-indigo">Plan Details</div>
+            <span>Cap Per Visit:</span> {{coverage.capPerVisit.limit | currency:'SGD':false}}
+            <br>
+            <span>Cap Per Week:</span> {{coverage.capPerWeek.limit | currency:'SGD':false}}
+            <br>
+            <span>Cap Per Month:</span> {{coverage.capPerMonth.limit | currency:'SGD':false}}
+            <br>
+            <br>
+            <span>Remarks:</span> {{patientCoverageItem.get('remarks').value}}
+            <br>
+        </div>
+    </div>
+    <div class="col-4">
+        <div>
+            <br>
+            <span>Cap Per Year:</span> {{coverage.capPerYear.limit | currency:'SGD':false}}
+            <br>
+            <span>Cap Per Lifetime:</span> {{coverage.capPerLifeTime.limit | currency:'SGD':false}}
+            <br>
+            <div *ngIf="coverage.copayment && coverage.copayment.value > 0 ">
+                <span>Co-Payment:</span> {{coverage.copayment.value > 0 ? "Yes " : "No "}}
+                <div *ngIf="coverage.copayment.paymentType=='DOLLAR'">
+                    <span>Co-Payment Amount:</span> {{coverage.copayment?.value | currency:'SGD':false}}
+                </div>
+                <div *ngIf="coverage.copayment.paymentType=='PERCENTAGE'">
+                    <span>Co-Payment Percentage:</span> {{coverage.copayment?.value}}%
+                </div>
+            </div>
+            <br>
+            <div *ngIf="coverage.startDate && coverage.endDate">
+                <span>Start Date:</span> {{coverage.startDate}}
+                <br>
+                <span>End Date:</span> {{coverage.endDate}}
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <ng-container>
+            <div>
+                <div class="text-indigo">Company Details</div>
+                <span>Contact Person:</span> {{ contact.name }}
+                <br>
+                <span>Address:</span> {{ address }}
+                <br>
+                <span>Email:</span> {{ contact.email }}
+                <br>
+                <span>Telephone:</span> {{ contact.directNumber }}
+            </div>
+        </ng-container>
+    </div>
+</div>
+<div class="plan-details">
+    <div class="row text-indigo">
+        <div class="col">Clinic Remarks</div>
+        <div class="col">Registration Remarks</div>
+        <div class="col">Payment Remarks</div>
+    </div>
+    <div class="row">
+        <div class="col">{{ coverage.clinicRemarks }}</div>
+        <div class="col">{{ coverage.registrationRemarks }} </div>
+        <div class="col">{{ coverage.paymentRemarks }}</div>
+    </div>
+</div>

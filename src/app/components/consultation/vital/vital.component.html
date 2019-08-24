@@ -1,0 +1,15 @@
+<alert></alert>
+<div class="card mb-0 h-100">
+    <div class="container py-2 card-body px-0" style="overflow-x: hidden">
+
+        <!-- <ng-template tabHeading>
+            <i class="icon-search"></i>
+            <span>VITAL SIGNS</span>
+        </ng-template> -->
+        <app-vital-sign [vitalForm]='vitalForm'></app-vital-sign>
+        <div class="container pl-3 pt-3 pb-3">
+            <label>VITAL TRENDS</label>
+            <app-vital-trend [vitalTabs]='vitalTabs' [refresh]='trendRefresh'></app-vital-trend>
+        </div>
+    </div>
+</div>
